@@ -1,0 +1,2 @@
+Hi my name is Vruj Patel and i'm a Software Engineering major at Drexel. Currently in CI-102 I am in group 6 and were working to create 
+a habit tracker app to keep users motivated and engaged.
