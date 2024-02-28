@@ -12,7 +12,7 @@ class Task{
   get_point_value() {
     return this.point_value;
   }
-}
+} 
 
 const App = () => {
   const task1 = new Task("Do the dishes", 10);
