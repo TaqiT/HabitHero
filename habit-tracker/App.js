@@ -23,16 +23,6 @@ const App = () => {
   var task2 = new Task(1, "Take out the trash", 5);
   var taskList = [task1, task2];
   return DisplayTaskList(taskList);
-  // return DisplayTask(task1);
-}
-
-const DisplayTask = (task) => {
-  return (
-    <View style={styles}>
-      <Text>{task.get_task_str()}</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
 }
 
 const DisplayTaskList = (taskList) => {
