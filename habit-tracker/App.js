@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, View, AppRegistry} from 'react-native';
 
 var task_list = [];
 
@@ -30,6 +30,7 @@ const App = () => {
 const DisplayTaskList = (taskList) => {
   return (
     <View>
+      <View style={{height:50}}></View>
       {taskList.map((task, index) => (
         <View
           key = {index}
@@ -47,12 +48,14 @@ const DisplayTaskList = (taskList) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    marginHorizontal: 60,
+    alignSelf: 'center',
     padding: 5,
     width: 300,
-    marginTop: 50,
+    height: 50,
+    marginTop: 10,
     backgroundColor: '#A5A5A5',
     alignItems: 'center',
+    justifyContent: 'center',
     display: 'flex',
   },
   text: {
@@ -60,5 +63,16 @@ const styles = StyleSheet.create({
     fontSize: 20,
   }
 });
+
+{/* <Header
+  statusBarProps={{ barStyle: 'light-content' }}
+  barStyle="light-content" // or directly
+  leftComponent={<MyCustomCenterComponent />}
+  centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
+  containerStyle={{
+    backgroundColor: '#3D6DCC',
+    justifyContent: 'space-around',
+  }}
+/> */}
 
 export default App;
