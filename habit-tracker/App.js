@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 
 class Task{
-  constructor(name, point_value){
+  constructor(id, name, point_value){
+    this.id = id;
     this.name = name;
     this.point_value = point_value;
   }
@@ -12,27 +13,23 @@ class Task{
   get_point_value() {
     return this.point_value;
   }
-} 
-
-const App = () => {
-  const task1 = new Task("Do the dishes", 10);
-  const task2 = new Task("Take out the trash", 5);
-  const taskList = [task1, task2];
-  return DisplayTaskList(taskList);
+  get_task_str = () => {
+    return String(this.name) + " - " + String(this.point_value) + " points";
+  }
 }
 
-const DisplayTask = task => {
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#f00',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  });
+const App = () => {
+  var task1 = new Task(0, "Do the dishes", 10);
+  var task2 = new Task(1, "Take out the trash", 5);
+  var taskList = [task1, task2];
+  return DisplayTaskList(taskList);
+  // return DisplayTask(task1);
+}
+
+const DisplayTask = (task) => {
   return (
     <View style={styles}>
-      <Text>{task.get_name()} - {task.get_point_value()} points</Text>
+      <Text>{task.get_task_str()}</Text>
       <StatusBar style="auto" />
     </View>
   );
@@ -40,9 +37,16 @@ const DisplayTask = task => {
 
 const DisplayTaskList = (taskList) => {
   return (
-    <View style={styles.container}>
-      <DisplayTask task={taskList[0]} />
-      <DisplayTask task={taskList[0]} />
+    <View>
+      {taskList.map((task, index) => (
+        <TouchableOpacity
+          key = {index}
+          style = {styles.container}>
+          <Text style={styles.text}>
+            {task.get_task_str()}
+          </Text>
+        </TouchableOpacity>
+      ))}
       <StatusBar style="auto" />
     </View>
   );
@@ -50,11 +54,15 @@ const DisplayTaskList = (taskList) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    padding: 5,
+    marginTop: 50,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
   },
+  text: {
+    color: '#000',
+    fontSize: 20,
+  }
 });
 
 export default App;
