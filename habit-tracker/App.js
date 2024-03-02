@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import {
-  StyleSheet, TouchableOpacity, Text, View, AppRegistry, ScrollView, FlatList
+  StyleSheet, TouchableOpacity, Text, View, ScrollView
 } from 'react-native';
 
 var task_list = [];
-var container_background_color = '#A5A5A5';
+
 class Task{
   constructor(name, point_value){
     this.id = task_list.length;
@@ -24,8 +24,8 @@ class Task{
 }
 
 const App = () => {
-  var task1 = new Task('Task Name', 10);
-  var task2 = new Task('Take out the trash---------', 5);
+  var task1 = new Task('Task Name', 9999);
+  var task2 = new Task('Take out the trash', 5);
   var task3 = new Task('Clean the bathroom', 15);
   var task4 = new Task('Do the laundry', 20);
   var task5 = new Task('Sweep the floors', 10);
@@ -52,67 +52,67 @@ const DisplayTaskList = (taskList) => {
           key = {index}
           style = {styles.touchable}>
           <View style={styles.spacer}></View>
-          <Text style={styles.task_name}>
-            {task.get_name()}
-          </Text>
           <View style={styles.spacer}></View>
-          <View style={styles.task_points}>
-            <Text>
+          <View style={styles.task_name.view}>
+            <Text style={styles.task_name.text}>
+              {task.get_name()}
+            </Text>
+          </View>
+          <View style={styles.spacer}></View>
+          <View style={styles.divider}></View>
+          {/* <View style={styles.spacer}></View> */}
+          <View style={styles.task_points.view}>
+            <Text style={styles.task_points.text}>
               {task.get_point_value()}
             </Text>
           </View>
+          {/* <View style={styles.spacer}></View> */}
+          <View style={styles.divider}></View>
           <View style={styles.spacer}></View>
           <View style={styles.check_box}></View>
         </TouchableOpacity>
       ))}
+      <View style={{height: 50}}></View>
       <StatusBar style='auto' />
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-    flexDirection: 'row',
-    alignSelf: 'center',
-    padding: 5,
-    width: 350,
-    height: 50,
-    marginTop: 10,
-    borderColor: '#000',
-    borderWidth: 1,
-    // backgroundColor: container_background_color,
-    alignItems: 'center',
-    justifyContent: 'center',
-    display: 'flex',
-  },
   task_name: {
-    flex: 10,
-    color: '#000',
-    fontSize: 15,
-    justifyContent: 'center',
+    view: {
+      flex: 20,
+      justifyContent: 'center',
+    },
+    text: {
+      color: '#000',
+      fontSize: 15,
+    },
   },
   task_points: {
-    flex: 3,
-    color: '#000',
-    backgroundColor: '#0f0',
-    fontSize: 20,
-    alignItems: 'center',
+    view: {
+      flex: 5.5,
+      // backgroundColor: '#0f0',
+      alignItems: 'center',
+    },
+    text: {
+      color: '#000',
+      fontSize: 20,
+      justifyContent: 'center',
+    },
   },
   spacer: {
-    flex:1,
+    flex: 1,
     height: 10,
-    // width: 50,
-    backgroundColor: '#f00',
+    // backgroundColor: '#f00',
   },
   check_box: {
-    flex: 2,
-    height: 10,
-    width: 50,
-    backgroundColor: '#00f',
+    flex: 4,
+    height: 20,
+    // backgroundColor: '#00f',
+    borderWidth: 1,
   },
   touchable:{
-    // flex: 1,
     flexDirection: 'row',
     alignSelf: 'center',
     padding: 5,
@@ -121,11 +121,17 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderColor: '#000',
     borderWidth: 1,
-    // backgroundColor: container_background_color,
     alignItems: 'center',
     justifyContent: 'left',
     display: 'flex',
-  }
+    borderRadius: 5,
+  },
+  divider: {
+    height: 23,
+    width: 5,
+    backgroundColor: '#777',
+    borderRadius: 5,
+  },
 });
 
 {/* <Header
