@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import {
-  StyleSheet, TouchableOpacity, Text, View, ScrollView
+  StyleSheet, TouchableOpacity, Text, View, ScrollView, Switch
 } from 'react-native';
 
 var task_list = [];
@@ -10,6 +10,7 @@ class Task{
     this.id = task_list.length;
     this.name = name;
     this.point_value = point_value;
+    this.completed = false;
     task_list.push(this);
   }
   get_name = () => {
@@ -17,9 +18,6 @@ class Task{
   }
   get_point_value = () => {
     return this.point_value;
-  }
-  get_task_str = () => {
-    return String(this.name) + ' - ' + String(this.point_value) + ' points';
   }
 }
 
@@ -60,16 +58,16 @@ const DisplayTaskList = (taskList) => {
           </View>
           <View style={styles.spacer}></View>
           <View style={styles.divider}></View>
-          {/* <View style={styles.spacer}></View> */}
           <View style={styles.task_points.view}>
             <Text style={styles.task_points.text}>
               {task.get_point_value()}
             </Text>
           </View>
-          {/* <View style={styles.spacer}></View> */}
           <View style={styles.divider}></View>
           <View style={styles.spacer}></View>
-          <View style={styles.check_box}></View>
+          <View>
+            <Switch/>
+          </View>
         </TouchableOpacity>
       ))}
       <View style={{height: 50}}></View>
@@ -97,7 +95,7 @@ const styles = StyleSheet.create({
     },
     text: {
       color: '#000',
-      fontSize: 20,
+      fontSize: 18,
       justifyContent: 'center',
     },
   },
