@@ -29,7 +29,7 @@ const MyTabs = () => {
 const App = () => {
   return (
       <NavigationContainer>
-           <MyStack/>
+          <MyStack/>
       </NavigationContainer>
   )
 }
