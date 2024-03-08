@@ -6,6 +6,7 @@ import {
 import TaskComponent from '../components/Task';
 
 var task_list = [];
+var points = 0;
 
 class Task{
   constructor(name, point_value){
