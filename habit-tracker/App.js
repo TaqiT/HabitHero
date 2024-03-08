@@ -10,27 +10,27 @@ const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
 
 const MyStack = () => {
-    return (
-        <stack.Navigator>
-            <stack.Screen name="Habit Hero" component={MyTabs} />
-        </stack.Navigator>
-    )
+  return (
+    <stack.Navigator>
+      <stack.Screen name="Habit Hero" component={MyTabs} />
+    </stack.Navigator>
+  )
 }
 
 const MyTabs = () => {
-    return (
-        <tab.Navigator>
-            <stack.Screen name="Tasks" component={TaskTab} />
-            <stack.Screen name="Shop" component={ShopTab} />
-        </tab.Navigator>
-    )
+  return (
+    <tab.Navigator>
+      <stack.Screen name="Tasks" component={TaskTab} />
+      <stack.Screen name="Shop" component={ShopTab} />
+    </tab.Navigator>
+  )
 }
 
 const App = () => {
   return (
-      <NavigationContainer>
-          <MyStack/>
-      </NavigationContainer>
+    <NavigationContainer>
+      <MyStack/>
+    </NavigationContainer>
   )
 }
 
