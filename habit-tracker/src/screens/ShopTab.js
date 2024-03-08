@@ -17,22 +17,19 @@ class Task{
 }
 
 const ShopTab = () => {
-  var task2 = new Task('Take out the trash', 5);
-  var task3 = new Task('Clean the bathroom', 15);
-  var task4 = new Task('Do the laundry', 20);
-  var task5 = new Task('Sweep the floors', 10);
-  var task6 = new Task('Mop the floors', 15);
-  var task7 = new Task('Clean the kitchen', 10);
-  var task8 = new Task('Clean the living room', 10);
-  var task9 = new Task('Clean the bedroom', 10);
-  var task10 = new Task('Clean the office', 10);
-  var task11 = new Task('Clean the garage', 10);
-  var task12 = new Task('Clean the car', 10);
-  var task13 = new Task('Clean the yard', 10);
-  var task14 = new Task('Clean the pool', 10);
-  var task15 = new Task('Clean the shed', 10);
-  var task16 = new Task('Clean the attic', 10);
-  return (
+  var task1 = new Task('Skip the gym', 100);
+  var task2 = new Task('Go get fast food', 50);
+  var task3 = new Task('Buy concert tickets', 400);
+  var task4 = new Task('Weekend getaway', 200);
+  var task5 = new Task('Fine dining experience', 150);
+  var task6 = new Task('Spa Day', 100);
+  var task7 = new Task('Get ur nails done', 250);
+  var task8 = new Task('Skip a chore', 60);
+  var task9 = new Task('Night out', 120);
+  var task10 = new Task('DIY beauty night', 140);
+  var task11 = new Task('Indulge in junk food', 240);
+  var task12 = new Task('Shopping spree', 400);
+return (
     DisplayTaskList(task_list)
   )
 }
