@@ -45,7 +45,7 @@ const DisplayTaskList = (taskList) => {
   return (
     <ScrollView>
       {taskList.map((task, index) => (
-        <TaskComponent key={index} name={task.name} point_value={task.point_value}/>
+        <TaskComponent key={index} task={task}/>
       ))}
       <View style={{height: 20}}></View>
       <StatusBar style='auto'/>

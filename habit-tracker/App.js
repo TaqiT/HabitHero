@@ -8,20 +8,14 @@ import { points } from './src/screens/TaskTab'; // Importing points variable fro
 import {
   Text,
   View,
-  StyleSheet
+  StyleSheet,
+  TouchableOpacity,
 } from "react-native"
-
+import { Button } from '@rneui/themed'; // run 'npm install @rneui/themed'
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
 
-const MyStack = () => {
-  return (
-    <stack.Navigator>
-      <stack.Screen name="Habit Hero" component={MyTabs}/>
-    </stack.Navigator>
-  )
-}
 
 const MyTabs = () => {
   return (
@@ -37,11 +31,17 @@ const App = () => {
     <View style={styles.container}>
       <NavigationContainer>
         <stack.Navigator>
-          <stack.Screen name="Habit Hero" component={MyTabs} />
+          <stack.Screen name="Habit Hero" component={MyTabs}/>
         </stack.Navigator>
-        <View style={styles.pointsContainer}>
+        <TouchableOpacity style={styles.pointsContainer}>
           <Text style={styles.pointsText}>Points: <Text>{points}</Text></Text>
-        </View>
+        </TouchableOpacity>
+        {/* <TouchableOpacity style={styles.addTaskButtonContainer}>
+          <Button
+            style={styles.taskButton}
+            title="+"
+          />
+        </TouchableOpacity> */}
       </NavigationContainer>
     </View>
   );
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
   pointsContainer: {
     position: 'absolute',
-    top: 50,
+    top: 45,
     right: 20,
     backgroundColor: '#7FFFD4',
     padding: 10,
@@ -64,6 +64,23 @@ const styles = StyleSheet.create({
   pointsText: {
     fontSize: 16,
   },
+  addTaskButtonContainer: {
+    position: 'absolute',
+    // alignItems: 'center',
+    left: 20,
+    top: 40,
+    width: 50,
+    height: 50,
+    padding: 10,
+    borderWidth: 5,
+    borderRadius: 10,
+    borderColor: '#000',
+  },
+  taskButton:{
+    fontSize: 16,
+    backgroundColor: '#f00',
+    color: '#000',
+  }
 });
 
 export default App;

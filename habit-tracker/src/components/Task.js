@@ -16,14 +16,14 @@ const TaskComponent = (props) => {
 			<View style={styles.spacer}></View>
 			<View style={styles.task_name.view}>
 				<Text style={styles.task_name.text}>
-					{props.name}
+					{props.task.name}
 				</Text>
 			</View>
 			<View style={styles.spacer}></View>
 			<View style={styles.divider}></View>
 			<View style={styles.task_points.view}>
 				<Text style={styles.task_points.text}>
-					{props.point_value}
+					{props.task.point_value}
 				</Text>
 			</View>
 			<View style={styles.divider}></View>
