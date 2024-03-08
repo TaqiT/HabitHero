@@ -12,7 +12,6 @@ import {
   StyleSheet
 } from "react-native"
 
-<<<<<<< HEAD
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
@@ -31,29 +30,11 @@ const MyTabs = () => {
       <stack.Screen name="Tasks" component={TaskTab}/>
       <stack.Screen name="Shop" component={ShopTab}/>
     </tab.Navigator>
-=======
-const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
-
-const MyTabs = () => {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Tasks" component={TaskTab} />
-      <Tab.Screen name="Shop" component={ShopTab} />
-    </Tab.Navigator>
->>>>>>> Total-Points
   )
 }
 
 const App = () => {
   return (
-<<<<<<< HEAD
-    <NavigationContainer>
-      <MyStack/>
-    </NavigationContainer>
-  )
-}
-=======
     <View style={styles.container}>
       <NavigationContainer>
         <Stack.Navigator>
@@ -85,7 +66,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
->>>>>>> Total-Points
 
 export default App;
-
