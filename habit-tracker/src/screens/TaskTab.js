@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 
 var task_list = [];
+var points = 0;
 
 class Task{
   constructor(name, point_value){
@@ -14,16 +15,9 @@ class Task{
     this.completed = false;
     task_list.push(this);
   }
-  get_name = () => {
-    return this.name;
-  }
-  get_point_value = () => {
-    return this.point_value;
-  }
 }
 
-const HomeTab = () => {
-    var task1 = new Task('Task Name', 9999);
+  const HomeTab = () => {
     var task2 = new Task('Take out the trash', 5);
     var task3 = new Task('Clean the bathroom', 15);
     var task4 = new Task('Do the laundry', 20);
@@ -46,6 +40,7 @@ const HomeTab = () => {
 
 
 const DisplayTaskList = (taskList) => {
+  var switch_states = [];
   return (
     <ScrollView>
       {taskList.map((task, index) => (
@@ -56,25 +51,32 @@ const DisplayTaskList = (taskList) => {
           <View style={styles.spacer}></View>
           <View style={styles.task_name.view}>
             <Text style={styles.task_name.text}>
-              {task.get_name()}
+              {task.name}
             </Text>
           </View>
           <View style={styles.spacer}></View>
           <View style={styles.divider}></View>
           <View style={styles.task_points.view}>
             <Text style={styles.task_points.text}>
-              {task.get_point_value()}
+              {task.point_value}
             </Text>
           </View>
           <View style={styles.divider}></View>
           <View style={styles.spacer}></View>
           <View>
-            <Switch/>
+            <Switch
+              value={switch_states[index]}
+              onValueChange={() => {
+              switch_states[index] = !switch_states[index];
+              switch_states[index] ? points += task.point_value : points -= task.point_value;
+              console.log(points);
+            }}
+            />
           </View>
         </TouchableOpacity>
       ))}
       <View style={{height: 20}}></View>
-      <StatusBar style='auto' />
+      <StatusBar style='auto'/>
     </ScrollView>
   );
 }
