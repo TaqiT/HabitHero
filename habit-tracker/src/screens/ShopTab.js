@@ -14,16 +14,9 @@ class Task{
     this.completed = false;
     task_list.push(this);
   }
-  get_name = () => {
-    return this.name;
-  }
-  get_point_value = () => {
-    return this.point_value;
-  }
 }
 
 const ShopTab = () => {
-  var task1 = new Task('Task Name', 9999);
   var task2 = new Task('Take out the trash', 5);
   var task3 = new Task('Clean the bathroom', 15);
   var task4 = new Task('Do the laundry', 20);
@@ -56,14 +49,14 @@ const DisplayTaskList = (taskList) => {
           <View style={styles.spacer}></View>
           <View style={styles.task_name.view}>
             <Text style={styles.task_name.text}>
-              {task.get_name()}
+              {task.name}
             </Text>
           </View>
           <View style={styles.spacer}></View>
           <View style={styles.divider}></View>
           <View style={styles.task_points.view}>
             <Text style={styles.task_points.text}>
-              {task.get_point_value()}
+              {task.point_value}
             </Text>
           </View>
           <View style={styles.divider}></View>

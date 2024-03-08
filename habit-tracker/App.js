@@ -12,7 +12,7 @@ const tab = createBottomTabNavigator();
 const MyStack = () => {
   return (
     <stack.Navigator>
-      <stack.Screen name="Habit Hero" component={MyTabs} />
+      <stack.Screen name="Habit Hero" component={MyTabs}/>
     </stack.Navigator>
   )
 }
@@ -20,8 +20,8 @@ const MyStack = () => {
 const MyTabs = () => {
   return (
     <tab.Navigator>
-      <stack.Screen name="Tasks" component={TaskTab} />
-      <stack.Screen name="Shop" component={ShopTab} />
+      <stack.Screen name="Tasks" component={TaskTab}/>
+      <stack.Screen name="Shop" component={ShopTab}/>
     </tab.Navigator>
   )
 }
