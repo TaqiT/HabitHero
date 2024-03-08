@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import {
   StyleSheet, TouchableOpacity, Text, View, ScrollView, Switch
 } from 'react-native';
+import TaskComponent from '../components/Task';
 
 var task_list = [];
 var points = 0;
@@ -41,40 +42,10 @@ const HomeTab = () => {
 
 
 const DisplayTaskList = (taskList) => {
-  var switch_states = [];
   return (
     <ScrollView>
       {taskList.map((task, index) => (
-        <TouchableOpacity
-          key = {index}
-          style = {styles.touchable}>
-          <View style={styles.spacer}></View>
-          <View style={styles.spacer}></View>
-          <View style={styles.task_name.view}>
-            <Text style={styles.task_name.text}>
-              {task.name}
-            </Text>
-          </View>
-          <View style={styles.spacer}></View>
-          <View style={styles.divider}></View>
-          <View style={styles.task_points.view}>
-            <Text style={styles.task_points.text}>
-              {task.point_value}
-            </Text>
-          </View>
-          <View style={styles.divider}></View>
-          <View style={styles.spacer}></View>
-          <View>
-            <Switch
-              value={switch_states[index]}
-              onValueChange={() => {
-              switch_states[index] = !switch_states[index];
-              switch_states[index] ? points += task.point_value : points -= task.point_value;
-              console.log(points);
-            }}
-            />
-          </View>
-        </TouchableOpacity>
+        <TaskComponent key={index} name={task.name} point_value={task.point_value}/>
       ))}
       <View style={{height: 20}}></View>
       <StatusBar style='auto'/>

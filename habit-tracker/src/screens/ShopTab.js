@@ -29,7 +29,7 @@ const ShopTab = () => {
   var task10 = new Task('DIY beauty night', 140);
   var task11 = new Task('Indulge in junk food', 240);
   var task12 = new Task('Shopping spree', 400);
-return (
+  return (
     DisplayTaskList(task_list)
   )
 }
