@@ -4,7 +4,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TaskTab from './src/screens/TaskTab';
 import ShopTab from './src/screens/ShopTab';
-//import HomeTab from './src/screens/HomeTab'; // Correct import for HomeTab
 import { points } from './src/screens/TaskTab'; // Importing points variable from TaskTab
 import {
   Text,
@@ -37,9 +36,9 @@ const App = () => {
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Habit Hero" component={MyTabs} />
-        </Stack.Navigator>
+        <stack.Navigator>
+          <stack.Screen name="Habit Hero" component={MyTabs} />
+        </stack.Navigator>
         <View style={styles.pointsContainer}>
           <Text style={styles.pointsText}>Points: <Text>{points}</Text></Text>
         </View>
