@@ -6,6 +6,7 @@ import {
 
 var task_list = [];
 var points = 0;
+var points = 0;
 
 class Task{
   constructor(name, point_value){
@@ -132,9 +133,10 @@ const styles = StyleSheet.create({
   divider: {
     height: 23,
     width: 5,
-    backgroundColor: '#777',
+    backgroundColor: '#7FFFD4',
     borderRadius: 5,
   },
 });
+
 
 export default HomeTab;
