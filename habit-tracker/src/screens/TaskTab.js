@@ -3,9 +3,9 @@ import { StatusBar } from 'expo-status-bar';
 import {
   StyleSheet, TouchableOpacity, Text, View, ScrollView, Switch
 } from 'react-native';
+import TaskComponent from '../components/Task';
 
 var task_list = [];
-var points = 0;
 
 class Task{
   constructor(name, point_value){
@@ -40,101 +40,15 @@ const HomeTab = () => {
 
 
 const DisplayTaskList = (taskList) => {
-  var switch_states = [];
   return (
     <ScrollView>
       {taskList.map((task, index) => (
-        <TouchableOpacity
-          key = {index}
-          style = {styles.touchable}>
-          <View style={styles.spacer}></View>
-          <View style={styles.spacer}></View>
-          <View style={styles.task_name.view}>
-            <Text style={styles.task_name.text}>
-              {task.name}
-            </Text>
-          </View>
-          <View style={styles.spacer}></View>
-          <View style={styles.divider}></View>
-          <View style={styles.task_points.view}>
-            <Text style={styles.task_points.text}>
-              {task.point_value}
-            </Text>
-          </View>
-          <View style={styles.divider}></View>
-          <View style={styles.spacer}></View>
-          <View>
-            <Switch
-              value={switch_states[index]}
-              onValueChange={() => {
-              switch_states[index] = !switch_states[index];
-              switch_states[index] ? points += task.point_value : points -= task.point_value;
-              console.log(points);
-            }}
-            />
-          </View>
-        </TouchableOpacity>
+        <TaskComponent key={index} name={task.name} point_value={task.point_value}/>
       ))}
       <View style={{height: 20}}></View>
       <StatusBar style='auto'/>
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  task_name: {
-    view: {
-      flex: 20,
-      justifyContent: 'center',
-    },
-    text: {
-      color: '#000',
-      fontSize: 15,
-    },
-  },
-  task_points: {
-    view: {
-      flex: 5.5,
-      // backgroundColor: '#0f0',
-      alignItems: 'center',
-    },
-    text: {
-      color: '#000',
-      fontSize: 18,
-      justifyContent: 'center',
-    },
-  },
-  spacer: {
-    flex: 1,
-    height: 10,
-    // backgroundColor: '#f00',
-  },
-  check_box: {
-    flex: 4,
-    height: 20,
-    // backgroundColor: '#00f',
-    borderWidth: 1,
-  },
-  touchable:{
-    flexDirection: 'row',
-    alignSelf: 'center',
-    padding: 5,
-    width: 350,
-    height: 50,
-    marginTop: 10,
-    borderColor: '#000',
-    borderWidth: 1,
-    alignItems: 'center',
-    justifyContent: 'left',
-    display: 'flex',
-    borderRadius: 5,
-  },
-  divider: {
-    height: 23,
-    width: 5,
-    backgroundColor: '#777',
-    borderRadius: 5,
-  },
-});
 
 export default HomeTab;
