@@ -1,7 +1,7 @@
 import React from 'react'
 import { StatusBar } from 'expo-status-bar';
 import {
-  StyleSheet, TouchableOpacity, Text, View, ScrollView, Switch
+  StyleSheet, TouchableOpacity, Text, View, ScrollView, Switch, Button
 } from 'react-native';
 
 var task_list = [];
@@ -58,8 +58,12 @@ const DisplayTaskList = (taskList) => {
           </View>
           <View style={styles.divider}></View>
           <View style={styles.spacer}></View>
-          <View>
-            <Switch/>
+          <View style={{borderWidth:1, borderRadius:4}}>
+            <Button
+              title="Redeem"
+              color="#000"
+              onPress={() => alert('Redeemed!')}
+            />
           </View>
         </TouchableOpacity>
       ))}
@@ -120,7 +124,7 @@ const styles = StyleSheet.create({
   divider: {
     height: 23,
     width: 5,
-    backgroundColor: '#777',
+    backgroundColor: '#8A2BE2',
     borderRadius: 5,
   },
 });
