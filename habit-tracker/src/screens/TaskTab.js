@@ -1,7 +1,7 @@
 import React from 'react'
 import { StatusBar } from 'expo-status-bar';
 import {
-  StyleSheet, TouchableOpacity, Text, View, ScrollView, Switch
+  View, ScrollView
 } from 'react-native';
 import TaskComponent from '../components/Task';
 
