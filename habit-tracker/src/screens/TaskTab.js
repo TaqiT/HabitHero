@@ -138,5 +138,5 @@ const styles = StyleSheet.create({
   },
 });
 
-
+export { points };
 export default HomeTab;
