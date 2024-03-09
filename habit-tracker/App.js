@@ -36,12 +36,13 @@ const App = () => {
         <TouchableOpacity style={styles.pointsContainer}>
           <Text style={styles.pointsText}>Points: <Text>{points}</Text></Text>
         </TouchableOpacity>
-        {/* <TouchableOpacity style={styles.addTaskButtonContainer}>
+        <TouchableOpacity style={styles.addTaskButton.container}>
           <Button
-            style={styles.taskButton}
+            buttonStyle={styles.addTaskButton.button}
+            titleStyle={styles.addTaskButton.textStyle}
             title="+"
           />
-        </TouchableOpacity> */}
+        </TouchableOpacity>
       </NavigationContainer>
     </View>
   );
@@ -64,22 +65,26 @@ const styles = StyleSheet.create({
   pointsText: {
     fontSize: 16,
   },
-  addTaskButtonContainer: {
-    position: 'absolute',
-    // alignItems: 'center',
-    left: 20,
-    top: 40,
-    width: 50,
-    height: 50,
-    padding: 10,
-    borderWidth: 5,
-    borderRadius: 10,
-    borderColor: '#000',
-  },
-  taskButton:{
-    fontSize: 16,
-    backgroundColor: '#f00',
-    color: '#000',
+  addTaskButton: {
+    container: {
+      position: 'absolute',
+      left: 20,
+      top: 40,
+      width: 50,
+      height: 50,
+      padding: 10,
+      borderWidth: 5,
+      borderRadius: 10,
+      borderColor: '#000',
+      backgroundColor: '#fff',
+    },
+    buttonStyle:{
+      color: '#fff',
+    },
+    textStyle: {
+      fontSize: 20,
+      backgroundColor: '#fff',
+    },
   }
 });
 
