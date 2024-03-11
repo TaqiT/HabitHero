@@ -129,14 +129,12 @@ const styles = StyleSheet.create({
       borderRadius: 5,
     },
     buttonStyle: {
-      justifyContent: 'left',
       borderRadius: 20,
       height: 30,
       width: 70,
       backgroundColor: '#fff'
     },
     textStyle: {
-      justifyContent: 'left',
       color: '#000',
       fontSize: 15,
     }

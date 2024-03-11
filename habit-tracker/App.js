@@ -36,12 +36,8 @@ const App = () => {
         <TouchableOpacity style={styles.pointsContainer}>
           <Text style={styles.pointsText}>Points: <Text>{points}</Text></Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.addTaskButton.container}>
-          <Button
-            buttonStyle={styles.addTaskButton.button}
-            titleStyle={styles.addTaskButton.textStyle}
-            title="+"
-          />
+        <TouchableOpacity style={styles.editButton.container}>
+          <Text style={styles.editButton.textStyle}>Edit</Text>
         </TouchableOpacity>
       </NavigationContainer>
     </View>
@@ -56,7 +52,7 @@ const styles = StyleSheet.create({
   pointsContainer: {
     position: 'absolute',
     top: 45,
-    right: 20,
+    left: 25,
     backgroundColor: '#7FFFD4',
     padding: 10,
     borderRadius: 5,
@@ -65,25 +61,20 @@ const styles = StyleSheet.create({
   pointsText: {
     fontSize: 16,
   },
-  addTaskButton: {
+  editButton: {
     container: {
       position: 'absolute',
-      left: 20,
-      top: 40,
-      width: 50,
+      top: 45,
+      right: 20,
+      width: 70,
       height: 50,
-      padding: 10,
-      borderWidth: 5,
-      borderRadius: 10,
-      borderColor: '#000',
-      backgroundColor: '#fff',
-    },
-    buttonStyle:{
-      color: '#fff',
+      padding: 5,
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     textStyle: {
       fontSize: 20,
-      backgroundColor: '#fff',
+      color: '#8A2BE2',
     },
   }
 });
