@@ -14,22 +14,22 @@ const TaskComponent = ({task, editMode}) => {
 	return (
 		<TouchableOpacity
 			style = {styles.touchable}>
-			<View style={styles.spacer}></View>
-			<View style={styles.spacer}></View>
+			<View style={styles.spacer}/>
+			<View style={styles.spacer}/>
 			<View style={styles.task_name.view}>
 				<Text style={styles.task_name.text}>
 					{task.name}
 				</Text>
 			</View>
-			<View style={styles.spacer}></View>
-			<View style={styles.divider}></View>
+			<View style={styles.spacer}/>
+			<View style={styles.divider}/>
 			<View style={styles.task_points.view}>
 				<Text style={styles.task_points.text}>
 					{task.point_value}
 				</Text>
 			</View>
-			<View style={styles.divider}></View>
-			<View style={styles.spacer}></View>
+			<View style={styles.divider}/>
+			<View style={styles.spacer}/>
 			{Boolean(editMode) ?
 			<View>
 				<Text>Hi</Text>

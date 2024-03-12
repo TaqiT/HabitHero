@@ -6,7 +6,6 @@ import {
 import TaskComponent, { points } from '../components/Task';
 
 var task_list = [];
-// var points = 0;
 
 class Task{
   constructor(name, point_value){
@@ -46,7 +45,7 @@ const DisplayTaskList = (taskList, editModeEnabled) => {
       {taskList.map((task, index) => (
         <TaskComponent key={index} task={task} editMode={editModeEnabled}/>
       ))}
-      <View style={{height: 20}}></View>
+      <View style={{height: 20}}/>
       <StatusBar style='auto'/>
     </ScrollView>
   );
