@@ -1,26 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TaskTab from './src/screens/TaskTab';
 import ShopTab from './src/screens/ShopTab';
-import { points } from './src/screens/TaskTab'; // Importing points variable from TaskTab
+import { points } from './src/components/Task'; // Importing points variable from TaskTab
 import {
   Text,
   View,
   StyleSheet,
   TouchableOpacity,
 } from "react-native"
-import { Button } from '@rneui/themed'; // run 'npm install @rneui/themed'
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
+var editModeEnabled = true;
 
+const toggleEditMode = () => {
+  editModeEnabled = !editModeEnabled;
+}
 
 const MyTabs = () => {
   return (
     <tab.Navigator>
-      <stack.Screen name="Tasks" component={TaskTab}/>
+      <stack.Screen name="Tasks" component={TaskTab} props={editModeEnabled}/>
       <stack.Screen name="Shop" component={ShopTab}/>
     </tab.Navigator>
   )
@@ -34,9 +37,9 @@ const App = () => {
           <stack.Screen name="Habit Hero" component={MyTabs}/>
         </stack.Navigator>
         <TouchableOpacity style={styles.pointsContainer}>
-          <Text style={styles.pointsText}>Points: <Text>{points}</Text></Text>
+          <Text style={styles.pointsText}>{`Points: ${Number(points)}`}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.editButton.container}>
+        <TouchableOpacity style={styles.editButton.container} onPress={toggleEditMode}>
           <Text style={styles.editButton.textStyle}>Edit</Text>
         </TouchableOpacity>
       </NavigationContainer>

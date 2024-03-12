@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
 	StyleSheet, TouchableOpacity, Text, View, Switch
 } from 'react-native';
-import { useState } from 'react';
 
 
-const TaskComponent = (props) => {
+var points = 0;
+
+const TaskComponent = ({task, editMode}) => {
 	const [isEnabled, setIsEnabled] = useState(false);
 	const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-	var points = 0;
+	var [taskPoints, setTaskPoints] = useState(0);
+	points = taskPoints;
 	return (
 		<TouchableOpacity
 			style = {styles.touchable}>
@@ -16,26 +18,32 @@ const TaskComponent = (props) => {
 			<View style={styles.spacer}></View>
 			<View style={styles.task_name.view}>
 				<Text style={styles.task_name.text}>
-					{props.task.name}
+					{task.name}
 				</Text>
 			</View>
 			<View style={styles.spacer}></View>
 			<View style={styles.divider}></View>
 			<View style={styles.task_points.view}>
 				<Text style={styles.task_points.text}>
-					{props.task.point_value}
+					{task.point_value}
 				</Text>
 			</View>
 			<View style={styles.divider}></View>
 			<View style={styles.spacer}></View>
+			{Boolean(editMode) ?
 			<View>
-				<Switch
-					value={isEnabled}
-					onValueChange={
-						toggleSwitch
-					}
-				/>
-			</View>
+				<Text>Hi</Text>
+			</View>:
+				<View>
+					<Switch
+						value={isEnabled}
+						onValueChange={(state) => {
+							toggleSwitch();
+							state ? setTaskPoints(taskPoints + task.point_value) : setTaskPoints(taskPoints - task.point_value);
+						}}
+					/>
+				</View>
+		}
 		</TouchableOpacity>
 	);
 }
@@ -97,4 +105,6 @@ const styles = StyleSheet.create({
 	},
 });
 
+
+export { points };
 export default TaskComponent;
