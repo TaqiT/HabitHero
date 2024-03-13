@@ -1,16 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {
 	StyleSheet, TouchableOpacity, Text, View, Switch
 } from 'react-native';
+import { PointsContext } from '../provider/PointsProvider';
 
-
-var points = 0;
 
 const TaskComponent = ({task, editMode}) => {
 	const [isEnabled, setIsEnabled] = useState(false);
-	const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-	var [taskPoints, setTaskPoints] = useState(0);
-	points = taskPoints;
+	const toggleSwitch = () => { setIsEnabled(previousState => !previousState); addPoints(task.point_value); }
+	const { addPoints } = useContext(PointsContext);
 	return (
 		<TouchableOpacity
 			style = {styles.touchable}>
@@ -30,20 +28,15 @@ const TaskComponent = ({task, editMode}) => {
 			</View>
 			<View style={styles.divider}/>
 			<View style={styles.spacer}/>
-			{Boolean(editMode) ?
 			<View>
-				<Text>Hi</Text>
-			</View>:
-				<View>
-					<Switch
-						value={isEnabled}
-						onValueChange={(state) => {
-							toggleSwitch();
-							state ? setTaskPoints(taskPoints + task.point_value) : setTaskPoints(taskPoints - task.point_value);
-						}}
-					/>
-				</View>
-		}
+				<Switch
+					value={isEnabled}
+					onChange={() => {
+						addPoints(task.point_value);
+						toggleSwitch();
+					}}
+				/>
+			</View>
 		</TouchableOpacity>
 	);
 }
@@ -106,5 +99,4 @@ const styles = StyleSheet.create({
 });
 
 
-export { points };
 export default TaskComponent;

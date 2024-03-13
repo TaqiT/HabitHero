@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TaskTab from './src/screens/TaskTab';
 import ShopTab from './src/screens/ShopTab';
-import { points } from './src/components/Task'; // Importing points variable from TaskTab
+import Points from './src/components/Points';
 import {
   Text,
   View,
   StyleSheet,
   TouchableOpacity,
 } from "react-native"
+import PointsProvider from './src/provider/PointsProvider';
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
@@ -33,15 +34,15 @@ const App = () => {
   return (
     <View style={styles.container}>
       <NavigationContainer>
-        <stack.Navigator>
-          <stack.Screen name="Habit Hero" component={MyTabs}/>
-        </stack.Navigator>
-        <TouchableOpacity style={styles.pointsContainer}>
-          <Text style={styles.pointsText}>{`Points: ${Number(points)}`}</Text>
-        </TouchableOpacity>
+        <PointsProvider>
+          <stack.Navigator>
+            <stack.Screen name="Habit Hero" component={MyTabs}/>
+          </stack.Navigator>
+        </PointsProvider>
         <TouchableOpacity style={styles.editButton.container} onPress={toggleEditMode}>
           <Text style={styles.editButton.textStyle}>Edit</Text>
         </TouchableOpacity>
+        <Points/>
       </NavigationContainer>
     </View>
   );
