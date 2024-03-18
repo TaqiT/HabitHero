@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     },
     textStyle: {
       color: '#000',
-      fontSize: 15,
+      fontSize: 10,
     }
   }
 });

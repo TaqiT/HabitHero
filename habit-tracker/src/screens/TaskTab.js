@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import {
   View, ScrollView
 } from 'react-native';
-import TaskComponent, { points } from '../components/Task';
+import TaskComponent from '../components/Task';
 
 var task_list = [];
 
@@ -16,7 +16,6 @@ class Task{
     task_list.push(this);
   }
 }
-
 const TaskTab = (props) => {
   var task2 = new Task('Take out the trash', 9999);
   var task3 = new Task('Clean the bathroom', 10);
@@ -37,8 +36,6 @@ const TaskTab = (props) => {
     DisplayTaskList(task_list, Boolean(props.editModeEnabled))
   )
 }
-
-
 const DisplayTaskList = (taskList, editModeEnabled) => {
   return (
     <ScrollView>
@@ -51,5 +48,4 @@ const DisplayTaskList = (taskList, editModeEnabled) => {
   );
 }
 
-// export { points, };
 export default TaskTab;

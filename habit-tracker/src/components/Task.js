@@ -30,20 +30,15 @@ const TaskComponent = ({task, editMode}) => {
 			</View>
 			<View style={styles.divider}/>
 			<View style={styles.spacer}/>
-			{Boolean(editMode) ?
 			<View>
-				<Text>Hi</Text>
-			</View>:
-				<View>
-					<Switch
-						value={isEnabled}
-						onValueChange={(state) => {
-							toggleSwitch();
-							state ? setTaskPoints(taskPoints + task.point_value) : setTaskPoints(taskPoints - task.point_value);
-						}}
-					/>
-				</View>
-		}
+				<Switch
+					value={isEnabled}
+					onValueChange={(state) => {
+						toggleSwitch();
+						state ? setTaskPoints(taskPoints + task.point_value) : setTaskPoints(taskPoints - task.point_value);
+					}}
+				/>
+			</View>
 		</TouchableOpacity>
 	);
 }
