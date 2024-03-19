@@ -6,7 +6,7 @@ import {
 
 var points = 0;
 
-const TaskComponent = ({task, editMode}) => {
+const TaskComponent = ({task}) => {
 	const [isEnabled, setIsEnabled] = useState(false);
 	const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 	var [taskPoints, setTaskPoints] = useState(0);
