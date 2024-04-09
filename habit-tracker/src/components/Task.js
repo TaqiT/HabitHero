@@ -41,6 +41,7 @@ const TaskComponent = ({task}) => {
 					onValueChange={(state) => {
 						toggleSwitch();
 						state ? setTaskPoints(taskPoints + task.point_value) : setTaskPoints(taskPoints - task.point_value);
+						console.log("Points:", taskPoints);
 					}}
 				/>
 			</View>}
