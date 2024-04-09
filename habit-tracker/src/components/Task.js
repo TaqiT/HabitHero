@@ -5,6 +5,7 @@ import {
 
 
 var points = 0;
+var editModeEnabled = false;
 
 const TaskComponent = ({task}) => {
 	const [isEnabled, setIsEnabled] = useState(false);
@@ -30,6 +31,10 @@ const TaskComponent = ({task}) => {
 			</View>
 			<View style={styles.divider}/>
 			<View style={styles.spacer}/>
+			{editModeEnabled ?
+				<View>
+					<Button></Button>
+				</View> :
 			<View>
 				<Switch
 					value={isEnabled}
@@ -38,7 +43,7 @@ const TaskComponent = ({task}) => {
 						state ? setTaskPoints(taskPoints + task.point_value) : setTaskPoints(taskPoints - task.point_value);
 					}}
 				/>
-			</View>
+			</View>}
 		</TouchableOpacity>
 	);
 }
