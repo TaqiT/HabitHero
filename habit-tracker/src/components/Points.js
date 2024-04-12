@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
-import { PointsContext } from "../provider/PointsProvider";
+import { PointsProvider, PointsContext } from "../providers/PointsProvider";
 
 
 
@@ -8,9 +8,11 @@ import { PointsContext } from "../provider/PointsProvider";
 const Points = () => {
 	const { pointTotal } = useContext(PointsContext);
 	return (
-		<TouchableOpacity style={styles.pointsContainer}>
-			<Text style={styles.pointsText}>{`Points: ${pointTotal}`}</Text>
-		</TouchableOpacity>
+		<PointsContext.Provider value={ pointTotal }>
+			<TouchableOpacity style={styles.pointsContainer}>
+				<Text style={styles.pointsText}>{`Points: ${pointTotal}`}</Text>
+			</TouchableOpacity>
+		</PointsContext.Provider>
 	);
 }
 

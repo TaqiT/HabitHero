@@ -39,11 +39,11 @@ const TaskTab = (props) => {
 }
 
 
-const DisplayTaskList = (taskList, editModeEnabled) => {
+const DisplayTaskList = (taskList) => {
   return (
     <ScrollView>
       {taskList.map((task, index) => (
-        <TaskComponent key={index} task={task} editMode={editModeEnabled}/>
+        <TaskComponent key={index} task={task}/>
       ))}
       <View style={{height: 20}}/>
       <StatusBar style='auto'/>

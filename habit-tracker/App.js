@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -11,7 +11,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native"
-import PointsProvider from './src/provider/PointsProvider';
+import { PointsProvider , PointsContext } from './src/providers/PointsProvider';
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
@@ -23,10 +23,12 @@ const toggleEditMode = () => {
 
 const MyTabs = () => {
   return (
-    <tab.Navigator>
-      <stack.Screen name="Tasks" component={TaskTab} props={editModeEnabled}/>
-      <stack.Screen name="Shop" component={ShopTab}/>
-    </tab.Navigator>
+    <PointsProvider>
+      <tab.Navigator>
+        <stack.Screen name="Tasks" component={TaskTab} props={editModeEnabled}/>
+        <stack.Screen name="Shop" component={ShopTab}/>
+      </tab.Navigator>
+    </PointsProvider>
   )
 }
 
