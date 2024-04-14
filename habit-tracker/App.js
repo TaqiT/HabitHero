@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TaskTab from './src/screens/TaskTab';
 import ShopTab from './src/screens/ShopTab';
+import SettingsTab from './src/screens/SettingsTab';
 import { points } from './src/screens/TaskTab'; // Importing points variable from TaskTab
 import {
   Text,
@@ -16,12 +17,27 @@ import { Button } from '@rneui/themed'; // run 'npm install @rneui/themed'
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
 
+// sets style for the bottom navigation bar
+const screenOptions = {
+  tabBarStyle: {
+    backgroundColor: 'black',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    elevation: 0,
+    borderColor: 'white',
+    borderRadius: 0
+  }
+}
+
 
 const MyTabs = () => {
   return (
-    <tab.Navigator>
+    <tab.Navigator screenOptions={screenOptions}>
       <stack.Screen name="Tasks" component={TaskTab}/>
       <stack.Screen name="Shop" component={ShopTab}/>
+      <stack.Screen name="Settings" component={SettingsTab}/>
     </tab.Navigator>
   )
 }
@@ -31,7 +47,20 @@ const App = () => {
     <View style={styles.container}>
       <NavigationContainer>
         <stack.Navigator>
-          <stack.Screen name="Habit Hero" component={MyTabs}/>
+          <stack.Screen 
+            name="Habit Hero" 
+            component={MyTabs}
+            options={{
+              title: 'My home',
+              headerStyle: {
+                backgroundColor: '#000000',
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}
+          />
         </stack.Navigator>
         <TouchableOpacity style={styles.pointsContainer}>
           <Text style={styles.pointsText}>Points: <Text>{points}</Text></Text>

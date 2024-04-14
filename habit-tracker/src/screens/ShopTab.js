@@ -136,7 +136,6 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff'
     },
     textStyle: {
-      justifyContent: 'left',
       color: '#000',
       fontSize: 15,
     }
