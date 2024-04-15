@@ -8,11 +8,9 @@ import { PointsProvider, PointsContext } from "../providers/PointsProvider";
 const Points = () => {
 	const { pointTotal } = useContext(PointsContext);
 	return (
-		<PointsContext.Provider value={ pointTotal }>
 			<TouchableOpacity style={styles.pointsContainer}>
 				<Text style={styles.pointsText}>{`Points: ${pointTotal}`}</Text>
 			</TouchableOpacity>
-		</PointsContext.Provider>
 	);
 }
 

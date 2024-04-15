@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import {
 	StyleSheet, TouchableOpacity, Text, View, Switch
 } from 'react-native';
-import { PointsContext } from '../providers/PointsProvider';
+import { PointsContext, PointsProvider } from '../providers/PointsProvider';
 
 
 const TaskComponent = ({task}) => {
@@ -10,7 +10,6 @@ const TaskComponent = ({task}) => {
 	const { addPoints } = useContext(PointsContext);
 	const toggleSwitch = () => { setIsEnabled(previousState => !previousState) }
 	return (
-		<PointsContext.Provider value={ addPoints }>
 		<TouchableOpacity
 			style = {styles.touchable}>
 			<View style={styles.spacer}/>
@@ -32,14 +31,13 @@ const TaskComponent = ({task}) => {
 			<View>
 				<Switch
 					value={isEnabled}
-					onChange={() => {
-						addPoints(task.point_value);
+					onPress={() => {
+						addPoints(Number(task.point_value));
 						toggleSwitch();
 					}}
 				/>
 			</View>
 		</TouchableOpacity>
-		</PointsContext.Provider>
 	);
 }
 

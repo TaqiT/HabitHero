@@ -3,7 +3,8 @@ import { StatusBar } from 'expo-status-bar';
 import {
   View, ScrollView
 } from 'react-native';
-import TaskComponent, { points } from '../components/Task';
+import TaskComponent from '../components/Task';
+import { PointsContext, PointsProvider} from '../providers/PointsProvider';
 
 var task_list = [];
 
@@ -17,7 +18,7 @@ class Task{
   }
 }
 
-const TaskTab = (props) => {
+const TaskTab = () => {
   var task2 = new Task('Take out the trash', 9999);
   var task3 = new Task('Clean the bathroom', 10);
   var task4 = new Task('Do the laundry', 10);
@@ -34,22 +35,21 @@ const TaskTab = (props) => {
   var task15 = new Task('Clean the shed', 10);
   var task16 = new Task('Clean the attic', 10);
   return (
-    DisplayTaskList(task_list, Boolean(props.editModeEnabled))
+    DisplayTaskList(task_list)
   )
 }
 
 
 const DisplayTaskList = (taskList) => {
   return (
-    <ScrollView>
-      {taskList.map((task, index) => (
-        <TaskComponent key={index} task={task}/>
-      ))}
-      <View style={{height: 20}}/>
-      <StatusBar style='auto'/>
-    </ScrollView>
+      <ScrollView>
+        {taskList.map((task, index) => (
+          <TaskComponent key={index} task={task}/>
+        ))}
+        <View style={{height: 20}}/>
+        <StatusBar style='auto'/>
+      </ScrollView>
   );
 }
 
-// export { points, };
 export default TaskTab;

@@ -15,17 +15,12 @@ import { PointsProvider , PointsContext } from './src/providers/PointsProvider';
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
-var editModeEnabled = true;
-
-const toggleEditMode = () => {
-  editModeEnabled = !editModeEnabled;
-}
 
 const MyTabs = () => {
   return (
     <PointsProvider>
       <tab.Navigator>
-        <stack.Screen name="Tasks" component={TaskTab} props={editModeEnabled}/>
+        <stack.Screen name="Tasks" component={TaskTab}/>
         <stack.Screen name="Shop" component={ShopTab}/>
       </tab.Navigator>
     </PointsProvider>
@@ -34,19 +29,19 @@ const MyTabs = () => {
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      <NavigationContainer>
-        <PointsProvider>
-          <stack.Navigator>
-            <stack.Screen name="Habit Hero" component={MyTabs}/>
-          </stack.Navigator>
-        </PointsProvider>
-        <TouchableOpacity style={styles.editButton.container} onPress={toggleEditMode}>
-          <Text style={styles.editButton.textStyle}>Edit</Text>
-        </TouchableOpacity>
-        <Points/>
-      </NavigationContainer>
-    </View>
+    <PointsProvider value={Points}>
+      <View style={styles.container}>
+        <NavigationContainer>
+            <stack.Navigator>
+              <stack.Screen name="Habit Hero" component={MyTabs}/>
+            </stack.Navigator>
+          <TouchableOpacity style={styles.editButton.container}>
+            <Text style={styles.editButton.textStyle}>Edit</Text>
+          </TouchableOpacity>
+          <Points/>
+        </NavigationContainer>
+      </View>
+    </PointsProvider>
   );
 };
 
