@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TaskTab from './src/screens/TaskTab';
 import ShopTab from './src/screens/ShopTab';
-import { points } from './src/components/Task'; // Importing points variable from TaskTab
+import SettingsTab from './src/screens/SettingsTab';
 import {
   Text,
   View,
@@ -14,7 +14,34 @@ import {
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
-var editModeEnabled = true;
+
+// sets style for the bottom navigation bar
+const screenOptions = {
+  tabBarStyle: {
+    backgroundColor: 'black',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    elevation: 0,
+    borderColor: 'white',
+    borderRadius: 0
+  }
+}
+
+// sets style for the bottom navigation bar
+const screenOptions = {
+  tabBarStyle: {
+    backgroundColor: 'black',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    elevation: 0,
+    borderColor: 'white',
+    borderRadius: 0
+  }
+}
 
 const toggleEditMode = () => {
   editModeEnabled = !editModeEnabled;
@@ -22,9 +49,10 @@ const toggleEditMode = () => {
 
 const MyTabs = () => {
   return (
-    <tab.Navigator>
-      <stack.Screen name="Tasks" component={TaskTab} props={editModeEnabled}/>
+    <tab.Navigator screenOptions={screenOptions}>
+      <stack.Screen name="Tasks" component={TaskTab}/>
       <stack.Screen name="Shop" component={ShopTab}/>
+      <stack.Screen name="Settings" component={SettingsTab}/>
     </tab.Navigator>
   )
 }
@@ -34,7 +62,20 @@ const App = () => {
     <View style={styles.container}>
       <NavigationContainer>
         <stack.Navigator>
-          <stack.Screen name="Habit Hero" component={MyTabs}/>
+          <stack.Screen 
+            name="Habit Hero" 
+            component={MyTabs}
+            options={{
+              title: 'My home',
+              headerStyle: {
+                backgroundColor: '#000000',
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontWeight: 'bold',
+              },
+            }}
+          />
         </stack.Navigator>
         <TouchableOpacity style={styles.pointsContainer}>
           <Text style={styles.pointsText}>{`Points: ${Number(points)}`}</Text>
