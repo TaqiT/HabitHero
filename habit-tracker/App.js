@@ -15,19 +15,6 @@ import {
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
 
-// sets style for the bottom navigation bar
-const screenOptions = {
-  tabBarStyle: {
-    backgroundColor: 'black',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    elevation: 0,
-    borderColor: 'white',
-    borderRadius: 0
-  }
-}
 
 // sets style for the bottom navigation bar
 const screenOptions = {
@@ -41,10 +28,6 @@ const screenOptions = {
     borderColor: 'white',
     borderRadius: 0
   }
-}
-
-const toggleEditMode = () => {
-  editModeEnabled = !editModeEnabled;
 }
 
 const MyTabs = () => {
@@ -62,8 +45,8 @@ const App = () => {
     <View style={styles.container}>
       <NavigationContainer>
         <stack.Navigator>
-          <stack.Screen 
-            name="Habit Hero" 
+          <stack.Screen
+            name="Habit Hero"
             component={MyTabs}
             options={{
               title: 'My home',
@@ -77,10 +60,7 @@ const App = () => {
             }}
           />
         </stack.Navigator>
-        <TouchableOpacity style={styles.pointsContainer}>
-          <Text style={styles.pointsText}>{`Points: ${Number(points)}`}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.editButton.container} onPress={toggleEditMode}>
+        <TouchableOpacity style={styles.editButton.container}>
           <Text style={styles.editButton.textStyle}>Edit</Text>
         </TouchableOpacity>
       </NavigationContainer>
