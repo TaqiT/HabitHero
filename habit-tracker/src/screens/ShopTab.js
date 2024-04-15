@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import {
   StyleSheet, TouchableOpacity, Text, View, ScrollView
 } from 'react-native';
-import { Button } from '@rneui/themed'; // run 'npm install @rneui/themed'
+import { Button } from '@rneui/themed';
 var reward_list = [];
 
 class Reward{

@@ -16,7 +16,7 @@ class Task{
     task_list.push(this);
   }
 }
-const TaskTab = (props) => {
+const TaskTab = () => {
   var task2 = new Task('Take out the trash', 9999);
   var task3 = new Task('Clean the bathroom', 10);
   var task4 = new Task('Do the laundry', 10);
@@ -33,14 +33,14 @@ const TaskTab = (props) => {
   var task15 = new Task('Clean the shed', 10);
   var task16 = new Task('Clean the attic', 10);
   return (
-    DisplayTaskList(task_list, Boolean(props.editModeEnabled))
+    DisplayTaskList(task_list)
   )
 }
-const DisplayTaskList = (taskList, editModeEnabled) => {
+const DisplayTaskList = (taskList) => {
   return (
     <ScrollView>
       {taskList.map((task, index) => (
-        <TaskComponent key={index} task={task} editMode={editModeEnabled}/>
+        <TaskComponent key={index} task={task}/>
       ))}
       <View style={{height: 20}}/>
       <StatusBar style='auto'/>

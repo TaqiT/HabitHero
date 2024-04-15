@@ -4,14 +4,10 @@ import {
 } from 'react-native';
 
 
-var points = 0;
-var editModeEnabled = false;
 
 const TaskComponent = ({task}) => {
 	const [isEnabled, setIsEnabled] = useState(false);
 	const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-	var [taskPoints, setTaskPoints] = useState(0);
-	points = taskPoints;
 	return (
 		<TouchableOpacity
 			style = {styles.touchable}>
@@ -31,20 +27,14 @@ const TaskComponent = ({task}) => {
 			</View>
 			<View style={styles.divider}/>
 			<View style={styles.spacer}/>
-			{editModeEnabled ?
-				<View>
-					<Button></Button>
-				</View> :
 			<View>
 				<Switch
 					value={isEnabled}
-					onValueChange={(state) => {
+					onPress={() => {
 						toggleSwitch();
-						state ? setTaskPoints(taskPoints + task.point_value) : setTaskPoints(taskPoints - task.point_value);
-						console.log("Points:", taskPoints);
 					}}
 				/>
-			</View>}
+			</View>
 		</TouchableOpacity>
 	);
 }
@@ -92,20 +82,19 @@ const styles = StyleSheet.create({
 		height: 50,
 		marginTop: 10,
 		borderColor: '#000',
-		borderWidth: 1,
+		borderWidth: 1.5,
 		alignItems: 'center',
 		justifyContent: 'left',
 		display: 'flex',
-		borderRadius: 5,
+		borderRadius: 15,
 	},
 	divider: {
 		height: 23,
 		width: 5,
-		backgroundColor: '#7FFFD4',
+		backgroundColor: '#c9b047',
 		borderRadius: 5,
 	},
 });
 
 
-export { points };
 export default TaskComponent;

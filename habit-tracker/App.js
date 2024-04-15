@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -16,23 +16,10 @@ const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
 
 
-// sets style for the bottom navigation bar
-const screenOptions = {
-  tabBarStyle: {
-    backgroundColor: 'black',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    elevation: 0,
-    borderColor: 'white',
-    borderRadius: 0
-  }
-}
 
 const MyTabs = () => {
   return (
-    <tab.Navigator screenOptions={screenOptions}>
+    <tab.Navigator screenOptions={styles.screenOptions}>
       <stack.Screen name="Tasks" component={TaskTab}/>
       <stack.Screen name="Shop" component={ShopTab}/>
       <stack.Screen name="Settings" component={SettingsTab}/>
@@ -47,7 +34,7 @@ const App = () => {
         <stack.Navigator>
           <stack.Screen
             name="Habit Hero"
-            component={MyTabs}
+            component={ MyTabs }
             options={{
               title: 'My home',
               headerStyle: {
@@ -100,7 +87,19 @@ const styles = StyleSheet.create({
       fontSize: 20,
       color: '#8A2BE2',
     },
-  }
+  },
+  screenOptions: {
+    tabBarStyle: {
+      backgroundColor: 'black',
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      right: 0,
+      elevation: 0,
+      borderColor: 'white',
+      borderRadius: 0
+    }
+    },
 });
 
 export default App;
