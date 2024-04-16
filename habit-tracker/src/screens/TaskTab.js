@@ -32,18 +32,18 @@ const TaskTab = () => {
   var task16 = new Task('Clean the attic', 10);
 
   return (
-    <DisplayTaskList taskList={task_list} />
+    DisplayTaskList(task_list)
   );
 };
 
-const DisplayTaskList = ({ taskList }) => {
+const DisplayTaskList = (taskList) => {
   return (
-    <ScrollView>
+    <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
         {taskList.map((task, index) => (
           <TaskComponent key={index} task={task} />
         ))}
-        <View style={{ height: 20 }} />
+        <View style={{ height: 90 }} />
         <StatusBar style='auto' />
       </View>
     </ScrollView>
@@ -57,22 +57,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
+  scrollView: {
+    backgroundColor: 'white',
+  },
 });
 
-const DisplayTaskList = (taskList) => {
-  return (
-    <ScrollView> 
-      <TouchableOpacity> 
-        <View style = {{height: 20}} />
-          <Text>Add Task</Text>
-        <View style = {{height: 20}} />
-      </TouchableOpacity>
-      {taskList.map((task, index)) => (
-      <TaskComponent key = {index} task = {task} />
-      ))}
-      <View style = {{height: 20}} />
-      <StatusBar style = 'auto' />
-    </ScrollView>
-  )
-}
 export default TaskTab;

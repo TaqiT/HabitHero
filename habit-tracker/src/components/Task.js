@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'left',
 		display: 'flex',
 		borderRadius: 15,
+		backgroundColor: '#fff',
 	},
 	divider: {
 		height: 23,

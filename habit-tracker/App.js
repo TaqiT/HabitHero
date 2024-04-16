@@ -6,7 +6,6 @@ import TaskTab from './src/screens/TaskTab';
 import ShopTab from './src/screens/ShopTab';
 import SettingsTab from './src/screens/SettingsTab';
 import Points from './src/components/Points';
-import EditButton from './src/components/Edit'; 
 import { PointsProvider } from './src/providers/PointsProvider';
 import { View, StyleSheet,} from 'react-native';
 
@@ -60,7 +59,6 @@ const App = () => {
         </NavigationContainer>
       </View>
       <Points/>
-      <EditButton/> 
     </PointsProvider>
   );
 };
@@ -82,23 +80,10 @@ const styles = StyleSheet.create({
   pointsText: {
     fontSize: 16,
   },
-  editButton: {
-    container: {
-      position: 'absolute',
-      top: 45,
-      right: 20,
-      width: 70,
-      height: 50,
-      padding: 5,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
     textStyle: {
       fontSize: 20,
       color: '#8A2BE2',
     },
-  },
 });
 
 export default App;
-
