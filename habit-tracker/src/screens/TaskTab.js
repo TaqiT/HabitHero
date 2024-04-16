@@ -1,6 +1,10 @@
-import React from 'react';
-import { StyleSheet, ScrollView, View, StatusBar } from 'react-native';
+import React, { useContext, useState } from 'react'
+import {
+  StyleSheet, ScrollView, View, StatusBar, Modal, Text, Pressable, Alert,
+  Touchable
+} from 'react-native';
 import TaskComponent from '../components/Task';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 var task_list = [];
 
@@ -37,9 +41,34 @@ const TaskTab = () => {
 };
 
 const DisplayTaskList = (taskList) => {
+  const [modalVisible, setModalVisible] = useState(false);
   return (
     <ScrollView style={styles.scrollView}>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Enter Task Name</Text>
+            <Pressable
+              style={[styles.doneButton, styles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}>
+              <Text style={styles.textStyle}>Done</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
       <View style={styles.container}>
+      <Pressable
+        style={[styles.addButton, styles.addButtonOpen]}
+        onPress={() => setModalVisible(true)}>
+        <Text style={styles.textStyle}>Create New Task!</Text>
+      </Pressable>
         {taskList.map((task, index) => (
           <TaskComponent key={index} task={task} />
         ))}
@@ -59,6 +88,62 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     backgroundColor: 'white',
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  addButton: {
+    padding: 10,
+    elevation: 2,
+		flexDirection: 'row',
+		alignSelf: 'center',
+		padding: 5,
+		width: 350,
+		height: 50,
+		marginTop: 10,
+		borderColor: '#000',
+		borderWidth: 1.5,
+		alignItems: 'center',
+		justifyContent: 'center',
+		display: 'flex',
+		borderRadius: 15,
+  },
+  addButtonOpen: {
+    backgroundColor: 'pink',
+  },
+  doneButton: {
+    padding: 10,
+    elevation: 2,
+  },
+  buttonClose: {
+    backgroundColor: '#2196F3',
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
   },
 });
 
