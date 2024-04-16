@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
 	divider: {
 		height: 23,
 		width: 5,
-		backgroundColor: '#c9b047',
+		backgroundColor: 'pink',
 		borderRadius: 5,
 	},
 });

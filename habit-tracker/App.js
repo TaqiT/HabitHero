@@ -6,23 +6,32 @@ import TaskTab from './src/screens/TaskTab';
 import ShopTab from './src/screens/ShopTab';
 import SettingsTab from './src/screens/SettingsTab';
 import Points from './src/components/Points';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native"
+import EditButton from './src/components/Edit'; 
 import { PointsProvider } from './src/providers/PointsProvider';
+import { View, StyleSheet,} from 'react-native';
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
 
 const MyTabs = () => {
   return (
-    <tab.Navigator screenOptions={styles.screenOptions}>
-      <stack.Screen name="Tasks" component={TaskTab}/>
-      <stack.Screen name="Shop" component={ShopTab}/>
-      <stack.Screen name="Settings" component={SettingsTab}/>
+    <tab.Navigator
+      screenOptions={{
+        tabBarStyle: {
+          backgroundColor: 'black',
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          elevation: 0,
+          borderColor: 'pink',
+          borderRadius: 0
+        }
+      }}
+    >
+      <tab.Screen name="Tasks" component={TaskTab}/>
+      <tab.Screen name="Shop" component={ShopTab}/>
+      <tab.Screen name="Settings" component={SettingsTab}/>
     </tab.Navigator>
   )
 }
@@ -37,11 +46,11 @@ const App = () => {
               name="Habit Hero"
               component={ MyTabs }
               options={{
-                title: 'My home',
+                title: 'My Home',
                 headerStyle: {
-                  backgroundColor: '#000000',
+                  backgroundColor: 'black',
                 },
-                headerTintColor: '#fff',
+                headerTintColor: 'Pink',
                 headerTitleStyle: {
                   fontWeight: 'bold',
                 },
@@ -51,6 +60,7 @@ const App = () => {
         </NavigationContainer>
       </View>
       <Points/>
+      <EditButton/> 
     </PointsProvider>
   );
 };
@@ -58,7 +68,7 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#7FFFD4',
+    backgroundColor: '#blue',
   },
   pointsContainer: {
     position: 'absolute',
@@ -88,18 +98,7 @@ const styles = StyleSheet.create({
       color: '#8A2BE2',
     },
   },
-  screenOptions: {
-    tabBarStyle: {
-      backgroundColor: 'black',
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      right: 0,
-      elevation: 0,
-      borderColor: 'white',
-      borderRadius: 0
-    }
-    },
 });
 
 export default App;
+

@@ -1,14 +1,11 @@
-import React from 'react'
-import { StatusBar } from 'expo-status-bar';
-import {
-  View, ScrollView
-} from 'react-native';
+import React from 'react';
+import { StyleSheet, ScrollView, View, StatusBar } from 'react-native';
 import TaskComponent from '../components/Task';
 
 var task_list = [];
 
-class Task{
-  constructor(name, point_value){
+class Task {
+  constructor(name, point_value) {
     this.id = task_list.length;
     this.name = name;
     this.point_value = point_value;
@@ -16,6 +13,7 @@ class Task{
     task_list.push(this);
   }
 }
+
 const TaskTab = () => {
   var task2 = new Task('Take out the trash', 9999);
   var task3 = new Task('Clean the bathroom', 10);
@@ -32,20 +30,33 @@ const TaskTab = () => {
   var task14 = new Task('Clean the pool', 10);
   var task15 = new Task('Clean the shed', 10);
   var task16 = new Task('Clean the attic', 10);
+
   return (
-    DisplayTaskList(task_list)
-  )
-}
-const DisplayTaskList = (taskList) => {
-  return (
-      <ScrollView>
-        {taskList.map((task, index) => (
-          <TaskComponent key={index} task={task}/>
-        ))}
-        <View style={{height: 20}}/>
-        <StatusBar style='auto'/>
-      </ScrollView>
+    <DisplayTaskList taskList={task_list} />
   );
-}
+};
+
+const DisplayTaskList = ({ taskList }) => {
+  return (
+    <ScrollView>
+      <View style={styles.container}>
+        {taskList.map((task, index) => (
+          <TaskComponent key={index} task={task} />
+        ))}
+        <View style={{ height: 20 }} />
+        <StatusBar style='auto' />
+      </View>
+    </ScrollView>
+  );
+};
+
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+});
 
 export default TaskTab;
