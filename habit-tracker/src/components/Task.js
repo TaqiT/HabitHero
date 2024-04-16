@@ -7,7 +7,8 @@ import { PointsContext, PointsProvider } from '../providers/PointsProvider';
 
 const TaskComponent = ({task}) => {
 	const [isEnabled, setIsEnabled] = useState(false);
-	const { addPoints } = useContext(PointsContext);
+	const { setPointsTotal } = useContext(PointsContext);
+	const { pointTotal } = useContext(PointsContext);
 	const toggleSwitch = () => { setIsEnabled(previousState => !previousState) }
 	return (
 		<TouchableOpacity
@@ -31,9 +32,11 @@ const TaskComponent = ({task}) => {
 			<View>
 				<Switch
 					value={isEnabled}
-					onPress={() => {
-						addPoints(Number(task.point_value));
+					onValueChange={(state) => {
+						{state ? setPointsTotal(pointTotal + task.point_value) :
+						setPointsTotal(pointTotal - task.point_value)}
 						toggleSwitch();
+						console.log(pointTotal);
 					}}
 				/>
 			</View>

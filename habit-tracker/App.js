@@ -18,26 +18,21 @@ const tab = createBottomTabNavigator();
 
 const MyTabs = () => {
   return (
-    <PointsProvider>
       <tab.Navigator>
         <stack.Screen name="Tasks" component={TaskTab}/>
         <stack.Screen name="Shop" component={ShopTab}/>
       </tab.Navigator>
-    </PointsProvider>
   )
 }
 
 const App = () => {
   return (
-    <PointsProvider value={Points}>
+    <PointsProvider>
       <View style={styles.container}>
         <NavigationContainer>
             <stack.Navigator>
               <stack.Screen name="Habit Hero" component={MyTabs}/>
             </stack.Navigator>
-          <TouchableOpacity style={styles.editButton.container}>
-            <Text style={styles.editButton.textStyle}>Edit</Text>
-          </TouchableOpacity>
           <Points/>
         </NavigationContainer>
       </View>
