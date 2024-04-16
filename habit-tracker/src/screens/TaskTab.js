@@ -1,10 +1,8 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import {
-  StyleSheet, ScrollView, View, StatusBar, Modal, Text, Pressable, Alert,
-  Touchable
+  StyleSheet, ScrollView, View, StatusBar, Modal, Text, TouchableOpacity, TextInput
 } from 'react-native';
 import TaskComponent from '../components/Task';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 var task_list = [];
 
@@ -44,7 +42,6 @@ const DisplayTaskList = (taskList) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <ScrollView style={styles.scrollView}>
-
       <Modal
         animationType="slide"
         transparent={true}
@@ -54,21 +51,33 @@ const DisplayTaskList = (taskList) => {
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Enter Task Name</Text>
-            <Pressable
+            <View style={{ height: 10 }} />
+            <Text style={styles.modalText}>New Task</Text>
+            <TextInput
+              style={styles.nameInput}
+              value={"Task Name"}
+            />
+            <View style={{ height: 10 }} />
+            <TextInput
+              style={styles.pointValueInput}
+              value={"Task Point value"}
+              keyboardType="numeric"
+            />
+            <View style={{ height: 550, width: 350 }} />
+            <TouchableOpacity
               style={[styles.doneButton, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}>
               <Text style={styles.textStyle}>Done</Text>
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
       <View style={styles.container}>
-      <Pressable
+      <TouchableOpacity
         style={[styles.addButton, styles.addButtonOpen]}
         onPress={() => setModalVisible(true)}>
         <Text style={styles.textStyle}>Create New Task!</Text>
-      </Pressable>
+      </TouchableOpacity>
         {taskList.map((task, index) => (
           <TaskComponent key={index} task={task} />
         ))}
@@ -83,7 +92,7 @@ const DisplayTaskList = (taskList) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 10,
     backgroundColor: 'white',
   },
   scrollView: {
@@ -93,13 +102,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 22,
+    marginTop: 40,
   },
   modalView: {
-    margin: 20,
+    margin: 0,
     backgroundColor: 'white',
-    borderRadius: 10,
-    padding: 35,
+    borderRadius: 50,
+    borderWidth: 4,
+    borderColor: 'pink',
+    padding: 20,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -120,7 +131,6 @@ const styles = StyleSheet.create({
 		height: 50,
 		marginTop: 10,
 		borderColor: '#000',
-		borderWidth: 1.5,
 		alignItems: 'center',
 		justifyContent: 'center',
 		display: 'flex',
@@ -131,7 +141,11 @@ const styles = StyleSheet.create({
   },
   doneButton: {
     padding: 10,
+    width: 300,
     elevation: 2,
+		borderRadius: 10,
+    backgroundColor: '#2196F3',
+
   },
   buttonClose: {
     backgroundColor: '#2196F3',
@@ -144,6 +158,28 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: 'center',
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  nameInput: {
+    height: 50,
+    width: 300,
+    margin: 0,
+    borderWidth: 2,
+    padding: 5,
+    borderRadius: 10,
+    textAlign: 'center',
+    borderColor: 'pink',
+  },
+  pointValueInput: {
+    height: 50,
+    width: 300,
+    margin: 0,
+    borderWidth: 2,
+    padding: 5,
+    borderRadius: 10,
+    textAlign: 'center',
+    borderColor: 'pink',
   },
 });
 
