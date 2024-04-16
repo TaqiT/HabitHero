@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {
 	StyleSheet, TouchableOpacity, Text, View, Switch
 } from 'react-native';
-
+import { PointsContext } from '../providers/PointsProvider';
 
 
 const TaskComponent = ({task}) => {
 	const [isEnabled, setIsEnabled] = useState(false);
-	const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+	const { setPointsTotal } = useContext(PointsContext);
+	const { pointTotal } = useContext(PointsContext);
+	const toggleSwitch = () => { setIsEnabled(previousState => !previousState) }
 	return (
 		<TouchableOpacity
 			style = {styles.touchable}>
@@ -30,7 +32,9 @@ const TaskComponent = ({task}) => {
 			<View>
 				<Switch
 					value={isEnabled}
-					onPress={() => {
+					onValueChange={(state) => {
+						{state ? setPointsTotal(pointTotal + task.point_value) :
+						setPointsTotal(pointTotal - task.point_value)}
 						toggleSwitch();
 					}}
 				/>

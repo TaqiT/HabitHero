@@ -5,17 +5,17 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TaskTab from './src/screens/TaskTab';
 import ShopTab from './src/screens/ShopTab';
 import SettingsTab from './src/screens/SettingsTab';
+import Points from './src/components/Points';
 import {
   Text,
   View,
   StyleSheet,
   TouchableOpacity,
 } from "react-native"
+import { PointsProvider } from './src/providers/PointsProvider';
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
-
-
 
 const MyTabs = () => {
   return (
@@ -29,29 +29,29 @@ const MyTabs = () => {
 
 const App = () => {
   return (
-    <View style={styles.container}>
-      <NavigationContainer>
-        <stack.Navigator>
-          <stack.Screen
-            name="Habit Hero"
-            component={ MyTabs }
-            options={{
-              title: 'My home',
-              headerStyle: {
-                backgroundColor: '#000000',
-              },
-              headerTintColor: '#fff',
-              headerTitleStyle: {
-                fontWeight: 'bold',
-              },
-            }}
-          />
-        </stack.Navigator>
-        <TouchableOpacity style={styles.editButton.container}>
-          <Text style={styles.editButton.textStyle}>Edit</Text>
-        </TouchableOpacity>
-      </NavigationContainer>
-    </View>
+    <PointsProvider>
+      <View style={styles.container}>
+        <NavigationContainer>
+          <stack.Navigator>
+            <stack.Screen
+              name="Habit Hero"
+              component={ MyTabs }
+              options={{
+                title: 'My home',
+                headerStyle: {
+                  backgroundColor: '#000000',
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+          </stack.Navigator>
+        </NavigationContainer>
+      </View>
+      <Points/>
+    </PointsProvider>
   );
 };
 

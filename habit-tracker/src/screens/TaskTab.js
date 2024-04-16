@@ -38,13 +38,13 @@ const TaskTab = () => {
 }
 const DisplayTaskList = (taskList) => {
   return (
-    <ScrollView>
-      {taskList.map((task, index) => (
-        <TaskComponent key={index} task={task}/>
-      ))}
-      <View style={{height: 20}}/>
-      <StatusBar style='auto'/>
-    </ScrollView>
+      <ScrollView>
+        {taskList.map((task, index) => (
+          <TaskComponent key={index} task={task}/>
+        ))}
+        <View style={{height: 20}}/>
+        <StatusBar style='auto'/>
+      </ScrollView>
   );
 }
 
