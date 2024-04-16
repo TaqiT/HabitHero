@@ -59,4 +59,20 @@ const styles = StyleSheet.create({
   },
 });
 
+const DisplayTaskList = (taskList) => {
+  return (
+    <ScrollView> 
+      <TouchableOpacity> 
+        <View style = {{height: 20}} />
+          <Text>Add Task</Text>
+        <View style = {{height: 20}} />
+      </TouchableOpacity>
+      {taskList.map((task, index)) => (
+      <TaskComponent key = {index} task = {task} />
+      ))}
+      <View style = {{height: 20}} />
+      <StatusBar style = 'auto' />
+    </ScrollView>
+  )
+}
 export default TaskTab;
