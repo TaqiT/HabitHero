@@ -1,9 +1,11 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { StatusBar } from 'expo-status-bar';
 import {
   StyleSheet, TouchableOpacity, Text, View, ScrollView
 } from 'react-native';
 import { Button } from '@rneui/themed';
+import { PointsContext } from '../providers/PointsProvider.js';
+
 var reward_list = [];
 
 class Reward{
@@ -35,6 +37,9 @@ const ShopTab = () => {
 
 
 const DisplayRewardList = (rewardList) => {
+  const { setPointsTotal } = useContext(PointsContext);
+	const { pointTotal } = useContext(PointsContext);
+
   return (
     <ScrollView>
       {rewardList.map((reward, index) => (
@@ -62,7 +67,10 @@ const DisplayRewardList = (rewardList) => {
               titleStyle={styles.button.textStyle}
               buttonStyle={styles.button.buttonStyle}
               title='Redeem'
-              onPress={() => alert('Redeemed!')}
+              onPress={() => {
+                pointTotal >= reward.point_value ? setPointsTotal(pointTotal - reward.point_value) : alert('Not enough points!');
+                pointTotal >= reward.point_value ? alert('Redeemed!') : null
+              }}
             />
           </View>
         </TouchableOpacity>

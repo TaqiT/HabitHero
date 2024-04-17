@@ -7,7 +7,7 @@ import ShopTab from './src/screens/ShopTab';
 import SettingsTab from './src/screens/SettingsTab';
 import Points from './src/components/Points';
 import { PointsProvider } from './src/providers/PointsProvider';
-import { View, StyleSheet,} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
