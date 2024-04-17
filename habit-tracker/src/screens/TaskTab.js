@@ -34,6 +34,8 @@ const TaskTab = () => {
 
 const DisplayTaskList = (taskList) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [newTaskName, onChangeTaskName] = React.useState('');
+  const [newTaskPointValue, onChangePointValue] = React.useState('');
   return (
     <ScrollView style={styles.scrollView}>
       <Modal
@@ -49,23 +51,35 @@ const DisplayTaskList = (taskList) => {
             <Text style={styles.modalText}>New Task</Text>
             <TextInput
               style={styles.nameInput}
-              value={"Task Name"}
+              value={newTaskName}
+              onChangeText={onChangeTaskName}
+              placeholder='Task Name'
+              enablesReturnKeyAutomatically={true}
+              maxLength={26}
+              placeholderTextColor='black'
+              returnKeyType={'done'}
             />
             <View style={{ height: 10 }} />
             <TextInput
               style={styles.pointValueInput}
-              value={"Task Point value"}
+              value={newTaskPointValue}
+              onChangeText={onChangePointValue}
               keyboardType="numeric"
+              placeholder='Point Value'
+              enablesReturnKeyAutomatically={true}
+              maxLength={4}
+              placeholderTextColor='black'
+              returnKeyType={'done'}
             />
             <View style={{ height: 550, width: 350 }} />
             <TouchableOpacity
               style={[styles.doneButton, styles.buttonClose]}
               onPress={() => {
                 setModalVisible(!modalVisible);
-                newTask = new Task('Clean the attic', 10);
+                newTask = new Task(newTaskName, newTaskPointValue);
                 taskList.push(newTask);
                 }}>
-              <Text style={styles.textStyle}>Done</Text>
+              <Text style={styles.doneButtonText}>Done</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -73,8 +87,12 @@ const DisplayTaskList = (taskList) => {
       <View style={styles.container}>
       <TouchableOpacity
         style={[styles.addButton, styles.addButtonOpen]}
-        onPress={() => setModalVisible(true)}>
-        <Text style={styles.textStyle}>Create New Task!</Text>
+        onPress={() => {
+          setModalVisible(true);
+          onChangeTaskName('');
+          onChangePointValue('');
+          }}>
+        <Text style={styles.addButtonText}>Create New Task!</Text>
       </TouchableOpacity>
         {taskList.map((task, index) => (
           <TaskComponent key={index} task={task} />
@@ -125,7 +143,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignSelf: 'center',
 		padding: 5,
-		width: 350,
+		width: 375,
 		height: 50,
 		marginTop: 10,
 		borderColor: '#000',
@@ -143,15 +161,21 @@ const styles = StyleSheet.create({
     elevation: 2,
 		borderRadius: 10,
     backgroundColor: '#2196F3',
-
   },
   buttonClose: {
     backgroundColor: '#2196F3',
   },
-  textStyle: {
+  addButtonText: {
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
+    fontSize: 20,
+  },
+  doneButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 20,
   },
   modalText: {
     marginBottom: 15,
@@ -168,16 +192,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     textAlign: 'center',
     borderColor: 'pink',
+    fontSize: 15,
   },
   pointValueInput: {
     height: 50,
-    width: 300,
+    width: 150,
     margin: 0,
     borderWidth: 2,
     padding: 5,
     borderRadius: 10,
     textAlign: 'center',
     borderColor: 'pink',
+    fontSize: 18,
   },
 });
 
