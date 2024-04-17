@@ -75,9 +75,14 @@ const DisplayTaskList = (taskList) => {
             <TouchableOpacity
               style={[styles.doneButton, styles.buttonClose]}
               onPress={() => {
+                if (newTaskName.length > 0 && newTaskPointValue.length > 0) {
                 setModalVisible(!modalVisible);
                 newTask = new Task(newTaskName, newTaskPointValue);
                 taskList.push(newTask);
+                }
+                else {
+                  alert('Please fill out all fields');
+                }
                 }}>
               <Text style={styles.doneButtonText}>Done</Text>
             </TouchableOpacity>
