@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import {
   StyleSheet, TouchableOpacity, Text, View, ScrollView
