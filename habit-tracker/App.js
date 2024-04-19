@@ -25,7 +25,9 @@ const MyTabs = () => {
           elevation: 0,
           borderColor: 'pink',
           borderRadius: 0
-        }
+        },
+        tabBarActiveTintColor: 'pink', 
+        tabBarInactiveTintColor: 'grey', 
       }}
     >
       <tab.Screen name="Tasks" component={TaskTab}/>
@@ -49,7 +51,7 @@ const App = () => {
                 headerStyle: {
                   backgroundColor: 'black',
                 },
-                headerTintColor: 'Pink',
+                headerTintColor: '#D3D3D3',
                 headerTitleStyle: {
                   fontWeight: 'bold',
                 },

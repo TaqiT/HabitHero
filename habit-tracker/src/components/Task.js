@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
 	task_points: {
 		view: {
 			flex: 5.5,
-			// backgroundColor: '#0f0',
+			
 			alignItems: 'center',
 		},
 		text: {
@@ -70,12 +70,12 @@ const styles = StyleSheet.create({
 	spacer: {
 		flex: 1,
 		height: 10,
-		// backgroundColor: '#f00',
+		
 	},
 	check_box: {
 		flex: 4,
 		height: 20,
-		// backgroundColor: '#00f',
+		
 		borderWidth: 1,
 	},
 	touchable: {
