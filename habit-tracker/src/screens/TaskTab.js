@@ -73,7 +73,7 @@ const DisplayTaskList = (taskList) => {
               returnKeyType={'done'}
             />
             <FrequencyButtonGroup />
-            <View style={{ height: 200, width: 350 }} />
+            <View style={{ height: 240, width: 350 }} />
             <TouchableOpacity
               style={[styles.doneButton, styles.buttonClose]}
               onPress={() => {
