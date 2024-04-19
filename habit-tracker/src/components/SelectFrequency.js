@@ -19,52 +19,10 @@ const weekdayData = [
   { key: 6, name: 'Sat'},
 ];
 
-const weekOne = [
-  { key: 0, name: '1'},
-  { key: 1, name: '2'},
-  { key: 2, name: '3'},
-  { key: 3, name: '4'},
-  { key: 4, name: '5'},
-  { key: 5, name: '6'},
-  { key: 6, name: '7'},
-];
-
-const weekTwo = [
-  { key: 0, name: '8'},
-  { key: 1, name: '9'},
-  { key: 2, name: '10'},
-  { key: 3, name: '11'},
-  { key: 4, name: '12'},
-  { key: 5, name: '13'},
-  { key: 6, name: '14'},
-];
-
-const weekThree = [
-  { key: 0, name: '15'},
-  { key: 1, name: '16'},
-  { key: 2, name: '17'},
-  { key: 3, name: '18'},
-  { key: 4, name: '19'},
-  { key: 5, name: '20'},
-  { key: 6, name: '21'},
-];
-
-const weekFour = [
-  { key: 0, name: '22'},
-  { key: 1, name: '23'},
-  { key: 2, name: '24'},
-  { key: 3, name: '25'},
-  { key: 4, name: '26'},
-  { key: 5, name: '27'},
-  { key: 6, name: '28'},
-];
-
-const weekFive = [
-  { key: 0, name: '29'},
-  { key: 1, name: '30'},
-  { key: 2, name: '31'},
-];
-
+function range(start, end) {
+  if(start === end) return [start];
+  return [start, ...range(start + 1, end)];
+}
 
 const WeekdayButton = (props) => {
   const [selected, setSelected] = useState(false);
@@ -116,34 +74,34 @@ const MonthButtonGroup = () => {
   return(
     <View style={styles.monthView}>
       <View style={styles.monthRowView}>
-        {weekOne.map((item, index) => {
-          key = index;
+        {range(1, 7).map((item) => {
+          key = item;
           return (
-            <MonthButton key={index} day={item.name}/>
+            <MonthButton key={item} day={item.toString()}/>
           );
         })}
       </View>
       <View style={styles.monthRowView}>
-        {weekTwo.map((item, index) => {
+        {range(8, 14).map((index) => {
           key = index;
           return (
-            <MonthButton key={index} day={item.name}/>
+            <MonthButton key={index} day={index.toString()}/>
           );
         })}
       </View>
       <View style={styles.monthRowView}>
-        {weekThree.map((item, index) => {
+        {range(15, 21).map((index) => {
           key = index;
           return (
-            <MonthButton key={index} day={item.name}/>
+            <MonthButton key={index} day={index.toString()}/>
           );
         })}
       </View>
       <View style={styles.monthRowView}>
-        {weekFour.map((item, index) => {
+        {range(22, 28).map((index) => {
           key = index;
           return (
-            <MonthButton key={index} day={item.name}/>
+            <MonthButton key={index} day={index.toString()}/>
           );
         })}
       </View>
