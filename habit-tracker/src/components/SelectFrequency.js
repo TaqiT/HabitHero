@@ -612,22 +612,25 @@ const FrequencyButtonGroup = () => {
   return (
     <View style={styles.view}>
     <View style={styles.periodView}>
-      {data.map((item) => {
+      {data.map((item, index) => {
+        key = index;
         return (
-          <Pressable
-            style={
-              item.name === userOption ? styles.period.selected.pressable :
-              styles.period.unselected.pressable
-            }
-            onPress={() => setUserOption(item.name)}
-          >
-            <Text style={
-                item.name === userOption ? styles.period.selected.text :
-                styles.period.unselected.text
-            }>
-              {item.name}
-            </Text>
-          </Pressable>
+          <View key={index}>
+            <Pressable
+              style={
+                item.name === userOption ? styles.period.selected.pressable :
+                styles.period.unselected.pressable
+              }
+              onPress={() => setUserOption(item.name)}
+            >
+              <Text style={
+                  item.name === userOption ? styles.period.selected.text :
+                  styles.period.unselected.text
+              }>
+                {item.name}
+              </Text>
+            </Pressable>
+          </View>
         );
       })}
     </View>
@@ -648,7 +651,6 @@ const FrequencyButtonGroup = () => {
 
 const styles = StyleSheet.create({
   view: {
-    // justifyContent: 'flex-end',
     margin: 10,
     // backgroundColor: 'red',
   },
