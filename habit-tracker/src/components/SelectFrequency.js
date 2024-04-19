@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from 'react'
 import {
   StyleSheet, Pressable, View, Text
 } from 'react-native';
+import { FrequencyContext } from "../providers/FrequencyProvider";
 
 const data = [
   { key: 0, name: 'Daily'},
@@ -26,10 +27,14 @@ function range(start, end) {
 
 const WeekdayButton = (props) => {
   const [selected, setSelected] = useState(false);
+  const { addWeekData, removeWeekData } = useContext(FrequencyContext);
   return (
     <Pressable
       style={selected ? styles.weekday.selected.pressable : styles.weekday.unselected.pressable}
-      onPress={() => setSelected(!selected)}
+      onPress={(state) => {
+        setSelected(!selected);
+        state ? addWeekData(props.day) : removeWeekData(props.day);
+      }}
     >
       <Text style={selected ? styles.weekday.selected.text : styles.weekday.unselected.text}>
         {props.day}
@@ -39,11 +44,15 @@ const WeekdayButton = (props) => {
 }
 
 const MonthButton = (props) => {
+  const { addMonthData, removeMonthData } = useContext(FrequencyContext);
   const [selected, setSelected] = useState(false);
   return (
     <Pressable
       style={selected ? styles.month.selected.pressable : styles.month.unselected.pressable}
-      onPress={() => setSelected(!selected)}
+      onPress={(state) => {
+        setSelected(!selected);
+        state ? addMonthData(props.day) : removeMonthData(props.day);
+      }}
     >
       <Text style={selected ? styles.month.selected.text : styles.month.unselected.text}>
         {props.day}
@@ -66,8 +75,7 @@ const WeekdayButtonGroup = () => {
       </View>
       <View style={styles.weeklySpacer}/>
     </View>
-
-);
+  );
 }
 
 const MonthButtonGroup = () => {
@@ -120,6 +128,7 @@ const MonthButtonGroup = () => {
 
 const FrequencyButtonGroup = () => {
   const [userOption, setUserOption] = useState('Daily');
+  const { setFrequencyType } = useContext(FrequencyContext);
   return (
     <View style={styles.view}>
     <View style={styles.periodView}>
@@ -132,7 +141,10 @@ const FrequencyButtonGroup = () => {
                 item.name === userOption ? styles.period.selected.pressable :
                 styles.period.unselected.pressable
               }
-              onPress={() => setUserOption(item.name)}
+              onPress={() => {
+                setUserOption(item.name);
+                setFrequencyType(item.name);
+              }}
             >
               <Text style={
                   item.name === userOption ? styles.period.selected.text :

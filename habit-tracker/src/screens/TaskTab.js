@@ -4,15 +4,21 @@ import {
 } from 'react-native';
 import TaskComponent from '../components/Task';
 import FrequencyButtonGroup from '../components/SelectFrequency.js';
+import { FrequencyContext } from "../providers/FrequencyProvider";
 
 var taskCount = 0;
 
 class Task {
-  constructor(name, point_value) {
+  constructor(name, point_value, frequency) {
     this.id = taskCount++;
     this.name = name;
     this.point_value = point_value;
-    this.completed = false;
+    this.frequency = frequency;
+    this.frequency_data = [];
+  }
+  toString() {
+    return this.name + ' - ' + this.point_value + ' points' + ' - ' +
+    this.frequency;
   }
 }
 
@@ -37,6 +43,7 @@ const DisplayTaskList = (taskList) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [newTaskName, onChangeTaskName] = React.useState('');
   const [newTaskPointValue, onChangePointValue] = React.useState('');
+  const { weekdayData, monthData, frequencyType } = React.useContext(FrequencyContext);
   return (
     <ScrollView style={styles.scrollView}>
       <Modal
@@ -78,9 +85,11 @@ const DisplayTaskList = (taskList) => {
               style={[styles.doneButton, styles.buttonClose]}
               onPress={() => {
                 if (newTaskName.length > 0 && newTaskPointValue.length > 0) {
-                setModalVisible(!modalVisible);
-                newTask = new Task(newTaskName, newTaskPointValue);
-                taskList.push(newTask);
+                  setModalVisible(!modalVisible);
+                  newTask = new Task(newTaskName, newTaskPointValue, frequencyType);
+                  (frequencyType === 'Weekly') ? newTask.frequency_data = weekdayData : newTask.frequency_data = monthData;
+                  taskList.push(newTask);
+                  console.log(newTask.toString());
                 }
                 else {
                   alert('Please fill out all fields');

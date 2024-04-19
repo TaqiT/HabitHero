@@ -7,6 +7,7 @@ import ShopTab from './src/screens/ShopTab';
 import SettingsTab from './src/screens/SettingsTab';
 import Points from './src/components/Points';
 import { PointsProvider } from './src/providers/PointsProvider';
+import { FrequencyProvider } from './src/providers/FrequencyProvider';
 import { View, StyleSheet } from 'react-native';
 
 const stack = createNativeStackNavigator();
@@ -26,8 +27,8 @@ const MyTabs = () => {
           borderColor: 'pink',
           borderRadius: 0
         },
-        tabBarActiveTintColor: 'pink', 
-        tabBarInactiveTintColor: 'grey', 
+        tabBarActiveTintColor: 'pink',
+        tabBarInactiveTintColor: 'grey',
       }}
     >
       <tab.Screen name="Tasks" component={TaskTab}/>
@@ -39,6 +40,7 @@ const MyTabs = () => {
 
 const App = () => {
   return (
+    <FrequencyProvider>
     <PointsProvider>
       <View style={styles.container}>
         <NavigationContainer>
@@ -62,6 +64,7 @@ const App = () => {
       </View>
       <Points/>
     </PointsProvider>
+    </FrequencyProvider>
   );
 };
 

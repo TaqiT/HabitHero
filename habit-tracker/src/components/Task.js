@@ -7,8 +7,7 @@ import { PointsContext } from '../providers/PointsProvider';
 
 const TaskComponent = ({task}) => {
 	const [isEnabled, setIsEnabled] = useState(false);
-	const { setPointsTotal } = useContext(PointsContext);
-	const { pointTotal } = useContext(PointsContext);
+	const { pointTotal, setPointsTotal } = useContext(PointsContext);
 	const toggleSwitch = () => { setIsEnabled(previousState => !previousState) }
 	return (
 		<TouchableOpacity
@@ -58,7 +57,7 @@ const styles = StyleSheet.create({
 	task_points: {
 		view: {
 			flex: 5.5,
-			
+
 			alignItems: 'center',
 		},
 		text: {
@@ -70,12 +69,12 @@ const styles = StyleSheet.create({
 	spacer: {
 		flex: 1,
 		height: 10,
-		
+
 	},
 	check_box: {
 		flex: 4,
 		height: 20,
-		
+
 		borderWidth: 1,
 	},
 	touchable: {
