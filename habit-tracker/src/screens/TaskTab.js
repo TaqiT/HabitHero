@@ -3,7 +3,7 @@ import {
   StyleSheet, ScrollView, View, StatusBar, Modal, Text, TouchableOpacity, TextInput,
 } from 'react-native';
 import TaskComponent from '../components/Task';
-import FrequencyRadioGroup from '../components/SelectFrequency.js';
+import FrequencyButtonGroup from '../components/SelectFrequency.js';
 
 var taskCount = 0;
 
@@ -72,8 +72,8 @@ const DisplayTaskList = (taskList) => {
               placeholderTextColor='black'
               returnKeyType={'done'}
             />
-            <FrequencyRadioGroup />
-            <View style={{ height: 450, width: 350 }} />
+            <FrequencyButtonGroup />
+            <View style={{ height: 200, width: 350 }} />
             <TouchableOpacity
               style={[styles.doneButton, styles.buttonClose]}
               onPress={() => {
