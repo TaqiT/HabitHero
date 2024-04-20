@@ -9,16 +9,16 @@ import { FrequencyContext } from "../providers/FrequencyProvider";
 var taskCount = 0;
 
 const colors = [
-  {key: 8, color: 'black'},
-  {key: 0, color: 'red'},
-  {key: 1, color: 'orange'},
-  {key: 2, color: 'yellow'},
-  {key: 3, color: 'green'},
-  {key: 4, color: 'blue'},
-  {key: 5, color: 'purple'},
-  {key: 6, color: 'pink'},
-  {key: 7, color: 'teal'},
-  {key: 9, color: 'brown'},
+  'black',
+  'red',
+  'orange',
+  'yellow',
+  'green',
+  'blue',
+  'purple',
+  'pink',
+  'teal',
+  'brown',
 ];
 
 
@@ -75,7 +75,7 @@ const TaskTab = () => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <View style={styles.topView}>
-              <Pressable style={styles.backButton}
+              <TouchableOpacity style={styles.backButton}
                 onPress={() => setModalVisible(!modalVisible)}
               />
               <View style={styles.topViewDivider} />
@@ -105,17 +105,17 @@ const TaskTab = () => {
             />
             <FrequencyButtonGroup />
             <View style={styles.colorsView}>
-              {colors.map((props) => {
-                key = props.key;
+              {colors.map((color) => {
                 return (
                   <TouchableOpacity
+                    key={colors.indexOf(color)}
                     style={{
-                      backgroundColor: props.color, width: 50, height: 50, borderRadius: 30, margin: 5,
-                      borderColor: (props.color === 'black') ? 'grey' : 'black',
-                      borderWidth: (selectedColor === props.color) ? 3 : 0
+                      backgroundColor: color, width: 50, height: 50, borderRadius: 30, margin: 5,
+                      borderColor: (color === 'black') ? 'grey' : 'black',
+                      borderWidth: (selectedColor === color) ? 3 : 0
                     }}
                     onPress={() => {
-                      changeColor(props.color);
+                      changeColor(color);
                     }}
                   />
                 );
@@ -182,7 +182,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'left',
     alignItems: 'left',
-    // backgroundColor: 'red',
   },
   topViewDivider: {
     height: 10,
@@ -206,7 +205,6 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   backButton: {
-    // padding: 10,
     position: 'absolute',
     borderBottomWidth: 3,
     borderLeftWidth: 3,
@@ -223,7 +221,6 @@ const styles = StyleSheet.create({
     height: 120,
     width: 300,
     flexWrap: 'wrap',
-    // backgroundColor: 'red',
   },
   addButton: {
     padding: 10,

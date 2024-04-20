@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'left',
 		display: 'flex',
-		borderRadius: 15,
+		borderRadius: 12,
 	},
 	divider: {
 		height: 23,
