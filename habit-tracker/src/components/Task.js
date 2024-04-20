@@ -12,7 +12,7 @@ const TaskComponent = ({task}) => {
 
 	return (
 		<TouchableOpacity
-			style={[styles.touchable, {borderColor: task.color==='default' ? 'black' : task.color}]}>
+			style={[styles.touchable, {borderColor: task.color==='' ? 'black' : task.color}]}>
 			<View style={styles.spacer}/>
 			<View style={styles.spacer}/>
 			<View style={styles.task_name.view}>
@@ -21,18 +21,18 @@ const TaskComponent = ({task}) => {
 				</Text>
 			</View>
 			<View style={styles.spacer}/>
-			<View style={[styles.divider, {backgroundColor: task.color==='default' ? 'pink' : task.color}]}/>
+			<View style={[styles.divider, {backgroundColor: task.color==='' ? 'pink' : task.color}]}/>
 			<View style={styles.task_points.view}>
 				<Text style={styles.task_points.text}>
 					{task.point_value}
 				</Text>
 			</View>
-			<View style={[styles.divider, {backgroundColor: task.color==='default' ? 'pink' : task.color}]}/>
+			<View style={[styles.divider, {backgroundColor: task.color==='' ? 'pink' : task.color}]}/>
 			<View style={styles.spacer}/>
 			<View>
 				<Switch
 					value={isEnabled}
-					thumbColor={task.color==='default' ? 'white' : task.color}
+					// thumbColor={task.color==='default' ? 'white' : task.color}
 					onValueChange={(state) => {
 						{state ? setPointsTotal(pointTotal + Number(task.point_value)) :
 						setPointsTotal(pointTotal - Number(task.point_value))}

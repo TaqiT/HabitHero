@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {
-  StyleSheet, ScrollView, View, StatusBar, Modal, Text, TouchableOpacity, TextInput,
+  StyleSheet, ScrollView, View, StatusBar, Modal, Text, TouchableOpacity, TextInput, Pressable
 } from 'react-native';
 import TaskComponent from '../components/Task';
 import FrequencyButtonGroup from '../components/SelectFrequency.js';
@@ -9,8 +9,8 @@ import { FrequencyContext } from "../providers/FrequencyProvider";
 var taskCount = 0;
 
 const colors = [
+  {key: 8, color: 'black'},
   {key: 0, color: 'red'},
-  {key: 8, color: 'white'},
   {key: 1, color: 'orange'},
   {key: 2, color: 'yellow'},
   {key: 3, color: 'green'},
@@ -23,7 +23,7 @@ const colors = [
 
 
 class Task {
-  constructor(name, point_value, frequency='daily', color='default') {
+  constructor(name, point_value, frequency='daily', color='') {
     this.id = taskCount++;
     this.name = name;
     this.point_value = point_value;
@@ -52,8 +52,17 @@ const TaskTab = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [newTaskName, onChangeTaskName] = React.useState('');
   const [newTaskPointValue, onChangePointValue] = React.useState('');
-  const [selectedColor, setSelectedColor] = React.useState('red');
-  const { weekdayData, monthData, frequencyType } = React.useContext(FrequencyContext);
+  const {
+    weekdayData, monthData, frequencyType
+  } = React.useContext(FrequencyContext);
+  const [selectedColor, setSelectedColor] = React.useState('');
+  const changeColor = (color) => {
+    if (selectedColor === color) {
+      setSelectedColor('');
+      return;
+    }
+    setSelectedColor(color);
+  }
   return (
     <ScrollView style={styles.scrollView}>
       <Modal
@@ -62,11 +71,16 @@ const TaskTab = () => {
         visible={modalVisible}
         onRequestClose={() => {
           setModalVisible(!modalVisible);
-        }}>
+      }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <View style={{ height: 10 }} />
-            <Text style={styles.modalText}>New Task</Text>
+            <View style={styles.topView}>
+              <Pressable style={styles.backButton}
+                onPress={() => setModalVisible(!modalVisible)}
+              />
+              <View style={styles.topViewDivider} />
+              <Text style={styles.modalText}>New Task</Text>
+            </View>
             <TextInput
               style={styles.nameInput}
               value={newTaskName}
@@ -96,10 +110,12 @@ const TaskTab = () => {
                 return (
                   <TouchableOpacity
                     style={{
-                      backgroundColor: props.color, width: 50, height: 50, borderRadius: 50, margin: 5, borderWidth: (selectedColor === props.color) ? 5 : 2
+                      backgroundColor: props.color, width: 50, height: 50, borderRadius: 30, margin: 5,
+                      borderColor: (props.color === 'black') ? 'grey' : 'black',
+                      borderWidth: (selectedColor === props.color) ? 3 : 0
                     }}
                     onPress={() => {
-                      setSelectedColor(props.color);
+                      changeColor(props.color);
                     }}
                   />
                 );
@@ -122,7 +138,7 @@ const TaskTab = () => {
               }}>
               <Text style={styles.doneButtonText}>Done</Text>
             </TouchableOpacity>
-            <View style={{ height: 150, width: 350 }} />
+            <View style={{ height: 90, width: 350 }} />
           </View>
         </View>
       </Modal>
@@ -162,6 +178,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 40,
   },
+  topView: {
+    flexDirection: 'row',
+    justifyContent: 'left',
+    alignItems: 'left',
+    // backgroundColor: 'red',
+  },
+  topViewDivider: {
+    height: 10,
+    width: 10,
+  },
   modalView: {
     margin: 0,
     backgroundColor: 'white',
@@ -178,6 +204,18 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+  backButton: {
+    // padding: 10,
+    position: 'absolute',
+    borderBottomWidth: 3,
+    borderLeftWidth: 3,
+    top: 2,
+    left: -90,
+    height: 15,
+    width: 15,
+    transform: [{ rotate: '45deg' }],
+    borderRadius: 0,
   },
   colorsView: {
     flexDirection: 'row',
