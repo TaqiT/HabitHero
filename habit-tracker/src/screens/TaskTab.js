@@ -8,21 +8,36 @@ import { FrequencyContext } from "../providers/FrequencyProvider";
 
 var taskCount = 0;
 
+const colors = [
+  {key: 0, color: 'red'},
+  {key: 8, color: 'white'},
+  {key: 1, color: 'orange'},
+  {key: 2, color: 'yellow'},
+  {key: 3, color: 'green'},
+  {key: 4, color: 'blue'},
+  {key: 5, color: 'purple'},
+  {key: 6, color: 'pink'},
+  {key: 7, color: 'teal'},
+  {key: 9, color: 'brown'},
+];
+
+
 class Task {
-  constructor(name, point_value, frequency) {
+  constructor(name, point_value, frequency='daily', color='default') {
     this.id = taskCount++;
     this.name = name;
     this.point_value = point_value;
     this.frequency = frequency;
     this.frequency_data = [];
+    this.color = color
   }
   toString() {
     return this.name + ' - ' + this.point_value + ' points' + ' - ' +
-    this.frequency;
+    this.frequency + ' - ' + this.color;
   }
 }
 
-var task_list = [
+var taskList = [
   new Task('Take out the trash', 9999),
   new Task('Clean the bathroom', 10),
   new Task('Do the laundry', 10),
@@ -34,15 +49,10 @@ var task_list = [
 ];
 
 const TaskTab = () => {
-  return (
-    DisplayTaskList(task_list)
-  );
-};
-
-const DisplayTaskList = (taskList) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [newTaskName, onChangeTaskName] = React.useState('');
   const [newTaskPointValue, onChangePointValue] = React.useState('');
+  const [selectedColor, setSelectedColor] = React.useState('red');
   const { weekdayData, monthData, frequencyType } = React.useContext(FrequencyContext);
   return (
     <ScrollView style={styles.scrollView}>
@@ -80,13 +90,28 @@ const DisplayTaskList = (taskList) => {
               returnKeyType={'done'}
             />
             <FrequencyButtonGroup />
-            <View style={{ height: 240, width: 350 }} />
+            <View style={styles.colorsView}>
+              {colors.map((props) => {
+                key = props.key;
+                return (
+                  <TouchableOpacity
+                    style={{
+                      backgroundColor: props.color, width: 50, height: 50, borderRadius: 50, margin: 5, borderWidth: (selectedColor === props.color) ? 5 : 2
+                    }}
+                    onPress={() => {
+                      setSelectedColor(props.color);
+                    }}
+                  />
+                );
+              })}
+            </View>
+            <View style={{ height: 20 }} />
             <TouchableOpacity
               style={[styles.doneButton, styles.buttonClose]}
               onPress={() => {
                 if (newTaskName.length > 0 && newTaskPointValue.length > 0) {
                   setModalVisible(!modalVisible);
-                  newTask = new Task(newTaskName, newTaskPointValue, frequencyType);
+                  newTask = new Task(newTaskName, newTaskPointValue, frequencyType, selectedColor);
                   (frequencyType === 'Weekly') ? newTask.frequency_data = weekdayData : newTask.frequency_data = monthData;
                   taskList.push(newTask);
                   console.log(newTask.toString());
@@ -94,9 +119,10 @@ const DisplayTaskList = (taskList) => {
                 else {
                   alert('Please fill out all fields');
                 }
-                }}>
+              }}>
               <Text style={styles.doneButtonText}>Done</Text>
             </TouchableOpacity>
+            <View style={{ height: 150, width: 350 }} />
           </View>
         </View>
       </Modal>
@@ -152,6 +178,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+  colorsView: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    height: 120,
+    width: 300,
+    flexWrap: 'wrap',
+    // backgroundColor: 'red',
   },
   addButton: {
     padding: 10,
