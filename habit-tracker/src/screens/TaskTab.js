@@ -121,24 +121,22 @@ const TaskTab = () => {
                 );
               })}
             </View>
-            <View style={{ height: 20 }} />
             <TouchableOpacity
-              style={[styles.doneButton, styles.buttonClose]}
+              style={[styles.saveButton, styles.buttonClose]}
               onPress={() => {
                 if (newTaskName.length > 0 && newTaskPointValue.length > 0) {
                   setModalVisible(!modalVisible);
                   newTask = new Task(newTaskName, newTaskPointValue, frequencyType, selectedColor);
                   (frequencyType === 'Weekly') ? newTask.frequency_data = weekdayData : newTask.frequency_data = monthData;
                   taskList.push(newTask);
-                  console.log(newTask.toString());
                 }
                 else {
                   alert('Please fill out all fields');
                 }
               }}>
-              <Text style={styles.doneButtonText}>Done</Text>
+              <Text style={styles.saveButtonText}>Save Task</Text>
             </TouchableOpacity>
-            <View style={{ height: 90, width: 350 }} />
+            <View style={{ height: 50, width: 350 }} />
           </View>
         </View>
       </Modal>
@@ -240,8 +238,9 @@ const styles = StyleSheet.create({
   addButtonOpen: {
     backgroundColor: 'pink',
   },
-  doneButton: {
+  saveButton: {
     padding: 10,
+    marginTop: 50,
     width: 300,
     elevation: 2,
 		borderRadius: 10,
@@ -256,11 +255,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
   },
-  doneButtonText: {
+  saveButtonText: {
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 25,
   },
   modalText: {
     marginBottom: 15,
