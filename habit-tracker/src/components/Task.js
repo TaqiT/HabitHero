@@ -9,9 +9,10 @@ const TaskComponent = ({task}) => {
 	const [isEnabled, setIsEnabled] = useState(false);
 	const { pointTotal, setPointsTotal } = useContext(PointsContext);
 	const toggleSwitch = () => { setIsEnabled(previousState => !previousState) }
+
 	return (
 		<TouchableOpacity
-			style = {styles.touchable}>
+			style={[styles.touchable, {borderColor: task.color==='' ? 'black' : task.color}]}>
 			<View style={styles.spacer}/>
 			<View style={styles.spacer}/>
 			<View style={styles.task_name.view}>
@@ -20,20 +21,21 @@ const TaskComponent = ({task}) => {
 				</Text>
 			</View>
 			<View style={styles.spacer}/>
-			<View style={styles.divider}/>
+			<View style={[styles.divider, {backgroundColor: task.color==='' ? 'pink' : task.color}]}/>
 			<View style={styles.task_points.view}>
 				<Text style={styles.task_points.text}>
 					{task.point_value}
 				</Text>
 			</View>
-			<View style={styles.divider}/>
+			<View style={[styles.divider, {backgroundColor: task.color==='' ? 'pink' : task.color}]}/>
 			<View style={styles.spacer}/>
 			<View>
 				<Switch
 					value={isEnabled}
+					// thumbColor={task.color==='default' ? 'white' : task.color}
 					onValueChange={(state) => {
-						{state ? setPointsTotal(pointTotal + task.point_value) :
-						setPointsTotal(pointTotal - task.point_value)}
+						{state ? setPointsTotal(pointTotal + Number(task.point_value)) :
+						setPointsTotal(pointTotal - Number(task.point_value))}
 						toggleSwitch();
 					}}
 				/>
@@ -89,8 +91,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'left',
 		display: 'flex',
-		borderRadius: 15,
-		backgroundColor: '#fff',
+		borderRadius: 12,
 	},
 	divider: {
 		height: 23,

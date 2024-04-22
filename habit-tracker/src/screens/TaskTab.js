@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {
-  StyleSheet, ScrollView, View, StatusBar, Modal, Text, TouchableOpacity, TextInput,
+  StyleSheet, ScrollView, View, StatusBar, Modal, Text, TouchableOpacity, TextInput, Pressable
 } from 'react-native';
 import TaskComponent from '../components/Task';
 import FrequencyButtonGroup from '../components/SelectFrequency.js';
@@ -8,21 +8,36 @@ import { FrequencyContext } from "../providers/FrequencyProvider";
 
 var taskCount = 0;
 
+const colors = [
+  'black',
+  'red',
+  'orange',
+  'yellow',
+  'green',
+  'blue',
+  'purple',
+  'pink',
+  'teal',
+  'brown',
+];
+
+
 class Task {
-  constructor(name, point_value, frequency) {
+  constructor(name, point_value, frequency='daily', color='') {
     this.id = taskCount++;
     this.name = name;
     this.point_value = point_value;
     this.frequency = frequency;
     this.frequency_data = [];
+    this.color = color
   }
   toString() {
     return this.name + ' - ' + this.point_value + ' points' + ' - ' +
-    this.frequency;
+    this.frequency + ' - ' + this.color;
   }
 }
 
-var task_list = [
+var taskList = [
   new Task('Take out the trash', 9999),
   new Task('Clean the bathroom', 10),
   new Task('Do the laundry', 10),
@@ -34,16 +49,20 @@ var task_list = [
 ];
 
 const TaskTab = () => {
-  return (
-    DisplayTaskList(task_list)
-  );
-};
-
-const DisplayTaskList = (taskList) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [newTaskName, onChangeTaskName] = React.useState('');
   const [newTaskPointValue, onChangePointValue] = React.useState('');
-  const { weekdayData, monthData, frequencyType } = React.useContext(FrequencyContext);
+  const {
+    weekdayData, monthData, frequencyType
+  } = React.useContext(FrequencyContext);
+  const [selectedColor, setSelectedColor] = React.useState('');
+  const changeColor = (color) => {
+    if (selectedColor === color) {
+      setSelectedColor('');
+      return;
+    }
+    setSelectedColor(color);
+  }
   return (
     <ScrollView style={styles.scrollView}>
       <Modal
@@ -52,11 +71,16 @@ const DisplayTaskList = (taskList) => {
         visible={modalVisible}
         onRequestClose={() => {
           setModalVisible(!modalVisible);
-        }}>
+      }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <View style={{ height: 10 }} />
-            <Text style={styles.modalText}>New Task</Text>
+            <View style={styles.topView}>
+              <TouchableOpacity style={styles.backButton}
+                onPress={() => setModalVisible(!modalVisible)}
+              />
+              <View style={styles.topViewDivider} />
+              <Text style={styles.modalText}>New Task</Text>
+            </View>
             <TextInput
               style={styles.nameInput}
               value={newTaskName}
@@ -80,13 +104,30 @@ const DisplayTaskList = (taskList) => {
               returnKeyType={'done'}
             />
             <FrequencyButtonGroup />
-            <View style={{ height: 240, width: 350 }} />
+            <View style={styles.colorsView}>
+              {colors.map((color) => {
+                return (
+                  <TouchableOpacity
+                    key={colors.indexOf(color)}
+                    style={{
+                      backgroundColor: color, width: 50, height: 50, borderRadius: 30, margin: 5,
+                      borderColor: (color === 'black') ? 'grey' : 'black',
+                      borderWidth: (selectedColor === color) ? 3 : 0
+                    }}
+                    onPress={() => {
+                      changeColor(color);
+                    }}
+                  />
+                );
+              })}
+            </View>
+            <View style={{ height: 20 }} />
             <TouchableOpacity
               style={[styles.doneButton, styles.buttonClose]}
               onPress={() => {
                 if (newTaskName.length > 0 && newTaskPointValue.length > 0) {
                   setModalVisible(!modalVisible);
-                  newTask = new Task(newTaskName, newTaskPointValue, frequencyType);
+                  newTask = new Task(newTaskName, newTaskPointValue, frequencyType, selectedColor);
                   (frequencyType === 'Weekly') ? newTask.frequency_data = weekdayData : newTask.frequency_data = monthData;
                   taskList.push(newTask);
                   console.log(newTask.toString());
@@ -94,9 +135,10 @@ const DisplayTaskList = (taskList) => {
                 else {
                   alert('Please fill out all fields');
                 }
-                }}>
+              }}>
               <Text style={styles.doneButtonText}>Done</Text>
             </TouchableOpacity>
+            <View style={{ height: 90, width: 350 }} />
           </View>
         </View>
       </Modal>
@@ -136,6 +178,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 40,
   },
+  topView: {
+    flexDirection: 'row',
+    justifyContent: 'left',
+    alignItems: 'left',
+  },
+  topViewDivider: {
+    height: 10,
+    width: 10,
+  },
   modalView: {
     margin: 0,
     backgroundColor: 'white',
@@ -152,6 +203,24 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+  backButton: {
+    position: 'absolute',
+    borderBottomWidth: 3,
+    borderLeftWidth: 3,
+    top: 2,
+    left: -90,
+    height: 15,
+    width: 15,
+    transform: [{ rotate: '45deg' }],
+    borderRadius: 0,
+  },
+  colorsView: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    height: 120,
+    width: 300,
+    flexWrap: 'wrap',
   },
   addButton: {
     padding: 10,
