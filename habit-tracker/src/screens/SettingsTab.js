@@ -15,6 +15,7 @@ const tabs = [
   { name: 'Preferences', icon: 'settings' },
   { name: 'Help', icon: 'help-circle' },
   { name: 'Content', icon: 'align-center' },
+  { name: 'Themes', icon: 'theme-light-dark'},
 ];
 
 export default function Example() {

@@ -6,6 +6,7 @@ import TaskTab from './src/screens/TaskTab';
 import ShopTab from './src/screens/ShopTab';
 import SettingsTab from './src/screens/SettingsTab';
 import Points from './src/components/Points';
+import CalendarTab from './src/screens/CalendarTab';
 import { PointsProvider } from './src/providers/PointsProvider';
 import { FrequencyProvider } from './src/providers/FrequencyProvider';
 import { View, StyleSheet } from 'react-native';
@@ -33,7 +34,10 @@ const MyTabs = () => {
     >
       <tab.Screen name="Tasks" component={TaskTab}/>
       <tab.Screen name="Shop" component={ShopTab}/>
+      <tab.Screen name="Calendar" component={CalendarTab}/>
       <tab.Screen name="Settings" component={SettingsTab}/>
+      
+      
     </tab.Navigator>
   )
 }
