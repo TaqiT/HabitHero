@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import {
-  StyleSheet, ScrollView, View, StatusBar, Modal, Text, TouchableOpacity, TextInput, Pressable
+  StyleSheet, ScrollView, View, StatusBar, Modal, Text, TouchableOpacity, TextInput, Switch
 } from 'react-native';
-import TaskComponent from '../components/Task';
 import FrequencyButtonGroup from '../components/SelectFrequency.js';
 import { FrequencyContext } from "../providers/FrequencyProvider";
+import { PointsContext } from '../providers/PointsProvider';
 
 var taskCount = 0;
 
@@ -48,12 +48,55 @@ var taskList = [
   new Task('Clean the bedroom', 10),
 ];
 
+
+
+const TaskComponent = ({task}) => {
+  const [isEnabled, setIsEnabled] = useState(false);
+  const { pointTotal, setPointsTotal } = useContext(PointsContext);
+  const toggleSwitch = () => { setIsEnabled(previousState => !previousState) }
+
+  return (
+    <TouchableOpacity
+      style={[styles.touchable, {borderColor: task.color==='' ? 'black' : task.color}]}>
+      <View style={styles.spacer}/>
+      <View style={styles.spacer}/>
+      <View style={styles.task_name.view}>
+        <Text style={styles.task_name.text}>
+          {task.name}
+        </Text>
+      </View>
+      <View style={styles.spacer}/>
+      <View style={[styles.divider, {backgroundColor: task.color==='' ? 'pink' : task.color}]}/>
+      <View style={styles.task_points.view}>
+        <Text style={styles.task_points.text}>
+          {task.point_value}
+        </Text>
+      </View>
+      <View style={[styles.divider, {backgroundColor: task.color==='' ? 'pink' : task.color}]}/>
+      <View style={styles.spacer}/>
+      <View>
+        <Switch
+          value={isEnabled}
+          onValueChange={(state) => {
+            {state ? setPointsTotal(pointTotal + Number(task.point_value)) :
+            setPointsTotal(pointTotal - Number(task.point_value))}
+            toggleSwitch();
+          }}
+        />
+      </View>
+    </TouchableOpacity>
+  );
+}
+
+
+
+
 const TaskTab = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [newTaskName, onChangeTaskName] = React.useState('');
   const [newTaskPointValue, onChangePointValue] = React.useState('');
   const {
-    weekdayData, monthData, frequencyType
+    weekData, clearWeekData, monthData, clearMonthData, frequencyType
   } = React.useContext(FrequencyContext);
   const [selectedColor, setSelectedColor] = React.useState('');
   const changeColor = (color) => {
@@ -124,10 +167,11 @@ const TaskTab = () => {
             <TouchableOpacity
               style={[styles.saveButton, styles.buttonClose]}
               onPress={() => {
-                if (newTaskName.length > 0 && newTaskPointValue.length > 0) {
+                if (newTaskName.length > 0 && newTaskPointValue.length > 0 && ( (frequencyType === 'Weekly' && weekData.length != 0) || (frequencyType === 'Monthly' && monthData.length != 0))
+                ) {
                   setModalVisible(!modalVisible);
                   newTask = new Task(newTaskName, newTaskPointValue, frequencyType, selectedColor);
-                  (frequencyType === 'Weekly') ? newTask.frequency_data = weekdayData : newTask.frequency_data = monthData;
+                  (frequencyType === 'Weekly') ? newTask.frequency_data = weekData : newTask.frequency_data = monthData;
                   taskList.push(newTask);
                 }
                 else {
@@ -147,6 +191,9 @@ const TaskTab = () => {
           setModalVisible(true);
           onChangeTaskName('');
           onChangePointValue('');
+          setSelectedColor('')
+          clearWeekData()
+          clearMonthData();
           }}>
         <Text style={styles.addButtonText}>Create New Task!</Text>
       </TouchableOpacity>
@@ -223,17 +270,17 @@ const styles = StyleSheet.create({
   addButton: {
     padding: 10,
     elevation: 2,
-		flexDirection: 'row',
-		alignSelf: 'center',
-		padding: 5,
-		width: 375,
-		height: 50,
-		marginTop: 10,
-		borderColor: '#000',
-		alignItems: 'center',
-		justifyContent: 'center',
-		display: 'flex',
-		borderRadius: 15,
+    flexDirection: 'row',
+    alignSelf: 'center',
+    padding: 5,
+    width: 375,
+    height: 50,
+    marginTop: 10,
+    borderColor: '#000',
+    alignItems: 'center',
+    justifyContent: 'center',
+    display: 'flex',
+    borderRadius: 15,
   },
   addButtonOpen: {
     backgroundColor: 'pink',
@@ -243,7 +290,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
     width: 300,
     elevation: 2,
-		borderRadius: 10,
+    borderRadius: 10,
     backgroundColor: '#2196F3',
   },
   buttonClose: {
@@ -288,6 +335,59 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     borderColor: 'pink',
     fontSize: 18,
+  },
+  task_name: {
+    view: {
+      flex: 20,
+      justifyContent: 'center',
+    },
+    text: {
+      color: '#000',
+      fontSize: 15,
+    },
+  },
+  task_points: {
+    view: {
+      flex: 5.5,
+
+      alignItems: 'center',
+    },
+    text: {
+      color: '#000',
+      fontSize: 18,
+      justifyContent: 'center',
+    },
+  },
+  spacer: {
+    flex: 1,
+    height: 10,
+
+  },
+  check_box: {
+    flex: 4,
+    height: 20,
+
+    borderWidth: 1,
+  },
+  touchable: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    padding: 5,
+    width: 375,
+    height: 50,
+    marginTop: 10,
+    borderColor: '#000',
+    borderWidth: 1.5,
+    alignItems: 'center',
+    justifyContent: 'left',
+    display: 'flex',
+    borderRadius: 12,
+  },
+  divider: {
+    height: 23,
+    width: 5,
+    backgroundColor: 'pink',
+    borderRadius: 5,
   },
 });
 
