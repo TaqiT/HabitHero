@@ -114,7 +114,7 @@ const TaskTab = () => {
         visible={modalVisible}
         onRequestClose={() => {
           setModalVisible(!modalVisible);
-      }}> 
+      }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <View style={styles.topView}>
@@ -146,20 +146,6 @@ const TaskTab = () => {
               placeholderTextColor='black'
               returnKeyType={'done'}
             />
-
-
-
-            <View style={style.deleteButton}> 
-            <TouchableOpacity onPress = {() => {setModalVisible(false)}} />
-            <TextInput> Delete </TextInput>
-            
-            
-
-
-            </View>
-
-
-    
             <FrequencyButtonGroup />
             <View style={styles.colorsView}>
               {colors.map((color) => {
@@ -177,6 +163,14 @@ const TaskTab = () => {
                   />
                 );
               })}
+            </View>
+            <View style={styles.deleteButton.view}>
+              <TouchableOpacity
+                style={styles.deleteButton.touchable}
+                onPress = {() => {setModalVisible(false)}}
+              >
+                <Text style={styles.deleteButton.text}> Delete </Text>
+              </TouchableOpacity>
             </View>
             <TouchableOpacity
               style={[styles.saveButton, styles.buttonClose]}
@@ -236,6 +230,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 40,
+  },
+  deleteButton: {
+    view: {
+      marginTop: 30,
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: 300,
+      height: 50,
+      backgroundColor: 'red',
+      borderRadius: 10,
+    },
+    touchable: {},
+    text: {
+      fontSize: 25,
+      fontWeight: 'bold',
+      color: 'white',
+    }
   },
   topView: {
     flexDirection: 'row',
@@ -301,7 +312,7 @@ const styles = StyleSheet.create({
   },
   saveButton: {
     padding: 10,
-    marginTop: 50,
+    marginTop: 30,
     width: 300,
     elevation: 2,
     borderRadius: 10,
