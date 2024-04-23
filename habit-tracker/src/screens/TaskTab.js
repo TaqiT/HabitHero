@@ -114,7 +114,7 @@ const TaskTab = () => {
         visible={modalVisible}
         onRequestClose={() => {
           setModalVisible(!modalVisible);
-      }}>
+      }}> 
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <View style={styles.topView}>
@@ -146,6 +146,20 @@ const TaskTab = () => {
               placeholderTextColor='black'
               returnKeyType={'done'}
             />
+
+
+
+            <View style={style.deleteButton}> 
+            <TouchableOpacity onPress = {() => {setModalVisible(false)}} />
+            <TextInput> Delete </TextInput>
+            
+            
+
+
+            </View>
+
+
+    
             <FrequencyButtonGroup />
             <View style={styles.colorsView}>
               {colors.map((color) => {
