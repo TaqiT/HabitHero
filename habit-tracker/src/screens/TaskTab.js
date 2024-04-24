@@ -39,7 +39,7 @@ class Task {
 }
 
 var taskList = [
-  new Task('Take out the trash', 9999, 'Weekly', ['Sun', 'Tue'], 'black'),
+  new Task('Take out the trash', 9999),
   new Task('Clean the bathroom', 10),
   new Task('Do the laundry', 10),
   new Task('Sweep the floors', 10),
@@ -139,6 +139,7 @@ const TaskTab = () => {
                 );
               })}
             </View>
+            {modalType == 'edit' ? // If the modal is in edit mode, show delete button, else show spacer view
             <View style={styles.deleteButton.view}>
               <TouchableOpacity
                 style={styles.deleteButton.touchable}
@@ -146,7 +147,9 @@ const TaskTab = () => {
               >
                 <Text style={styles.deleteButton.text}> Delete </Text>
               </TouchableOpacity>
-            </View>
+            </View> :
+            <View style={{ height: 70 }} />
+            }
             <TouchableOpacity
               style={[styles.saveButton, styles.buttonClose]}
               onPress={() => {saveButtonPress()}}
