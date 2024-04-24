@@ -6,30 +6,31 @@ import {
 import { Button } from '@rneui/themed';
 import { PointsContext } from '../providers/PointsProvider.js';
 
-var reward_list = [];
+var reward_list = [
+  new Reward('Skip the gym', 100),
+  new Reward('Go get fast food', 50),
+  new Reward('Buy concert tickets', 400),
+  new Reward('Weekend getaway', 200),
+  new Reward('Fine dining experience', 150),
+  new Reward('Spa Day', 100),
+  new Reward('Get your nails done', 250),
+  new Reward('Skip a chore', 60),
+  new Reward('Night out', 120),
+  new Reward('DIY beauty night', 140),
+  new Reward('Indulge in junk food', 240),
+  new Reward('Shopping spree', 400),
+
+];
 
 class Reward{
   constructor(name, point_value){
     this.id = reward_list.length;
     this.name = name;
     this.point_value = point_value;
-    reward_list.push(this);
   }
 }
 
 const ShopTab = () => {
-  var reward1 = new Reward('Skip the gym', 100);
-  var reward2 = new Reward('Go get fast food', 50);
-  var reward3 = new Reward('Buy concert tickets', 400);
-  var reward4 = new Reward('Weekend getaway', 200);
-  var reward5 = new Reward('Fine dining experience', 150);
-  var reward6 = new Reward('Spa Day', 100);
-  var reward7 = new Reward('Get your nails done', 250);
-  var reward8 = new Reward('Skip a chore', 60);
-  var reward9 = new Reward('Night out', 120);
-  var reward10 = new Reward('DIY beauty night', 140);
-  var reward11 = new Reward('Indulge in junk food', 240);
-  var reward12 = new Reward('Shopping spree', 400);
   return (
     DisplayRewardList(reward_list)
   )

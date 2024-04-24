@@ -57,7 +57,7 @@ const TaskComponent = ({task}) => {
 
   return (
     <TouchableOpacity
-      style={[styles.touchable, {borderColor: task.color==='' ? 'black' : task.color}]}>
+      style={[styles.taskTouchable, {borderColor: task.color==='' ? 'black' : task.color}]}>
       <View style={styles.spacer}/>
       <View style={styles.spacer}/>
       <View style={styles.task_name.view}>
@@ -87,7 +87,6 @@ const TaskComponent = ({task}) => {
     </TouchableOpacity>
   );
 }
-
 
 
 
@@ -391,10 +390,9 @@ const styles = StyleSheet.create({
   check_box: {
     flex: 4,
     height: 20,
-
     borderWidth: 1,
   },
-  touchable: {
+  taskTouchable: {
     flexDirection: 'row',
     alignSelf: 'center',
     padding: 5,
