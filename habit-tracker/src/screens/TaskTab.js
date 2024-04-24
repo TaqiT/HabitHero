@@ -49,6 +49,9 @@ var taskList = [
   new Task('Clean the bedroom', 10),
 ];
 
+const removeTask = (task) => {
+  taskList = taskList.filter((t) => t.id !== task.id);
+};
 
 const TaskTab = () => {
   const {
@@ -143,7 +146,9 @@ const TaskTab = () => {
             <View style={styles.deleteButton.view}>
               <TouchableOpacity
                 style={styles.deleteButton.touchable}
-                onPress = {() => {setTaskModalVisible(false)}}
+                onPress = {() => {
+                  setTaskModalVisible(false); removeTask(selectedTask);
+                }}
               >
                 <Text style={styles.deleteButton.text}> Delete </Text>
               </TouchableOpacity>
@@ -204,14 +209,17 @@ const styles = StyleSheet.create({
   deleteButton: {
     view: {
       marginTop: 20,
-      justifyContent: 'center',
-      alignItems: 'center',
       width: 300,
       height: 50,
       backgroundColor: 'red',
       borderRadius: 10,
     },
-    touchable: {},
+    touchable: {
+      width: '100%',
+      height: '100%',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
     text: {
       fontSize: 25,
       fontWeight: 'bold',
