@@ -15,34 +15,6 @@ import { View, StyleSheet } from 'react-native';
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
 
-const MyTabs = () => {
-  return (
-    <tab.Navigator
-      screenOptions={{
-        tabBarStyle: {
-          backgroundColor: 'black',
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          elevation: 0,
-          borderColor: 'pink',
-          borderRadius: 0
-        },
-        tabBarActiveTintColor: 'pink',
-        tabBarInactiveTintColor: 'grey',
-      }}
-    >
-      <tab.Screen name="Tasks" component={TaskTab}/>
-      <tab.Screen name="Shop" component={ShopTab}/>
-      <tab.Screen name="Calendar" component={CalendarTab}/>
-      <tab.Screen name="Settings" component={SettingsTab}/>
-
-
-    </tab.Navigator>
-  )
-}
-
 const App = () => {
   return (
     <TaskModalProvider>
@@ -50,22 +22,27 @@ const App = () => {
     <PointsProvider>
       <View style={styles.container}>
         <NavigationContainer>
-          <stack.Navigator>
-            <stack.Screen
-              name="Habit Hero"
-              component={ MyTabs }
-              options={{
-                title: 'My Home',
-                headerStyle: {
-                  backgroundColor: 'black',
-                },
-                headerTintColor: '#D3D3D3',
-                headerTitleStyle: {
-                  fontWeight: 'bold',
-                },
-              }}
-            />
-          </stack.Navigator>
+        <tab.Navigator
+          screenOptions={{
+            tabBarStyle: {
+              backgroundColor: 'black',
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              elevation: 0,
+              borderColor: 'pink',
+              borderRadius: 0
+            },
+            tabBarActiveTintColor: 'pink',
+            tabBarInactiveTintColor: 'grey',
+          }}
+        >
+          <tab.Screen name="Tasks" component={TaskTab}/>
+          <tab.Screen name="Shop" component={ShopTab}/>
+          <tab.Screen name="Calendar" component={CalendarTab}/>
+          <tab.Screen name="Settings" component={SettingsTab}/>
+        </tab.Navigator>
         </NavigationContainer>
       </View>
       <Points/>
