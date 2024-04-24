@@ -26,14 +26,14 @@ function range(start, end) {
 }
 
 const WeekdayButton = (props) => {
-  const [selected, setSelected] = useState(false);
-  const { addWeekData, removeWeekData } = useContext(FrequencyContext);
+  const { addWeekData, removeWeekData, weekData } = useContext(FrequencyContext);
+  const [selected, setSelected] = useState(weekData.includes(props.day));
   return (
     <Pressable
       style={selected ? styles.weekday.selected.pressable : styles.weekday.unselected.pressable}
       onPress={(state) => {
         setSelected(!selected);
-        state ? addWeekData(props.day) : removeWeekData(props.day);
+        state ? addWeekData([props.day]) : removeWeekData(props.day);
       }}
     >
       <Text style={selected ? styles.weekday.selected.text : styles.weekday.unselected.text}>
@@ -44,14 +44,14 @@ const WeekdayButton = (props) => {
 }
 
 const MonthButton = (props) => {
-  const { addMonthData, removeMonthData } = useContext(FrequencyContext);
-  const [selected, setSelected] = useState(false);
+  const { addMonthData, removeMonthData, monthData } = useContext(FrequencyContext);
+  const [selected, setSelected] = useState(monthData.includes(props.day));
   return (
     <Pressable
       style={selected ? styles.month.selected.pressable : styles.month.unselected.pressable}
       onPress={(state) => {
         setSelected(!selected);
-        state ? addMonthData(props.day) : removeMonthData(props.day);
+        state ? addMonthData([props.day]) : removeMonthData(props.day);
       }}
     >
       <Text style={selected ? styles.month.selected.text : styles.month.unselected.text}>
@@ -82,10 +82,10 @@ const MonthButtonGroup = () => {
   return(
     <View style={styles.monthView}>
       <View style={styles.monthRowView}>
-        {range(1, 7).map((item) => {
-          key = item;
+        {range(1, 7).map((index) => {
+          key = index;
           return (
-            <MonthButton key={item} day={item.toString()}/>
+            <MonthButton key={index} day={String(index)}/>
           );
         })}
       </View>
@@ -93,7 +93,7 @@ const MonthButtonGroup = () => {
         {range(8, 14).map((index) => {
           key = index;
           return (
-            <MonthButton key={index} day={index.toString()}/>
+            <MonthButton key={index} day={String(index)}/>
           );
         })}
       </View>
@@ -101,7 +101,7 @@ const MonthButtonGroup = () => {
         {range(15, 21).map((index) => {
           key = index;
           return (
-            <MonthButton key={index} day={index.toString()}/>
+            <MonthButton key={index} day={String(index)}/>
           );
         })}
       </View>
@@ -109,17 +109,17 @@ const MonthButtonGroup = () => {
         {range(22, 28).map((index) => {
           key = index;
           return (
-            <MonthButton key={index} day={index.toString()}/>
+            <MonthButton key={index} day={String(index)}/>
           );
         })}
       </View>
       <View style={styles.monthLastRowView}>
         <View style={styles.monthLastRowFirstDivider}/>
-        <MonthButton day={29}/>
+        <MonthButton day={String(29)}/>
         <View style={styles.monthLastRowSecondDivider}/>
-        <MonthButton day={30}/>
+        <MonthButton day={String(30)}/>
         <View style={styles.monthLastRowThirdDivider}/>
-        <MonthButton day={31}/>
+        <MonthButton day={String(31)}/>
       </View>
     </View>
   );
@@ -127,8 +127,7 @@ const MonthButtonGroup = () => {
 
 
 const FrequencyButtonGroup = () => {
-  const [userOption, setUserOption] = useState('Daily');
-  const { setFrequencyType } = useContext(FrequencyContext);
+  const { frequencyType, setFrequencyType } = useContext(FrequencyContext);
   return (
     <View style={styles.view}>
     <View style={styles.periodView}>
@@ -138,16 +137,15 @@ const FrequencyButtonGroup = () => {
           <View key={index}>
             <Pressable
               style={
-                item.name === userOption ? styles.period.selected.pressable :
+                item.name === frequencyType ? styles.period.selected.pressable :
                 styles.period.unselected.pressable
               }
               onPress={() => {
-                setUserOption(item.name);
                 setFrequencyType(item.name);
               }}
             >
               <Text style={
-                  item.name === userOption ? styles.period.selected.text :
+                  item.name === frequencyType ? styles.period.selected.text :
                   styles.period.unselected.text
               }>
                 {item.name}
@@ -159,17 +157,17 @@ const FrequencyButtonGroup = () => {
     </View>
     <View>
       {
-        userOption === 'Daily' ? <View style={styles.dailySpacer}/> : null
+        frequencyType === 'Daily' ? <View style={styles.dailySpacer}/> : null
       }
     </View>
     <View>
       {
-        userOption === 'Weekly' ? <WeekdayButtonGroup /> : null
+        frequencyType === 'Weekly' ? <WeekdayButtonGroup /> : null
       }
     </View>
     <View>
       {
-        userOption === 'Monthly' ? <MonthButtonGroup /> : null
+        frequencyType === 'Monthly' ? <MonthButtonGroup /> : null
       }
     </View>
 

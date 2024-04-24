@@ -1,10 +1,11 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import {
-  StyleSheet, ScrollView, View, StatusBar, Modal, Text, TouchableOpacity, TextInput, Switch
+  StyleSheet, ScrollView, View, StatusBar, Modal, Text, TouchableOpacity, TextInput
 } from 'react-native';
+import TaskComponent from '../components/Task.js';
 import FrequencyButtonGroup from '../components/SelectFrequency.js';
 import { FrequencyContext } from "../providers/FrequencyProvider";
-import { PointsContext } from '../providers/PointsProvider';
+import { TaskModalContext } from '../providers/TaskModalProvider.js';
 
 var taskCount = 0;
 
@@ -23,12 +24,12 @@ const colors = [
 
 
 class Task {
-  constructor(name, point_value, frequency='daily', color='') {
+  constructor(name, point_value, frequency='Daily', frequency_data=[], color='') {
     this.id = taskCount++;
     this.name = name;
     this.point_value = point_value;
     this.frequency = frequency;
-    this.frequency_data = [];
+    this.frequency_data = frequency_data;
     this.color = color
   }
   toString() {
@@ -38,7 +39,7 @@ class Task {
 }
 
 var taskList = [
-  new Task('Take out the trash', 9999),
+  new Task('Take out the trash', 9999, 'Weekly', ['Sun', 'Tue'], 'black'),
   new Task('Clean the bathroom', 10),
   new Task('Do the laundry', 10),
   new Task('Sweep the floors', 10),
@@ -49,76 +50,53 @@ var taskList = [
 ];
 
 
-
-const TaskComponent = ({task}) => {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const { pointTotal, setPointsTotal } = useContext(PointsContext);
-  const toggleSwitch = () => { setIsEnabled(previousState => !previousState) }
-
-  return (
-    <TouchableOpacity
-      style={[styles.taskTouchable, {borderColor: task.color==='' ? 'black' : task.color}]}>
-      <View style={styles.spacer}/>
-      <View style={styles.spacer}/>
-      <View style={styles.task_name.view}>
-        <Text style={styles.task_name.text}>
-          {task.name}
-        </Text>
-      </View>
-      <View style={styles.spacer}/>
-      <View style={[styles.divider, {backgroundColor: task.color==='' ? 'pink' : task.color}]}/>
-      <View style={styles.task_points.view}>
-        <Text style={styles.task_points.text}>
-          {task.point_value}
-        </Text>
-      </View>
-      <View style={[styles.divider, {backgroundColor: task.color==='' ? 'pink' : task.color}]}/>
-      <View style={styles.spacer}/>
-      <View>
-        <Switch
-          value={isEnabled}
-          onValueChange={(state) => {
-            {state ? setPointsTotal(pointTotal + Number(task.point_value)) :
-            setPointsTotal(pointTotal - Number(task.point_value))}
-            toggleSwitch();
-          }}
-        />
-      </View>
-    </TouchableOpacity>
-  );
-}
-
-
-
 const TaskTab = () => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [newTaskName, onChangeTaskName] = React.useState('');
-  const [newTaskPointValue, onChangePointValue] = React.useState('');
   const {
-    weekData, clearWeekData, monthData, clearMonthData, frequencyType
+    modalType, setModalType, taskModalVisible, setTaskModalVisible, newTaskName, setNewTaskName, newTaskPointValue, setNewTaskPointValue, newTaskColor, changeColor, selectedTask
+  } = useContext(TaskModalContext);
+  const {
+    weekData, clearWeekData, monthData, clearMonthData, frequencyType, setFrequencyType
   } = React.useContext(FrequencyContext);
-  const [selectedColor, setSelectedColor] = React.useState('');
-  const changeColor = (color) => {
-    if (selectedColor === color) {
-      setSelectedColor('');
-      return;
+  var saveButtonPressed = false;
+  const saveButtonPress = () => {
+    if (newTaskName.length > 0 && newTaskPointValue.length > 0 && ( (frequencyType === 'Weekly' && weekData.length != 0) || (frequencyType === 'Monthly' && monthData.length != 0) || frequencyType === 'Daily')
+    ){
+      setTaskModalVisible(false);
+      if (modalType === 'add') {
+        newTask = new Task(
+          newTaskName, newTaskPointValue, frequencyType
+        );
+        ((frequencyType === 'Weekly') ? newTask.frequency_data = weekData : newTask.frequency_data = monthData);
+        newTask.color = newTaskColor;
+        taskList.push(newTask);
+      }
+      else{
+        selectedTask.name = newTaskName;
+        selectedTask.point_value = newTaskPointValue;
+        selectedTask.frequency = frequencyType;
+        ((frequencyType === 'Weekly') ? selectedTask.frequency_data = weekData : selectedTask.frequency_data = monthData);
+        selectedTask.color = newTaskColor;
+      }
     }
-    setSelectedColor(color);
-  }
+    else if(saveButtonPressed) {
+      alert('Please fill out all fields');
+    }
+  };
+  saveButtonPressed = true;
   return (
     <ScrollView style={styles.scrollView}>
       <Modal
         animationType="slide"
         transparent={true}
-        visible={modalVisible}
+        visible={taskModalVisible}
         onRequestClose={() => {
-          setModalVisible(!modalVisible);
+          setTaskModalVisible(false);
       }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <View style={styles.topView}>
               <TouchableOpacity style={styles.backButton}
-                onPress={() => setModalVisible(!modalVisible)}
+                onPress={() => setTaskModalVisible(false)}
               />
               <View style={styles.topViewDivider} />
               <Text style={styles.modalText}>New Task</Text>
@@ -126,7 +104,7 @@ const TaskTab = () => {
             <TextInput
               style={styles.nameInput}
               value={newTaskName}
-              onChangeText={onChangeTaskName}
+              onChangeText={setNewTaskName}
               placeholder='Task Name'
               enablesReturnKeyAutomatically={true}
               maxLength={26}
@@ -137,7 +115,7 @@ const TaskTab = () => {
             <TextInput
               style={styles.pointValueInput}
               value={newTaskPointValue}
-              onChangeText={onChangePointValue}
+              onChangeText={setNewTaskPointValue}
               keyboardType="numeric"
               placeholder='Point Value'
               enablesReturnKeyAutomatically={true}
@@ -154,11 +132,9 @@ const TaskTab = () => {
                     style={{
                       backgroundColor: color, width: 50, height: 50, borderRadius: 30, margin: 5,
                       borderColor: (color === 'black') ? 'grey' : 'black',
-                      borderWidth: (selectedColor === color) ? 3 : 0
+                      borderWidth: (newTaskColor === color) ? 3 : 0
                     }}
-                    onPress={() => {
-                      changeColor(color);
-                    }}
+                    onPress={() => {changeColor(color)}}
                   />
                 );
               })}
@@ -166,28 +142,18 @@ const TaskTab = () => {
             <View style={styles.deleteButton.view}>
               <TouchableOpacity
                 style={styles.deleteButton.touchable}
-                onPress = {() => {setModalVisible(false)}}
+                onPress = {() => {setTaskModalVisible(false)}}
               >
                 <Text style={styles.deleteButton.text}> Delete </Text>
               </TouchableOpacity>
             </View>
             <TouchableOpacity
               style={[styles.saveButton, styles.buttonClose]}
-              onPress={() => {
-                if (newTaskName.length > 0 && newTaskPointValue.length > 0 && ( (frequencyType === 'Weekly' && weekData.length != 0) || (frequencyType === 'Monthly' && monthData.length != 0))
-                ) {
-                  setModalVisible(!modalVisible);
-                  newTask = new Task(newTaskName, newTaskPointValue, frequencyType, selectedColor);
-                  (frequencyType === 'Weekly') ? newTask.frequency_data = weekData : newTask.frequency_data = monthData;
-                  taskList.push(newTask);
-                }
-                else {
-                  alert('Please fill out all fields');
-                }
-              }}>
+              onPress={() => {saveButtonPress()}}
+            >
               <Text style={styles.saveButtonText}>Save Task</Text>
             </TouchableOpacity>
-            <View style={{ height: 50, width: 350 }} />
+            <View style={{ height: 30, width: 350 }} />
           </View>
         </View>
       </Modal>
@@ -195,11 +161,13 @@ const TaskTab = () => {
       <TouchableOpacity
         style={[styles.addButton, styles.addButtonOpen]}
         onPress={() => {
-          setModalVisible(true);
-          onChangeTaskName('');
-          onChangePointValue('');
-          setSelectedColor('')
-          clearWeekData()
+          setTaskModalVisible(true);
+          setModalType('add');
+          setNewTaskName('');
+          setNewTaskPointValue('');
+          changeColor('');
+          setFrequencyType('Daily');
+          clearWeekData();
           clearMonthData();
           }}>
         <Text style={styles.addButtonText}>Create New Task!</Text>
@@ -218,7 +186,7 @@ const TaskTab = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 10,
+    flex: 12,
     backgroundColor: 'white',
   },
   scrollView: {
@@ -232,7 +200,7 @@ const styles = StyleSheet.create({
   },
   deleteButton: {
     view: {
-      marginTop: 30,
+      marginTop: 20,
       justifyContent: 'center',
       alignItems: 'center',
       width: 300,
@@ -252,17 +220,13 @@ const styles = StyleSheet.create({
     justifyContent: 'left',
     alignItems: 'left',
   },
-  topViewDivider: {
-    height: 10,
-    width: 10,
-  },
   modalView: {
     margin: 0,
     backgroundColor: 'white',
-    borderRadius: 50,
+    borderRadius: 40,
     borderWidth: 4,
     borderColor: 'pink',
-    padding: 20,
+    padding: 15,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -311,7 +275,7 @@ const styles = StyleSheet.create({
   },
   saveButton: {
     padding: 10,
-    marginTop: 30,
+    marginTop: 20,
     width: 300,
     elevation: 2,
     borderRadius: 10,
@@ -373,7 +337,6 @@ const styles = StyleSheet.create({
   task_points: {
     view: {
       flex: 5.5,
-
       alignItems: 'center',
     },
     text: {
@@ -385,7 +348,6 @@ const styles = StyleSheet.create({
   spacer: {
     flex: 1,
     height: 10,
-
   },
   check_box: {
     flex: 4,

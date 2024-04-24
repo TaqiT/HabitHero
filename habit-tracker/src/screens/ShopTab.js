@@ -6,6 +6,15 @@ import {
 import { Button } from '@rneui/themed';
 import { PointsContext } from '../providers/PointsProvider.js';
 
+var rewardCount = 0;
+
+class Reward{
+  constructor(name, point_value){
+    this.id = rewardCount++;
+    this.name = name;
+    this.point_value = point_value;
+  }
+}
 var reward_list = [
   new Reward('Skip the gym', 100),
   new Reward('Go get fast food', 50),
@@ -21,14 +30,6 @@ var reward_list = [
   new Reward('Shopping spree', 400),
 
 ];
-
-class Reward{
-  constructor(name, point_value){
-    this.id = reward_list.length;
-    this.name = name;
-    this.point_value = point_value;
-  }
-}
 
 const ShopTab = () => {
   return (
