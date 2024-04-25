@@ -14,8 +14,7 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 const tabs = [
   { name: 'Preferences', icon: 'settings' },
   { name: 'Help', icon: 'help-circle' },
-  { name: 'Content', icon: 'align-center' },
-  { name: 'Themes', icon: 'theme-light-dark'},
+  { name: 'Themes', icon: 'pen-tool'},
 ];
 
 export default function Example() {
@@ -33,7 +32,7 @@ export default function Example() {
             <Image
               alt=""
               source={{
-                uri: 'https://lh3.googleusercontent.com/proxy/Ca8_UrH82JmV4ASRdbZcEJ79bYhbSB4Wnpz3QrqmXa8PW0SKfwg9qjHGH4202UyZ80W4wlhNMz97Rmd_i0DP7b0ndnJ4ogHufKHzC6lxgzWk6KlfrNFaTXsZFtQ',
+                uri: 'https://lh3.googleusercontent.com/pw/AP1GczOOdQtnh-Hfp5sLzpyQ45hcHBXZVhZ_TUU0StlTCsyxAwtWXgq9_Yg63WFR---w7oRjNVkfEM38OGRYdZSfm1T2Mo8XxA0HeS23zLjfPdyVEl_5lTKMAPaax8w5xDpX57ft6SVnT_0O9zOiwGufIkiW_iNggvgmRpS5bBcIagh5gifo0CAg7esCJ6DCX-txxzWN3e_hBtu_LFOPqrdJ_P9UTMHD-T7k00b3p6gYyOUzQbRfcIvwqHU9MUMjKi8XLzy3T000vtxBbZkMdwOlTgpDZXypyf8SRqTFNuX7otQPWiIvc-tbTB1n5HZx5gqjXuwW6WOVPm8Niiu62sObS3GYMEzxVLX_gNm_gaz9_LjzG_7C0weX8arN9JTOCQB4dQRnBs3L0VFMUDEeHRmO7sBSfxqgIIxSZFv3U9b9BJJA5nXeIvHynIlbllwgtVVEj0QA8WfhKv3H-8qSAfXWIL6xiVpJeoDp8WWdQHMT7vV9rXfAdLEnnfJKGxvEzWT9Ww2xgrR8oGIohqMPk2MP43A2sQa1rOlaS13hbirweFjyGJCrQIMyArf9Th-mubiAHTdDsCkVc4zfSb8WTaizwn_54x98hjyzPjAlCbwECcT8JE1XItRfaTcK88UXD_fA5i2wA39X62OluOuhiJildKPnn6OuDx3SNLnoSnfe7BoFHlc5DQgJQ2Ne09v-NXyCPd_kZzzhTb2AnfbWgEuKn7PRLksab5UF-8KYDSYPZ443iR_ylqrsLhCkgrM4x1KLSp-2GbVHsNEtODo0wHsOglw30SsTtQxQyg3557PXLgQggwHTZpTM_kPGnIZUTHPITycHlALRcEnyCk-LZd0F--MbIOSP_6N6bSCKZDHD-66Tm7r7WHbiKYIQ_3RE4Hqo9coZfJfpwz9yDUhkZx--nGg6xQ=w521-h928-s-no-gm?authuser=0',
               }}
               style={styles.profileAvatar} />
 
@@ -169,80 +168,80 @@ export default function Example() {
               </View>
             </View>
 
-            <View style={styles.section}>
-              <Text style={styles.sectionTitle}>Resources</Text>
-
-              <View style={styles.sectionBody}>
-                <View style={[styles.rowWrapper, styles.rowFirst]}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      // handle onPress
-                    }}
-                    style={styles.row}>
-                    <Text style={styles.rowLabel}>Contact Us</Text>
-
-                    <View style={styles.rowSpacer} />
-
-                    <FeatherIcon
-                      color="#C6C6C6"
-                      name="chevron-right"
-                      size={20} />
-                  </TouchableOpacity>
-                </View>
-
-                <View style={styles.rowWrapper}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      // handle onPress
-                    }}
-                    style={styles.row}>
-                    <Text style={styles.rowLabel}>Report Bug</Text>
-
-                    <View style={styles.rowSpacer} />
-
-                    <FeatherIcon
-                      color="#C6C6C6"
-                      name="chevron-right"
-                      size={20} />
-                  </TouchableOpacity>
-                </View>
-
-                <View style={styles.rowWrapper}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      // handle onPress
-                    }}
-                    style={styles.row}>
-                    <Text style={styles.rowLabel}>Rate in App Store</Text>
-
-                    <View style={styles.rowSpacer} />
-
-                    <FeatherIcon
-                      color="#C6C6C6"
-                      name="chevron-right"
-                      size={20} />
-                  </TouchableOpacity>
-                </View>
-
-                <View style={styles.rowWrapper}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      // handle onPress
-                    }}
-                    style={styles.row}>
-                    <Text style={styles.rowLabel}>Terms and Privacy</Text>
-
-                    <View style={styles.rowSpacer} />
-
-                    <FeatherIcon
-                      color="#C6C6C6"
-                      name="chevron-right"
-                      size={20} />
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>
           </ScrollView>
+        )}
+        {value === 1 && (
+        <View style={styles.section}>
+          <View style={styles.sectionBody}>
+            <View style={[styles.rowWrapper, styles.rowFirst]}>
+              <TouchableOpacity
+                onPress={() => {
+                  // handle onPress
+                }}
+                style={styles.row}
+              >
+                <Text style={styles.rowLabel}>Contact Us</Text>
+
+                <View style={styles.rowSpacer} />
+
+                <FeatherIcon
+                  color="#C6C6C6"
+                  name="chevron-right"
+                  size={20} />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.rowWrapper}>
+              <TouchableOpacity
+                onPress={() => {
+                  // handle onPress
+                }}
+                style={styles.row}>
+                <Text style={styles.rowLabel}>Report Bug</Text>
+
+                <View style={styles.rowSpacer} />
+
+                <FeatherIcon
+                  color="#C6C6C6"
+                  name="chevron-right"
+                  size={20} />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.rowWrapper}>
+              <TouchableOpacity
+                onPress={() => {
+                  // handle onPress
+                }}
+                style={styles.row}>
+                <Text style={styles.rowLabel}>Rate in App Store</Text>
+
+                <View style={styles.rowSpacer} />
+
+                <FeatherIcon
+                  color="#C6C6C6"
+                  name="chevron-right"
+                  size={20} />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.rowWrapper}>
+              <TouchableOpacity
+                onPress={() => {
+                  // handle onPress
+                }}
+                style={styles.row}>
+                <Text style={styles.rowLabel}>Terms and Privacy</Text>
+
+                <View style={styles.rowSpacer} />
+
+                <FeatherIcon
+                  color="#C6C6C6"
+                  name="chevron-right"
+                  size={20} />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
         )}
       </View>
     </SafeAreaView>
