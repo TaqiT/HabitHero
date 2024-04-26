@@ -62,7 +62,7 @@ const TaskTab = () => {
   } = React.useContext(FrequencyContext);
   var saveButtonPressed = false;
   const saveButtonPress = () => {
-    if (newTaskName.length > 0 && newTaskPointValue.length > 0 && ( (frequencyType === 'Weekly' && weekData.length != 0) || (frequencyType === 'Monthly' && monthData.length != 0) || frequencyType === 'Daily')
+    if (newTaskName.length > 0 && newTaskPointValue.length > 0 && ( (frequencyType === 'Weekly' && weekData.length != 0) || (frequencyType === 'Monthly' && monthData.length != 0) || frequencyType === 'Daily') && !isNaN(Number(newTaskPointValue))
     ){
       setTaskModalVisible(false);
       if (modalType === 'add') {
@@ -80,6 +80,9 @@ const TaskTab = () => {
         ((frequencyType === 'Weekly') ? selectedTask.frequency_data = weekData : selectedTask.frequency_data = monthData);
         selectedTask.color = newTaskColor;
       }
+    }
+    else if (saveButtonPressed && isNaN(Number(newTaskPointValue))){
+      alert('Please enter a valid point value');
     }
     else if(saveButtonPressed) {
       alert('Please fill out all fields');
