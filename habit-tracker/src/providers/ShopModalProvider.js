@@ -5,7 +5,7 @@ const ShopModalContext = createContext();
 const ShopModalProvider = ({ children }) => {
   const [modalType, setModalType] = useState('add');
   const [selectedReward, setSelectedReward] = useState(null);
-  const [RewardModalVisible, setRewardModalVisible] = useState(false);
+  const [rewardModalVisible, setRewardModalVisible] = useState(false);
   const [newRewardName, setNewRewardName] = useState('');
   const [newRewardPointValue, setNewRewardPointValue] = useState('');
   const [newRewardColor, setNewRewardColor] = useState('');
@@ -18,7 +18,7 @@ const ShopModalProvider = ({ children }) => {
   }
   return (
     <ShopModalContext.Provider value={{
-      modalType, setModalType, RewardModalVisible, setRewardModalVisible, newRewardName, setNewRewardName, newRewardPointValue, setNewRewardPointValue, newRewardColor, setNewRewardColor, changeColor, selectedReward, setSelectedReward
+      modalType, setModalType, rewardModalVisible, setRewardModalVisible, newRewardName, setNewRewardName, newRewardPointValue, setNewRewardPointValue, newRewardColor, setNewRewardColor, changeColor, selectedReward, setSelectedReward
       }}>
       {children}
     </ShopModalContext.Provider>

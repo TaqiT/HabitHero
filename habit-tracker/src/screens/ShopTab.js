@@ -57,22 +57,19 @@ const ShopTab = () => {
   } = useContext(ShopModalContext);
   var saveButtonPressed = false;
   const saveButtonPress = () => {
-    if (newRewardName.length > 0 && newRewardPointValue.length > 0 && ( (frequencyType === 'Weekly' && weekData.length != 0) || (frequencyType === 'Monthly' && monthData.length != 0) || frequencyType === 'Daily')
-    ){
+    if (newRewardName.length > 0 && newRewardPointValue.length > 0){
       setRewardModalVisible(false);
       if (modalType === 'add') {
         newReward = new Reward(
-          newRewardName, newRewardPointValue, frequencyType
+          newRewardName, newRewardPointValue
         );
-        ((frequencyType === 'Weekly') ? newReward.frequency_data = weekData : newReward.frequency_data = monthData);
+
         newReward.color = newRewardColor;
         reward_list.push(newReward);
       }
       else{
         selectedReward.name = newRewardName;
         selectedReward.point_value = newRewardPointValue;
-        selectedReward.frequency = frequencyType;
-        ((frequencyType === 'Weekly') ? selectedReward.frequency_data = weekData : selectedReward.frequency_data = monthData);
         selectedReward.color = newRewardColor;
       }
     }
@@ -168,9 +165,6 @@ const ShopTab = () => {
           setNewRewardName('');
           setNewRewardPointValue('');
           changeColor('');
-          setFrequencyType('Daily');
-          clearWeekData();
-          clearMonthData();
           }}>
         <Text style={styles.addButtonText}>Create New Reward!</Text>
       </TouchableOpacity>
