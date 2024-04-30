@@ -11,12 +11,15 @@ import { PointsProvider } from './src/providers/PointsProvider';
 import { FrequencyProvider } from './src/providers/FrequencyProvider';
 import { TaskModalProvider } from './src/providers/TaskModalProvider';
 import { View, StyleSheet } from 'react-native';
+import { RewardComponent } from './src/screens/ShopTab';
+import { ShopModalProvider } from './src/providers/ShopModalProvider';
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
 
 const App = () => {
   return (
+    <ShopModalProvider>
     <TaskModalProvider>
     <FrequencyProvider>
     <PointsProvider>
@@ -40,6 +43,7 @@ const App = () => {
         >
           <tab.Screen name="Tasks" component={TaskTab}/>
           <tab.Screen name="Shop" component={ShopTab}/>
+          <tab.Screen name="Rewards" component={RewardComponent}/> 
           <tab.Screen name="Calendar" component={CalendarTab}/>
           <tab.Screen name="Settings" component={SettingsTab}/>
         </tab.Navigator>
@@ -49,6 +53,7 @@ const App = () => {
     </PointsProvider>
     </FrequencyProvider>
     </TaskModalProvider>
+    </ShopModalProvider>
   );
 };
 

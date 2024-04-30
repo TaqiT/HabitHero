@@ -3,46 +3,47 @@ import {
 	StyleSheet, TouchableOpacity, Text, View, Switch
 } from 'react-native';
 import { PointsContext } from '../providers/PointsProvider';
-import { TaskModalContext } from '../providers/TaskModalProvider';
 import { FrequencyContext } from '../providers/FrequencyProvider';
+import { ShopModalContext } from '../providers/ShopModalProvider';
 
-const TaskComponent = ({task}) => {
+
+const ShopComponent = ({reward}) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const { pointTotal, setPointsTotal } = useContext(PointsContext);
   const {
-    setModalType, setTaskModalVisible, setNewTaskName, setNewTaskPointValue, setNewTaskColor, setSelectedTask
-  } = useContext(TaskModalContext);
+    setModalType, setRewardModalVisible, setNewRewardName, setNewRewardPointValue, setNewRewardColor, setSelectedReward
+  } = useContext(ShopModalContext);
 	const { setFrequencyType, addWeekData, addMonthData } = useContext(FrequencyContext);
 	const toggleSwitch = () => { setIsEnabled(previousState => !previousState) }
   return (
     <TouchableOpacity
-      style={[styles.taskTouchable, {borderColor: task.color==='' ? 'black' : task.color}]}
+      style={[styles.rewardTouchable, {borderColor: reward.color==='' ? 'black' : reward.color}]}
       onPress={() => {
-				setSelectedTask(task);
+				setSelectedReward(reward);
 				setModalType('edit');
-        setTaskModalVisible(true);
-        setNewTaskName(task.name);
-        setNewTaskPointValue(String(task.point_value));
-        setNewTaskColor(task.color);
-        setFrequencyType(task.frequency);
-        (task.frequency === 'Weekly') ? addWeekData(task.frequency_data) : addMonthData(task.frequency_data);
+        setRewardModalVisible(true);
+        setNewRewardName(reward.name);
+        setNewRewardPointValue(String(reward.point_value));
+        setNewRewardColor(reward.color);
+        setFrequencyType(reward.frequency);
+        (reward.frequency === 'Weekly') ? addWeekData(reward.frequency_data) : addMonthData(reward.frequency_data);
       }}
     >
       <View style={styles.spacer}/>
       <View style={styles.spacer}/>
-      <View style={styles.task_name.view}>
-        <Text style={styles.task_name.text}>
-          {task.name}
+      <View style={styles.reward_name.view}>
+        <Text style={styles.reward_name.text}>
+          {reward.name}
         </Text>
       </View>
       <View style={styles.spacer}/>
-      <View style={[styles.divider, {backgroundColor: task.color==='' ? 'pink' : task.color}]}/>
-      <View style={styles.task_points.view}>
-        <Text style={styles.task_points.text}>
-          {task.point_value}
+      <View style={[styles.divider, {backgroundColor: reward.color==='' ? 'pink' : reward.color}]}/>
+      <View style={styles.reward_points.view}>
+        <Text style={styles.reward_points.text}>
+          {reward.point_value}
         </Text>
       </View>
-      <View style={[styles.divider, {backgroundColor: task.color==='' ? 'pink' : task.color}]}/>
+      <View style={[styles.divider, {backgroundColor: reward.color==='' ? 'pink' : reward.color}]}/>
       <View style={styles.spacer}/>
       <View>
         <Switch
@@ -59,7 +60,7 @@ const TaskComponent = ({task}) => {
 }
 
 const styles = StyleSheet.create({
-	task_name: {
+	reward_name: {
 		view: {
 			flex: 20,
 			justifyContent: 'center',
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
 			fontSize: 15,
 		},
 	},
-	task_points: {
+	reward_points: {
 		view: {
 			flex: 5.5,
 
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
 		height: 20,
 		borderWidth: 1,
 	},
-	taskTouchable: {
+	rewardTouchable: {
 		flexDirection: 'row',
 		alignSelf: 'center',
 		padding: 5,
@@ -113,4 +114,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default TaskComponent;
+export default ShopComponent;
