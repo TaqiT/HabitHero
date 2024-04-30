@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
 	spacer: {
 		flex: 1,
 		height: 10,
-
 	},
 	check_box: {
 		flex: 4,

@@ -1,15 +1,13 @@
 import React, { useContext } from 'react'
-import { StatusBar } from 'expo-status-bar';
 import {
-  StyleSheet, TouchableOpacity, Text, View, ScrollView
+  StyleSheet, ScrollView, View, StatusBar, Modal, Text, TouchableOpacity, TextInput
 } from 'react-native';
 import { Button } from '@rneui/themed';
 import { PointsContext } from '../providers/PointsProvider.js';
-import { FrequencyContext } from "../providers/FrequencyProvider";
+import { FrequencyContext } from "../providers/FrequencyProvider.js";
 import { ShopModalContext } from '../providers/ShopModalProvider.js';
 import FrequencyButtonGroup from '../components/SelectFrequency.js';
-import ShopComponent from '../components/Shop.js';
-
+import RewardComponent from '../components/Reward.js';
 
 var rewardCount = 0;
 
@@ -54,6 +52,7 @@ var reward_list = [
 const removeReward = (reward) => {
   reward_list = reward_list.filter((t) => t.id !== reward.id);
 };
+
 const ShopTab = () => {
   const {
     modalType, setModalType, rewardModalVisible, setRewardModalVisible, newRewardName, setNewRewardName, newRewardPointValue, setNewRewardPointValue, newRewardColor, changeColor, selectedReward
@@ -181,8 +180,8 @@ const ShopTab = () => {
           }}>
         <Text style={styles.addButtonText}>Create New Reward!</Text>
       </TouchableOpacity>
-        {rewardList.map((reward, index) => (
-          <ShopComponent key={index} reward={reward} />
+        {reward_list.map((reward, index) => (
+          <RewardComponent key={index} reward={reward} />
         ))}
         <View style={{ height: 90 }} />
         <StatusBar style='auto' />
@@ -191,42 +190,60 @@ const ShopTab = () => {
   );
 };
 
-const RewardComponent = ({ reward }) => {
-  const { setPointsTotal } = useContext(PointsContext);
-	const { pointTotal } = useContext(PointsContext);
 
-  return (
-    <TouchableOpacity
-      style = {styles.touchable}>
-      <View style={styles.spacer}></View>
-      <View style={styles.spacer}></View>
-      <View style={styles.reward_name.view}>
-        <Text style={styles.reward_name.text}>
-          {reward.name}
-        </Text>
-      </View>
-      <View style={styles.spacer}></View>
-      <View style={styles.divider}></View>
-      <View style={styles.reward_points.view}>
-        <Text style={styles.reward_points.text}>
-          {reward.point_value}
-        </Text>
-      </View>
-      <View style={styles.divider}></View>
-      <View style={styles.spacer}></View>
-      <View style={styles.button.view}>
-        <Button
-          titleStyle={styles.button.textStyle}
-          buttonStyle={styles.button.buttonStyle}
-          title='Redeem'
-          onPress={() => {
-            pointTotal >= reward.point_value ? setPointsTotal(pointTotal - reward.point_value) : alert('Not enough points!');
-            pointTotal >= reward.point_value ? alert('Redeemed!') : null
-          }}
-        />
-      </View>
-    </TouchableOpacity>
-  );
-}
+const styles = StyleSheet.create({
+	reward_name: {
+		view: {
+			flex: 20,
+			justifyContent: 'center',
+		},
+		text: {
+			color: '#000',
+			fontSize: 15,
+		},
+	},
+	reward_points: {
+		view: {
+			flex: 5.5,
 
-export { ShopTab, RewardComponent };
+			alignItems: 'center',
+		},
+		text: {
+			color: '#000',
+			fontSize: 18,
+			justifyContent: 'center',
+		},
+	},
+	spacer: {
+		flex: 1,
+		height: 10,
+	},
+	check_box: {
+		flex: 4,
+		height: 20,
+		borderWidth: 1,
+	},
+	rewardTouchable: {
+		flexDirection: 'row',
+		alignSelf: 'center',
+		padding: 5,
+		width: 375,
+		height: 50,
+		marginTop: 10,
+		borderColor: '#000',
+		borderWidth: 1.5,
+		alignItems: 'center',
+		justifyContent: 'left',
+		display: 'flex',
+		borderRadius: 12,
+	},
+	divider: {
+		height: 23,
+		width: 5,
+		backgroundColor: 'pink',
+		borderRadius: 5,
+	},
+});
+
+
+export default ShopTab;

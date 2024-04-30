@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react';
 
-const RewardModalContext = createContext();
+const ShopModalContext = createContext();
 
 const ShopModalProvider = ({ children }) => {
   const [modalType, setModalType] = useState('add');
@@ -17,13 +17,13 @@ const ShopModalProvider = ({ children }) => {
     setNewRewardColor(color);
   }
   return (
-    <RewardModalContext.Provider value={{
+    <ShopModalContext.Provider value={{
       modalType, setModalType, RewardModalVisible, setRewardModalVisible, newRewardName, setNewRewardName, newRewardPointValue, setNewRewardPointValue, newRewardColor, setNewRewardColor, changeColor, selectedReward, setSelectedReward
       }}>
       {children}
-    </RewardModalContext.Provider>
+    </ShopModalContext.Provider>
   );
 };
 
 
-export { ShopModalProvider, RewardModalContext };
+export { ShopModalProvider, ShopModalContext };

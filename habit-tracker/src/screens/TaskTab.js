@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import TaskComponent from '../components/Task.js';
 import FrequencyButtonGroup from '../components/SelectFrequency.js';
-import { FrequencyContext } from "../providers/FrequencyProvider";
+import { FrequencyContext } from "../providers/FrequencyProvider.js";
 import { TaskModalContext } from '../providers/TaskModalProvider.js';
 
 var taskCount = 0;

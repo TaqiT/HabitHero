@@ -3,7 +3,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TaskTab from './src/screens/TaskTab';
-import ShopTab from './src/screens/ShopTab';
 import SettingsTab from './src/screens/SettingsTab';
 import Points from './src/components/Points';
 import CalendarTab from './src/screens/CalendarTab';
@@ -11,7 +10,7 @@ import { PointsProvider } from './src/providers/PointsProvider';
 import { FrequencyProvider } from './src/providers/FrequencyProvider';
 import { TaskModalProvider } from './src/providers/TaskModalProvider';
 import { View, StyleSheet } from 'react-native';
-import { RewardComponent } from './src/screens/ShopTab';
+import ShopTab from './src/screens/ShopTab';
 import { ShopModalProvider } from './src/providers/ShopModalProvider';
 
 const stack = createNativeStackNavigator();
@@ -43,7 +42,6 @@ const App = () => {
         >
           <tab.Screen name="Tasks" component={TaskTab}/>
           <tab.Screen name="Shop" component={ShopTab}/>
-          <tab.Screen name="Rewards" component={RewardComponent}/> 
           <tab.Screen name="Calendar" component={CalendarTab}/>
           <tab.Screen name="Settings" component={SettingsTab}/>
         </tab.Navigator>
