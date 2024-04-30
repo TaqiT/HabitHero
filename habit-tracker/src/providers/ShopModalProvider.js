@@ -7,7 +7,7 @@ const ShopModalProvider = ({ children }) => {
   const [selectedReward, setSelectedReward] = useState(null);
   const [RewardModalVisible, setRewardModalVisible] = useState(false);
   const [newRewardName, setNewRewardName] = useState('');
-  const [newRewardPointValue, setNewRewardPointValue] = useState('0');
+  const [newRewardPointValue, setNewRewardPointValue] = useState('');
   const [newRewardColor, setNewRewardColor] = useState('');
   const changeColor = (color) => {
     if (newRewardColor === color) {

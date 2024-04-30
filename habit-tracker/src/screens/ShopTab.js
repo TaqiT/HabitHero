@@ -4,9 +4,7 @@ import {
 } from 'react-native';
 import { Button } from '@rneui/themed';
 import { PointsContext } from '../providers/PointsProvider.js';
-import { FrequencyContext } from "../providers/FrequencyProvider.js";
 import { ShopModalContext } from '../providers/ShopModalProvider.js';
-import FrequencyButtonGroup from '../components/SelectFrequency.js';
 import RewardComponent from '../components/Reward.js';
 
 var rewardCount = 0;
@@ -57,9 +55,6 @@ const ShopTab = () => {
   const {
     modalType, setModalType, rewardModalVisible, setRewardModalVisible, newRewardName, setNewRewardName, newRewardPointValue, setNewRewardPointValue, newRewardColor, changeColor, selectedReward
   } = useContext(ShopModalContext);
-  const {
-    weekData, clearWeekData, monthData, clearMonthData, frequencyType, setFrequencyType
-  } = React.useContext(FrequencyContext);
   var saveButtonPressed = false;
   const saveButtonPress = () => {
     if (newRewardName.length > 0 && newRewardPointValue.length > 0 && ( (frequencyType === 'Weekly' && weekData.length != 0) || (frequencyType === 'Monthly' && monthData.length != 0) || frequencyType === 'Daily')
@@ -71,7 +66,7 @@ const ShopTab = () => {
         );
         ((frequencyType === 'Weekly') ? newReward.frequency_data = weekData : newReward.frequency_data = monthData);
         newReward.color = newRewardColor;
-        rewardList.push(newReward);
+        reward_list.push(newReward);
       }
       else{
         selectedReward.name = newRewardName;
@@ -126,7 +121,6 @@ const ShopTab = () => {
               placeholderTextColor='black'
               returnKeyType={'done'}
             />
-            <FrequencyButtonGroup />
             <View style={styles.colorsView}>
               {colors.map((color) => {
                 return (
@@ -153,7 +147,7 @@ const ShopTab = () => {
                 <Text style={styles.deleteButton.text}> Delete </Text>
               </TouchableOpacity>
             </View> :
-            <View style={{ height: 70 }} />
+            <View style={{ height: 400 }} />
             }
             <TouchableOpacity
               style={[styles.saveButton, styles.buttonClose]}
@@ -192,6 +186,198 @@ const ShopTab = () => {
 
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 12,
+    backgroundColor: 'white',
+  },
+  scrollView: {
+    backgroundColor: 'white',
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 40,
+  },
+  deleteButton: {
+    view: {
+      marginTop: 20,
+      width: 300,
+      height: 50,
+      backgroundColor: 'red',
+      borderRadius: 10,
+    },
+    touchable: {
+      width: '100%',
+      height: '100%',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    text: {
+      fontSize: 25,
+      fontWeight: 'bold',
+      color: 'white',
+    }
+  },
+  topView: {
+    flexDirection: 'row',
+    justifyContent: 'left',
+    alignItems: 'left',
+  },
+  modalView: {
+    margin: 0,
+    backgroundColor: 'white',
+    borderRadius: 40,
+    borderWidth: 4,
+    borderColor: 'pink',
+    padding: 15,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  backButton: {
+    position: 'absolute',
+    borderBottomWidth: 3,
+    borderLeftWidth: 3,
+    top: 2,
+    left: -90,
+    height: 15,
+    width: 15,
+    transform: [{ rotate: '45deg' }],
+    borderRadius: 0,
+  },
+  colorsView: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    height: 120,
+    width: 300,
+    flexWrap: 'wrap',
+  },
+  addButton: {
+    padding: 10,
+    elevation: 2,
+    flexDirection: 'row',
+    alignSelf: 'center',
+    padding: 5,
+    width: 375,
+    height: 50,
+    marginTop: 10,
+    borderColor: '#000',
+    alignItems: 'center',
+    justifyContent: 'center',
+    display: 'flex',
+    borderRadius: 15,
+  },
+  addButtonOpen: {
+    backgroundColor: 'pink',
+  },
+  saveButton: {
+    padding: 10,
+    marginTop: 20,
+    width: 300,
+    elevation: 2,
+    borderRadius: 10,
+    backgroundColor: '#2196F3',
+  },
+  buttonClose: {
+    backgroundColor: '#2196F3',
+  },
+  addButtonText: {
+    color: 'black',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 20,
+  },
+  saveButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 25,
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  nameInput: {
+    height: 50,
+    width: 300,
+    margin: 0,
+    borderWidth: 2,
+    padding: 5,
+    borderRadius: 10,
+    textAlign: 'center',
+    borderColor: 'pink',
+    fontSize: 15,
+  },
+  pointValueInput: {
+    height: 50,
+    width: 150,
+    margin: 0,
+    borderWidth: 2,
+    padding: 5,
+    borderRadius: 10,
+    textAlign: 'center',
+    borderColor: 'pink',
+    fontSize: 18,
+  },
+  reward_name: {
+    view: {
+      flex: 20,
+      justifyContent: 'center',
+    },
+    text: {
+      color: '#000',
+      fontSize: 15,
+    },
+  },
+  reward_points: {
+    view: {
+      flex: 5.5,
+      alignItems: 'center',
+    },
+    text: {
+      color: '#000',
+      fontSize: 18,
+      justifyContent: 'center',
+    },
+  },
+  spacer: {
+    flex: 1,
+    height: 10,
+  },
+  check_box: {
+    flex: 4,
+    height: 20,
+    borderWidth: 1,
+  },
+  rewardTouchable: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    padding: 5,
+    width: 375,
+    height: 50,
+    marginTop: 10,
+    borderColor: '#000',
+    borderWidth: 1.5,
+    alignItems: 'center',
+    justifyContent: 'left',
+    display: 'flex',
+    borderRadius: 12,
+  },
+  divider: {
+    height: 23,
+    width: 5,
+    backgroundColor: 'pink',
+    borderRadius: 5,
+  },
 	reward_name: {
 		view: {
 			flex: 20,

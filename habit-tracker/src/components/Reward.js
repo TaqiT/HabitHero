@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
-import { StatusBar } from 'expo-status-bar';
 import {
-  StyleSheet, TouchableOpacity, Text, View, ScrollView
+  StyleSheet, TouchableOpacity, Text, View
 } from 'react-native';
 import { Button } from '@rneui/themed';
 import { PointsContext } from '../providers/PointsProvider.js';
@@ -14,7 +13,7 @@ const RewardComponent = ({ reward }) => {
   const { setPointsTotal } = useContext(PointsContext);
 	const { pointTotal } = useContext(PointsContext);
   const {
-    setModalType, setTaskModalVisible, setNewTaskName, setNewTaskPointValue, setNewTaskColor, setSelectedTask
+    setModalType, setRewardModalVisible, setNewRewardName, setNewRewardPointValue, setNewRewardColor, setSelectedReward
   } = useContext(ShopModalContext);
 
   return (
