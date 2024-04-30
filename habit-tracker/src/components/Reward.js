@@ -19,7 +19,7 @@ const RewardComponent = ({ reward }) => {
 
   return (
     <TouchableOpacity
-      style = {styles.touchable}>
+      style = {styles.rewardTouchable}>
       <View style={styles.spacer}></View>
       <View style={styles.spacer}></View>
       <View style={styles.reward_name.view}>
