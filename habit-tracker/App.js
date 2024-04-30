@@ -11,6 +11,7 @@ import { PointsProvider } from './src/providers/PointsProvider';
 import { FrequencyProvider } from './src/providers/FrequencyProvider';
 import { TaskModalProvider } from './src/providers/TaskModalProvider';
 import { View, StyleSheet } from 'react-native';
+import FeatherIcon from 'react-native-vector-icons/Feather';
 
 const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
