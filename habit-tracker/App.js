@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TaskTab from './src/screens/TaskTab';
 import ShopTab from './src/screens/ShopTab';
@@ -12,7 +11,6 @@ import { FrequencyProvider } from './src/providers/FrequencyProvider';
 import { TaskModalProvider } from './src/providers/TaskModalProvider';
 import { View, StyleSheet } from 'react-native';
 
-const stack = createNativeStackNavigator();
 const tab = createBottomTabNavigator();
 
 const App = () => {
