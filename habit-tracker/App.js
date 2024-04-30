@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TaskTab from './src/screens/TaskTab';
 import ShopTab from './src/screens/ShopTab';
@@ -13,8 +12,7 @@ import { TaskModalProvider } from './src/providers/TaskModalProvider';
 import { View, StyleSheet } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
-const stack = createNativeStackNavigator();
-const tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 const App = () => {
   return (
@@ -23,7 +21,7 @@ const App = () => {
     <PointsProvider>
       <View style={styles.container}>
         <NavigationContainer>
-        <tab.Navigator
+        <Tab.Navigator
           screenOptions={{
             tabBarStyle: {
               backgroundColor: 'black',
@@ -39,7 +37,7 @@ const App = () => {
             tabBarInactiveTintColor: 'grey',
           }}
         >
-          {/* <tab.Screen name="Tasks" component={TaskTab}/> 
+          {/* <tab.Screen name="Tasks" component={TaskTab}/>
           <tab.Screen name="Shop" component={ShopTab}/>
           <tab.Screen name="Calendar" component={CalendarTab}/>
           <tab.Screen name="Settings" component={SettingsTab}/> */}
@@ -48,7 +46,7 @@ const App = () => {
             component={TaskTab}
             options={{
               tabBarIcon: ({ color, size }) => (
-                <FeatherIcon name="list-alt" color={white} size={10} />
+                <FeatherIcon name="list" color={"white"} size={10} />
               ),
             }}
           />
@@ -57,7 +55,7 @@ const App = () => {
             component={ShopTab}
             options={{
               tabBarIcon: ({ color, size }) => (
-                <FeatherIcon name="shopping-bag" color={white} size={10} />
+                <FeatherIcon name="shopping-bag" color={"white"} size={10} />
               ),
             }}
           />
@@ -66,7 +64,7 @@ const App = () => {
             component={CalendarTab}
             options={{
               tabBarIcon: ({ color, size }) => (
-                <FeatherIcon name="calendar" color={white} size={10} />
+                <FeatherIcon name="calendar" color={"white"} size={10} />
               ),
             }}
           />
@@ -75,11 +73,11 @@ const App = () => {
             component={SettingsTab}
             options={{
               tabBarIcon: ({ color, size }) => (
-                <FeatherIcon name="settings" color={white} size={10} />
+                <FeatherIcon name="settings" color={"white"} size={10} />
               ),
             }}
           />
-        </tab.Navigator>
+        </Tab.Navigator>
         </NavigationContainer>
       </View>
       <Points/>
