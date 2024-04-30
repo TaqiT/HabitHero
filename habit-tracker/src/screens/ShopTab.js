@@ -244,7 +244,6 @@ const styles = StyleSheet.create({
     height: 15,
     width: 15,
     transform: [{ rotate: '45deg' }],
-    borderRadius: 0,
   },
   colorsView: {
     flexDirection: 'row',

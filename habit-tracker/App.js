@@ -11,8 +11,9 @@ import { TaskModalProvider } from './src/providers/TaskModalProvider';
 import { View, StyleSheet } from 'react-native';
 import ShopTab from './src/screens/ShopTab';
 import { ShopModalProvider } from './src/providers/ShopModalProvider';
+import FeatherIcon from 'react-native-vector-icons/Feather';
 
-const tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 const App = () => {
   return (
@@ -22,7 +23,7 @@ const App = () => {
     <PointsProvider>
       <View style={styles.container}>
         <NavigationContainer>
-        <tab.Navigator
+        <Tab.Navigator
           screenOptions={{
             tabBarStyle: {
               backgroundColor: 'black',
@@ -38,11 +39,43 @@ const App = () => {
             tabBarInactiveTintColor: 'grey',
           }}
         >
-          <tab.Screen name="Tasks" component={TaskTab}/>
-          <tab.Screen name="Shop" component={ShopTab}/>
-          <tab.Screen name="Calendar" component={CalendarTab}/>
-          <tab.Screen name="Settings" component={SettingsTab}/>
-        </tab.Navigator>
+          <Tab.Screen
+            name="Tasks"
+            component={TaskTab}
+            options={{
+              tabBarIcon: () => (
+                <FeatherIcon name="list" color={"white"} size={10} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Shop"
+            component={ShopTab}
+            options={{
+              tabBarIcon: () => (
+                <FeatherIcon name="shopping-bag" color={"white"} size={10} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Calendar"
+            component={CalendarTab}
+            options={{
+              tabBarIcon: () => (
+                <FeatherIcon name="calendar" color={"white"} size={10} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Settings"
+            component={SettingsTab}
+            options={{
+              tabBarIcon: () => (
+                <FeatherIcon name="settings" color={"white"} size={10} />
+              ),
+            }}
+          />
+        </Tab.Navigator>
         </NavigationContainer>
       </View>
       <Points/>
