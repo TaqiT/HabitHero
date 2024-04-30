@@ -6,7 +6,6 @@ import { PointsContext } from '../providers/PointsProvider';
 import { TaskModalContext } from '../providers/TaskModalProvider';
 import { FrequencyContext } from '../providers/FrequencyProvider';
 
-
 const TaskComponent = ({task}) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const { pointTotal, setPointsTotal } = useContext(PointsContext);
@@ -85,7 +84,6 @@ const styles = StyleSheet.create({
 	spacer: {
 		flex: 1,
 		height: 10,
-
 	},
 	check_box: {
 		flex: 4,

@@ -2,7 +2,6 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TaskTab from './src/screens/TaskTab';
-import ShopTab from './src/screens/ShopTab';
 import SettingsTab from './src/screens/SettingsTab';
 import Points from './src/components/Points';
 import CalendarTab from './src/screens/CalendarTab';
@@ -10,11 +9,14 @@ import { PointsProvider } from './src/providers/PointsProvider';
 import { FrequencyProvider } from './src/providers/FrequencyProvider';
 import { TaskModalProvider } from './src/providers/TaskModalProvider';
 import { View, StyleSheet } from 'react-native';
+import ShopTab from './src/screens/ShopTab';
+import { ShopModalProvider } from './src/providers/ShopModalProvider';
 
 const tab = createBottomTabNavigator();
 
 const App = () => {
   return (
+    <ShopModalProvider>
     <TaskModalProvider>
     <FrequencyProvider>
     <PointsProvider>
@@ -47,6 +49,7 @@ const App = () => {
     </PointsProvider>
     </FrequencyProvider>
     </TaskModalProvider>
+    </ShopModalProvider>
   );
 };
 
