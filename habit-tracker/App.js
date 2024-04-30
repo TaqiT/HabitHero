@@ -38,88 +38,44 @@ const App = () => {
             tabBarInactiveTintColor: 'grey',
           }}
         >
-          {/* <tab.Screen name="Tasks" component={TaskTab}/> */}
-          {/* <tab.Screen name="Shop" component={ShopTab}/>
-          <tab.Screen name="Calendar" component={CalendarTab}/> */}
-          {/* <tab.Screen name="Settings" component={SettingsTab}/> */}
-          <tab.Screen 
-            name="Tasks" 
+          {/* <tab.Screen name="Tasks" component={TaskTab}/> 
+          <tab.Screen name="Shop" component={ShopTab}/>
+          <tab.Screen name="Calendar" component={CalendarTab}/>
+          <tab.Screen name="Settings" component={SettingsTab}/> */}
+          <Tab.Screen
+            name="Tasks"
             component={TaskTab}
             options={{
-              tabBarIcon: ({focused}) => (
-                <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
-                  <Image
-                    source={require('./assets/listPng.png')}
-                    resizeMode="contain"
-                    style = {{
-                      width: 30,
-                      height: 20,
-                      borderRadius: 30,
-                      borderColor: 'white',
-                    }}
-                  />
-                </View>
-              )
+              tabBarIcon: ({ color, size }) => (
+                <FeatherIcon name="list-alt" color={white} size={10} />
+              ),
             }}
           />
-          <tab.Screen 
-            name="Shop" 
+          <Tab.Screen
+            name="Shop"
             component={ShopTab}
             options={{
-              tabBarIcon: ({focused}) => (
-                <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
-                  <Image
-                    source={require('./assets/ShopIcon.png')}
-                    resizeMode="contain"
-                    style = {{
-                      width: 30,
-                      height: 20,
-                      borderRadius: 30,
-                      borderColor: 'white',
-                    }}
-                  />
-                </View>
-              )
+              tabBarIcon: ({ color, size }) => (
+                <FeatherIcon name="shopping-bag" color={white} size={10} />
+              ),
             }}
           />
-          <tab.Screen 
-            name="Calendar" 
+          <Tab.Screen
+            name="Calendar"
             component={CalendarTab}
             options={{
-              tabBarIcon: ({focused}) => (
-                <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
-                  <Image
-                    source={require('./assets/calendarIcon.png')}
-                    resizeMode="contain"
-                    style = {{
-                      width: 30,
-                      height: 20,
-                      borderRadius: 30,
-                      borderColor: 'white',
-                    }}
-                  />
-                </View>
-              )
+              tabBarIcon: ({ color, size }) => (
+                <FeatherIcon name="calendar" color={white} size={10} />
+              ),
             }}
           />
-          <tab.Screen 
-            name="Settings" 
+          <Tab.Screen
+            name="Settings"
             component={SettingsTab}
             options={{
-              tabBarIcon: ({focused}) => (
-                <View style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
-                  <Image
-                    source={require('./assets/settingsIcon.png')}
-                    resizeMode="contain"
-                    style = {{
-                      width: 30,
-                      height: 20,
-                      borderRadius: 30,
-                      borderColor: 'white',
-                    }}
-                  />
-                </View>
-              )
+              tabBarIcon: ({ color, size }) => (
+                <FeatherIcon name="settings" color={white} size={10} />
+              ),
             }}
           />
         </tab.Navigator>
