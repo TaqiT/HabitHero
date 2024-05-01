@@ -168,20 +168,6 @@ const TaskTab = () => {
         </View>
       </Modal>
       <View style={styles.container}>
-        <TouchableOpacity
-          style={[styles.addButton, styles.addButtonOpen]}
-          onPress={() => {
-            setTaskModalVisible(true);
-            setModalType('add');
-            setNewTaskName('');
-            setNewTaskPointValue('');
-            changeColor('');
-            setFrequencyType('Daily');
-            clearWeekData();
-            clearMonthData();
-        }}>
-          <Text style={styles.addButtonText}>Create New Task!</Text>
-        </TouchableOpacity>
         {taskList.map((task, index) => (
           <TaskComponent key={index} task={task} />
         ))}

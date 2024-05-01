@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TaskTab from './src/screens/TaskTab';
 import SettingsTab from './src/screens/SettingsTab';
 import Points from './src/components/Points';
+import AddTaskButton from './src/components/AddTaskButton';
 import CalendarTab from './src/screens/CalendarTab';
 import { PointsProvider } from './src/providers/PointsProvider';
 import { FrequencyProvider } from './src/providers/FrequencyProvider';
@@ -83,6 +84,7 @@ const App = () => {
         </NavigationContainer>
       </View>
       <Points/>
+      <AddTaskButton/>
     </PointsProvider>
     </FrequencyProvider>
     </TaskModalProvider>
@@ -111,7 +113,7 @@ const styles = StyleSheet.create({
       fontSize: 20,
       color: '#8A2BE2',
     },
-  
+
 });
 
 export default App;
