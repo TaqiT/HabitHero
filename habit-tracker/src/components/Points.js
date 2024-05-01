@@ -6,15 +6,20 @@ import confetti from '../components/confetti.json';
 
 const Points = () => {
     const { pointTotal } = useContext(PointsContext);
+    const lottieRef = useRef(null);
 
-	function triggerConfetti() {
-		console.log('triggering confetti');
-	}
+    function triggerConfetti() {
+        if (lottieRef.current) {
+            lottieRef.current.play();
+        }
+    }
+
     return (
         <PointsProvider>
             <TouchableOpacity style={styles.pointsContainer} onPress={triggerConfetti}>
                 <Text style={styles.pointsText}>{`Points: ${pointTotal}`}</Text>
                 <LottieView 
+                    ref={lottieRef}
                     source={confetti}
                     loop={false}
                     style={styles.lottie}
