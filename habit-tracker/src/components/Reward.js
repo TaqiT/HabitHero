@@ -101,26 +101,26 @@ const styles = StyleSheet.create({
 	divider: {
 		height: 23,
 		width: 5,
-		backgroundColor: 'pink',
+		backgroundColor: '#A852FF',
 		borderRadius: 5,
 	},
   button: {
     view: {
       flex: 7,
-      height: 30,
-      backgroundColor: '#fff',
-      borderWidth: 1,
-      borderRadius: 5,
+      height: 40,
+      backgroundColor: '#A852FF',
+      borderWidth: 1.5,
+      borderRadius: 6,
     },
     buttonStyle: {
-      borderRadius: 20,
-      height: 30,
+      borderRadius:80,
+      height: 35,
       width: 70,
-      backgroundColor: '#fff'
+      backgroundColor: '#A852FF'
     },
     textStyle: {
-      color: '#000',
-      fontSize: 10,
+      color: 'white',
+      fontSize: 15,
     }
   }
 

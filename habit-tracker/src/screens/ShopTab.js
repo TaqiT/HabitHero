@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 40,
     borderWidth: 4,
-    borderColor: 'pink',
+    borderColor: '#A852FF',
     padding: 15,
     alignItems: 'center',
     shadowColor: '#000',
@@ -237,12 +237,12 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: 'absolute',
-    borderBottomWidth: 3,
-    borderLeftWidth: 3,
-    top: 2,
+    borderBottomWidth: 4,
+    borderLeftWidth: 4,
+    top: 7,
     left: -90,
-    height: 15,
-    width: 15,
+    height: 17,
+    width: 17,
     transform: [{ rotate: '45deg' }],
   },
   colorsView: {
@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   addButtonOpen: {
-    backgroundColor: 'pink',
+    backgroundColor: '#A852FF',
   },
   saveButton: {
     padding: 10,
@@ -276,10 +276,10 @@ const styles = StyleSheet.create({
     width: 300,
     elevation: 2,
     borderRadius: 10,
-    backgroundColor: '#2196F3',
+    backgroundColor: '#A852FF',
   },
   buttonClose: {
-    backgroundColor: '#2196F3',
+    backgroundColor: '#A852FF',
   },
   addButtonText: {
     color: 'black',
@@ -307,7 +307,7 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 10,
     textAlign: 'center',
-    borderColor: 'pink',
+    borderColor: '#A852FF',
     fontSize: 15,
   },
   pointValueInput: {
@@ -318,12 +318,12 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 10,
     textAlign: 'center',
-    borderColor: 'pink',
+    borderColor: '#A852FF',
     fontSize: 18,
   },
   reward_name: {
     view: {
-      flex: 20,
+      flex: 10,
       justifyContent: 'center',
     },
     text: {
@@ -368,7 +368,7 @@ const styles = StyleSheet.create({
   divider: {
     height: 23,
     width: 5,
-    backgroundColor: 'pink',
+    backgroundColor: '#A852FF',
     borderRadius: 5,
   },
 	reward_name: {
@@ -409,7 +409,7 @@ const styles = StyleSheet.create({
 		width: 375,
 		height: 50,
 		marginTop: 10,
-		borderColor: '#000',
+		borderColor: '#A852F',
 		borderWidth: 1.5,
 		alignItems: 'center',
 		justifyContent: 'left',
@@ -419,7 +419,7 @@ const styles = StyleSheet.create({
 	divider: {
 		height: 23,
 		width: 5,
-		backgroundColor: 'pink',
+		backgroundColor: '#A852F',
 		borderRadius: 5,
 	},
 });

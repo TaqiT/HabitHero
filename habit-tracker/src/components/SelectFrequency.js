@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
     unselected: {
       pressable: {
         backgroundColor: 'white',
-        borderColor: 'pink',
+        borderColor: '#A852FF',
         borderWidth: 2,
         margin: 10,
         padding: 10,
@@ -242,8 +242,8 @@ const styles = StyleSheet.create({
     },
   selected: {
     pressable: {
-      backgroundColor: 'pink',
-      borderColor: 'pink',
+      backgroundColor: '#A852FF',
+      borderColor: '#A852FF',
       borderWidth: 2,
       margin: 10,
       padding: 10,
@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
     unselected: {
       pressable: {
         backgroundColor: 'white',
-        borderColor: 'pink',
+        borderColor: '#A852FF',
         borderWidth: 2,
         margin: 5,
         padding: 5,
@@ -272,8 +272,8 @@ const styles = StyleSheet.create({
     },
   selected: {
     pressable: {
-      backgroundColor: 'pink',
-      borderColor: 'pink',
+      backgroundColor: '#A852FF',
+      borderColor: '#A852FF',
       borderWidth: 2,
       margin: 5,
       padding: 5,
@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
     unselected: {
       pressable: {
         backgroundColor: 'white',
-        borderColor: 'pink',
+        borderColor: '#A852FF',
         borderWidth: 2,
         borderRadius: 10,
         width: 35,
@@ -303,8 +303,8 @@ const styles = StyleSheet.create({
     },
   selected: {
     pressable: {
-      backgroundColor: 'pink',
-      borderColor: 'pink',
+      backgroundColor: '#A852FF',
+      borderColor: '#A852FF',
       borderWidth: 2,
       borderRadius: 10,
       width: 35,

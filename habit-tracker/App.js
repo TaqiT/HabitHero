@@ -25,6 +25,10 @@ const App = () => {
         <NavigationContainer>
         <Tab.Navigator
           screenOptions={{
+            headerStyle: {
+              backgroundColor: 'black',
+            },
+            headerTintColor: 'white',
             tabBarStyle: {
               backgroundColor: 'black',
               position: 'absolute',
@@ -32,11 +36,11 @@ const App = () => {
               left: 0,
               right: 0,
               elevation: 0,
-              borderColor: 'pink',
+              borderColor: 'black',
               borderRadius: 0
             },
-            tabBarActiveTintColor: 'pink',
-            tabBarInactiveTintColor: 'grey',
+            tabBarActiveTintColor: '#8000FF',
+            tabBarInactiveTintColor: 'white',
           }}
         >
           <Tab.Screen
@@ -44,7 +48,7 @@ const App = () => {
             component={TaskTab}
             options={{
               tabBarIcon: () => (
-                <FeatherIcon name="list" color={"white"} size={10} />
+                <FeatherIcon name="list" color={"white"} size={18} />
               ),
             }}
           />
@@ -53,7 +57,7 @@ const App = () => {
             component={ShopTab}
             options={{
               tabBarIcon: () => (
-                <FeatherIcon name="shopping-bag" color={"white"} size={10} />
+                <FeatherIcon name="shopping-bag" color={"white"} size={18} />
               ),
             }}
           />
@@ -62,7 +66,7 @@ const App = () => {
             component={CalendarTab}
             options={{
               tabBarIcon: () => (
-                <FeatherIcon name="calendar" color={"white"} size={10} />
+                <FeatherIcon name="calendar" color={"white"} size={18} />
               ),
             }}
           />
@@ -71,7 +75,7 @@ const App = () => {
             component={SettingsTab}
             options={{
               tabBarIcon: () => (
-                <FeatherIcon name="settings" color={"white"} size={10} />
+                <FeatherIcon name="settings" color={"white"} size={18} />
               ),
             }}
           />
@@ -89,13 +93,13 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#blue',
+    backgroundColor: 'black',
   },
   pointsContainer: {
     position: 'absolute',
     top: 45,
     left: 25,
-    backgroundColor: '#7FFFD4',
+    backgroundColor: '#black',
     padding: 10,
     borderRadius: 5,
     elevation: 5,
@@ -107,6 +111,7 @@ const styles = StyleSheet.create({
       fontSize: 20,
       color: '#8A2BE2',
     },
+  
 });
 
 export default App;

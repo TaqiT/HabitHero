@@ -36,13 +36,13 @@ const TaskComponent = ({task}) => {
         </Text>
       </View>
       <View style={styles.spacer}/>
-      <View style={[styles.divider, {backgroundColor: task.color==='' ? 'pink' : task.color}]}/>
+      <View style={[styles.divider, {backgroundColor: task.color==='' ? '#A852FF' : task.color}]}/>
       <View style={styles.task_points.view}>
         <Text style={styles.task_points.text}>
           {task.point_value}
         </Text>
       </View>
-      <View style={[styles.divider, {backgroundColor: task.color==='' ? 'pink' : task.color}]}/>
+      <View style={[styles.divider, {backgroundColor: task.color==='' ? '#A852FF' : task.color}]}/>
       <View style={styles.spacer}/>
       <View>
         <Switch
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
 	divider: {
 		height: 23,
 		width: 5,
-		backgroundColor: 'pink',
+		backgroundColor: '#A852FF',
 		borderRadius: 5,
 	},
 });
