@@ -6,6 +6,10 @@ import TaskComponent from '../components/Task.js';
 import FrequencyButtonGroup from '../components/SelectFrequency.js';
 import { FrequencyContext } from "../providers/FrequencyProvider.js";
 import { TaskModalContext } from '../providers/TaskModalProvider.js';
+import DraggableFlatList, {
+  ScaleDecorator,
+} from "react-native-draggable-flatlist";
+import { ListItem } from "react-native-design-system";
 
 var taskCount = 0;
 
@@ -51,6 +55,37 @@ var taskList = [
 const removeTask = (task) => {
   taskList = taskList.filter((t) => t.id !== task.id);
 };
+
+const TaskListComponent = () => {
+  const [data, setData] = React.useState(taskList);
+  const renderListItem = ({ item, drag }) => {
+    <ScaleDecorator style={styles.container}>
+      <ListItem
+        onLongPress={drag}
+        onPress={() => (null)}
+      >
+        <TaskComponent task={item} />
+      </ListItem>
+    </ScaleDecorator>
+  }
+  setData((prevData) => {
+    const newItem = {
+      key,
+      todo,
+      isCompleted: false,
+    };
+    return [newItem, ...prevData];
+  });
+  return(
+    <DraggableFlatList
+      data={data}
+      onDragEnd={({ data }) => setData(data)}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item }) => renderListItem(item)}
+  />
+  )
+};
+
 
 const TaskTab = () => {
   const {
@@ -182,9 +217,10 @@ const TaskTab = () => {
         }}>
           <Text style={styles.addButtonText}>Create New Task!</Text>
         </TouchableOpacity>
-        {taskList.map((task, index) => (
+        <TaskListComponent />
+        {/* {taskList.map((task, index) => (
           <TaskComponent key={index} task={task} />
-        ))}
+        ))} */}
         <View style={{ height: 90 }} />
       </View>
       <StatusBar style='auto' />

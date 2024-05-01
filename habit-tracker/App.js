@@ -12,17 +12,15 @@ import { View, StyleSheet } from 'react-native';
 import ShopTab from './src/screens/ShopTab';
 import { ShopModalProvider } from './src/providers/ShopModalProvider';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { ThemeProvider, theme } from "react-native-design-system";
 
 const Tab = createBottomTabNavigator();
 
-const App = () => {
+const RootApp = () => {
   return (
-    <ShopModalProvider>
-    <TaskModalProvider>
-    <FrequencyProvider>
-    <PointsProvider>
-      <View style={styles.container}>
-        <NavigationContainer>
+    <View style={styles.container}>
+      <NavigationContainer>
         <Tab.Navigator
           screenOptions={{
             headerStyle: {
@@ -80,15 +78,30 @@ const App = () => {
             }}
           />
         </Tab.Navigator>
-        </NavigationContainer>
-      </View>
+      </NavigationContainer>
+    </View>
+  );
+};
+
+const App = () => {
+  return (
+    <GestureHandlerRootView style={styles.container}>
+    <ThemeProvider theme={theme}>
+    <ShopModalProvider>
+    <TaskModalProvider>
+    <FrequencyProvider>
+    <PointsProvider>
+      <RootApp />
       <Points/>
     </PointsProvider>
     </FrequencyProvider>
     </TaskModalProvider>
     </ShopModalProvider>
+    </ThemeProvider>
+    </GestureHandlerRootView>
   );
-};
+}
+
 
 const styles = StyleSheet.create({
   container: {
@@ -111,7 +124,7 @@ const styles = StyleSheet.create({
       fontSize: 20,
       color: '#8A2BE2',
     },
-  
+
 });
 
 export default App;
