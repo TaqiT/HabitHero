@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import {
-  StyleSheet, ScrollView, View, StatusBar, Modal, Text, TouchableOpacity, TextInput
+  StyleSheet, ScrollView, View, StatusBar, Modal, Text, TouchableOpacity, TextInput, FlatList
 } from 'react-native';
 import TaskComponent from '../components/Task.js';
 import FrequencyButtonGroup from '../components/SelectFrequency.js';
@@ -168,26 +168,26 @@ const TaskTab = () => {
         </View>
       </Modal>
       <View style={styles.container}>
-      <TouchableOpacity
-        style={[styles.addButton, styles.addButtonOpen]}
-        onPress={() => {
-          setTaskModalVisible(true);
-          setModalType('add');
-          setNewTaskName('');
-          setNewTaskPointValue('');
-          changeColor('');
-          setFrequencyType('Daily');
-          clearWeekData();
-          clearMonthData();
-          }}>
-        <Text style={styles.addButtonText}>Create New Task!</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.addButton, styles.addButtonOpen]}
+          onPress={() => {
+            setTaskModalVisible(true);
+            setModalType('add');
+            setNewTaskName('');
+            setNewTaskPointValue('');
+            changeColor('');
+            setFrequencyType('Daily');
+            clearWeekData();
+            clearMonthData();
+        }}>
+          <Text style={styles.addButtonText}>Create New Task!</Text>
+        </TouchableOpacity>
         {taskList.map((task, index) => (
           <TaskComponent key={index} task={task} />
         ))}
         <View style={{ height: 90 }} />
-        <StatusBar style='auto' />
       </View>
+      <StatusBar style='auto' />
     </ScrollView>
   );
 };
