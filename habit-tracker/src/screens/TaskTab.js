@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import {
-  StyleSheet, ScrollView, View, StatusBar, Modal, Text, TouchableOpacity, TextInput, FlatList
+  StyleSheet, ScrollView, View, StatusBar, Modal, Text, TouchableOpacity, TextInput
 } from 'react-native';
 import TaskComponent from '../components/Task.js';
 import FrequencyButtonGroup from '../components/SelectFrequency.js';

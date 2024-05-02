@@ -1,25 +1,35 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useRef } from 'react'
 import {
-	StyleSheet, TouchableOpacity, Text, View, Switch
+  StyleSheet, TouchableOpacity, Text, View, Switch
 } from 'react-native';
 import { PointsContext } from '../providers/PointsProvider';
 import { TaskModalContext } from '../providers/TaskModalProvider';
 import { FrequencyContext } from '../providers/FrequencyProvider';
+import LottieView from 'lottie-react-native';
+import confetti from '../components/confetti.json';
 
 const TaskComponent = ({task}) => {
+  const lottieRef = useRef(null);
   const [isEnabled, setIsEnabled] = useState(false);
   const { pointTotal, setPointsTotal } = useContext(PointsContext);
   const {
     setModalType, setTaskModalVisible, setNewTaskName, setNewTaskPointValue, setNewTaskColor, setSelectedTask
   } = useContext(TaskModalContext);
-	const { setFrequencyType, addWeekData, addMonthData } = useContext(FrequencyContext);
-	const toggleSwitch = () => { setIsEnabled(previousState => !previousState) }
+  const {
+    setFrequencyType, addWeekData, addMonthData
+  } = useContext(FrequencyContext);
+  const toggleSwitch = () => { setIsEnabled(previousState => !previousState) }
+  function triggerConfetti() {
+    if (lottieRef.current) {
+      lottieRef.current.play();
+    }
+  }
   return (
     <TouchableOpacity
       style={[styles.taskTouchable, {borderColor: task.color==='' ? 'black' : task.color}]}
       onPress={() => {
-				setSelectedTask(task);
-				setModalType('edit');
+        setSelectedTask(task);
+        setModalType('edit');
         setTaskModalVisible(true);
         setNewTaskName(task.name);
         setNewTaskPointValue(String(task.point_value));
@@ -28,6 +38,13 @@ const TaskComponent = ({task}) => {
         (task.frequency === 'Weekly') ? addWeekData(task.frequency_data) : addMonthData(task.frequency_data);
       }}
     >
+      <LottieView
+        ref={lottieRef}
+        source={confetti}
+        loop={false}
+        style={{pointerEvents: 'none'}}
+        resizeMode='cover'
+      />
       <View style={styles.spacer}/>
       <View style={styles.spacer}/>
       <View style={styles.task_name.view}>
@@ -48,9 +65,10 @@ const TaskComponent = ({task}) => {
         <Switch
           value={isEnabled}
           onValueChange={(state) => {
-            {state ? setPointsTotal(pointTotal + Number(task.point_value)) :
-            setPointsTotal(pointTotal - Number(task.point_value))}
+            {state ? setPointsTotal(pointTotal + Number(task.point_value))
+            : setPointsTotal(pointTotal - Number(task.point_value))}
             toggleSwitch();
+            {state ? triggerConfetti() : null }
           }}
         />
       </View>
@@ -59,57 +77,56 @@ const TaskComponent = ({task}) => {
 }
 
 const styles = StyleSheet.create({
-	task_name: {
-		view: {
-			flex: 20,
-			justifyContent: 'center',
-		},
-		text: {
-			color: '#000',
-			fontSize: 15,
-		},
-	},
-	task_points: {
-		view: {
-			flex: 5.5,
-
-			alignItems: 'center',
-		},
-		text: {
-			color: '#000',
-			fontSize: 18,
-			justifyContent: 'center',
-		},
-	},
-	spacer: {
-		flex: 1,
-		height: 10,
-	},
-	check_box: {
-		flex: 4,
-		height: 20,
-		borderWidth: 1,
-	},
-	taskTouchable: {
-		flexDirection: 'row',
-		alignSelf: 'center',
-		padding: 5,
-		width: 375,
-		height: 50,
-		marginTop: 10,
-		borderColor: '#000',
-		borderWidth: 1.5,
-		alignItems: 'center',
-		justifyContent: 'left',
-		display: 'flex',
-		borderRadius: 12,
-	},
-	divider: {
-		height: 23,
-		width: 5,
-		backgroundColor: '#A852FF',
-		borderRadius: 5,
-	},
+  task_name: {
+    view: {
+      flex: 20,
+      justifyContent: 'center',
+    },
+    text: {
+      color: '#000',
+      fontSize: 15,
+    },
+  },
+  task_points: {
+    view: {
+      flex: 5.5,
+      alignItems: 'center',
+    },
+    text: {
+      color: '#000',
+      fontSize: 18,
+      justifyContent: 'center',
+    },
+  },
+  spacer: {
+    flex: 1,
+    height: 10,
+  },
+  check_box: {
+    flex: 4,
+    height: 20,
+    borderWidth: 1,
+  },
+  taskTouchable: {
+    flexDirection: 'row',
+    alignSelf: 'center',
+    padding: 5,
+    width: 375,
+    height: 50,
+    marginTop: 10,
+    borderColor: '#000',
+    borderWidth: 1.5,
+    alignItems: 'center',
+    justifyContent: 'left',
+    display: 'flex',
+    borderRadius: 12,
+  },
+  divider: {
+    height: 23,
+    width: 5,
+    backgroundColor: '#A852FF',
+    borderRadius: 5,
+  },
 });
 
 export default TaskComponent;

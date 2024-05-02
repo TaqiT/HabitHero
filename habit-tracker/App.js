@@ -22,6 +22,16 @@ const App = () => {
     <TaskModalProvider>
     <FrequencyProvider>
     <PointsProvider>
+      <RootApp/>
+    </PointsProvider>
+    </FrequencyProvider>
+    </TaskModalProvider>
+    </ShopModalProvider>
+  );
+};
+
+const RootApp = () => {
+  return (
       <View style={styles.container}>
         <NavigationContainer>
         <Tab.Navigator
@@ -82,13 +92,9 @@ const App = () => {
           />
         </Tab.Navigator>
         </NavigationContainer>
+        <Points/>
+        <AddTaskButton/>
       </View>
-      <Points/>
-      <AddTaskButton/>
-    </PointsProvider>
-    </FrequencyProvider>
-    </TaskModalProvider>
-    </ShopModalProvider>
   );
 };
 
