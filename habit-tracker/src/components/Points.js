@@ -5,26 +5,29 @@ import LottieView from 'lottie-react-native';
 import confetti from '../components/confetti.json';
 
 const Points = () => {
-  const { pointTotal } = useContext(PointsContext);
-  function triggerConfetti() {
-    console.log('triggering confetti');
-  }
-  return (
-    <PointsProvider>
-      <TouchableOpacity
-        style={styles.pointsContainer}
-        onPress={triggerConfetti}
-      >
-        <Text style={styles.pointsText}>{`Points: ${pointTotal}`}</Text>
-        <LottieView
-          source={confetti}
-          loop={false}
-          style={styles.lottie}
-          resizeMode='cover'
-        />
-      </TouchableOpacity>
-    </PointsProvider>
-  );
+    const { pointTotal } = useContext(PointsContext);
+    const lottieRef = useRef(null);
+
+    function triggerConfetti() {
+        if (lottieRef.current) {
+            lottieRef.current.play();
+        }
+    }
+
+    return (
+        <PointsProvider>
+            <TouchableOpacity style={styles.pointsContainer} onPress={triggerConfetti}>
+                <Text style={styles.pointsText}>{`Points: ${pointTotal}`}</Text>
+                <LottieView 
+                    ref={lottieRef}
+                    source={confetti}
+                    loop={false}
+                    style={styles.lottie}
+                    resizeMode='cover'
+                />
+            </TouchableOpacity>
+        </PointsProvider>
+    );
 }
 
 const styles = StyleSheet.create({
