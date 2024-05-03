@@ -59,7 +59,7 @@ const TaskComponent = ({task}) => {
           {task.point_value}
         </Text>
       </View>
-      <View style={[styles.divider, {backgroundColor: task.color==='' ? '#A852FF' : task.color}]}/>
+      {/* <View style={[styles.divider, {backgroundColor: task.color==='' ? '#A852FF' : task.color}]}/> */}
       <View style={styles.spacer}/>
       <View>
         <Switch
@@ -121,12 +121,16 @@ const styles = StyleSheet.create({
     display: 'flex',
     borderRadius: 12,
   },
+
+  
   divider: {
-    height: 23,
-    width: 5,
+    height: 5,
+    width: 45,
     backgroundColor: '#A852FF',
     borderRadius: 5,
+  
   },
+  
 });
 
 export default TaskComponent;
