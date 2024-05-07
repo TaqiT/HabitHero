@@ -37,11 +37,11 @@ const RootApp = () => {
         <Tab.Navigator
           screenOptions={{
             headerStyle: {
-              backgroundColor: 'black',
+              backgroundColor: '#070F2B',
             },
             headerTintColor: 'white',
             tabBarStyle: {
-              backgroundColor: 'black',
+              backgroundColor: '#070F2B',
               position: 'absolute',
               bottom: 0,
               left: 0,
@@ -59,7 +59,7 @@ const RootApp = () => {
             component={TaskTab}
             options={{
               tabBarIcon: () => (
-                <FeatherIcon name="list" color={"white"} size={18} />
+                <FeatherIcon name="list" color={"#9290C3"} size={20} />
               ),
             }}
           />
@@ -68,7 +68,7 @@ const RootApp = () => {
             component={ShopTab}
             options={{
               tabBarIcon: () => (
-                <FeatherIcon name="shopping-bag" color={"white"} size={18} />
+                <FeatherIcon name="shopping-bag" color={"#9290C3"} size={20} />
               ),
             }}
           />
@@ -77,7 +77,7 @@ const RootApp = () => {
             component={CalendarTab}
             options={{
               tabBarIcon: () => (
-                <FeatherIcon name="calendar" color={"white"} size={18} />
+                <FeatherIcon name="calendar" color={"#9290C3"} size={20} />
               ),
             }}
           />
@@ -86,7 +86,7 @@ const RootApp = () => {
             component={SettingsTab}
             options={{
               tabBarIcon: () => (
-                <FeatherIcon name="settings" color={"white"} size={18} />
+                <FeatherIcon name="settings" color={"#9290C3"} size={20} />
               ),
             }}
           />
@@ -119,6 +119,9 @@ const styles = StyleSheet.create({
       fontSize: 20,
       color: '#8A2BE2',
     },
+  screen: {
+    backgroundColor: "black",
+  }
 
 });
 
