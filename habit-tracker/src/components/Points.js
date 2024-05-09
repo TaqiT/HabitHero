@@ -1,17 +1,19 @@
 import React, { useContext } from 'react';
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
-import { PointsProvider, PointsContext } from "../providers/PointsProvider";
+import { PointsContext } from "../providers/PointsProvider";
+import { ThemeContext } from '../providers/AppThemeProvider';
 
 const Points = () => {
+  const {
+    navBarColor, backgroundColor, highlightColor, containerColor
+  } = useContext(ThemeContext);
   const { pointTotal } = useContext(PointsContext);
   return (
-    <PointsProvider>
       <TouchableOpacity
-        style={styles.pointsContainer}
+        style={[styles.pointsContainer, { backgroundColor: containerColor }]}
       >
         <Text style={styles.pointsText}>{`Points: ${pointTotal}`}</Text>
       </TouchableOpacity>
-    </PointsProvider>
   );
 }
 
@@ -20,7 +22,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 45,
     left: 25,
-    backgroundColor: '#8000FF',
     padding: 10,
     borderRadius: 5,
     elevation: 5,

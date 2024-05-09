@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TaskTab from './src/screens/TaskTab';
@@ -9,6 +9,7 @@ import CalendarTab from './src/screens/CalendarTab';
 import { PointsProvider } from './src/providers/PointsProvider';
 import { FrequencyProvider } from './src/providers/FrequencyProvider';
 import { TaskModalProvider } from './src/providers/TaskModalProvider';
+import { ThemeProvider, ThemeContext } from './src/providers/AppThemeProvider';
 import { View, StyleSheet } from 'react-native';
 import ShopTab from './src/screens/ShopTab';
 import { ShopModalProvider } from './src/providers/ShopModalProvider';
@@ -18,6 +19,7 @@ const Tab = createBottomTabNavigator();
 
 const App = () => {
   return (
+    <ThemeProvider>
     <ShopModalProvider>
     <TaskModalProvider>
     <FrequencyProvider>
@@ -27,21 +29,25 @@ const App = () => {
     </FrequencyProvider>
     </TaskModalProvider>
     </ShopModalProvider>
+    </ThemeProvider>
   );
 };
 
 const RootApp = () => {
+  const {
+    navBarColor, backgroundColor, highlightColor, containerColor
+  } = useContext(ThemeContext);
   return (
       <View style={styles.container}>
         <NavigationContainer>
         <Tab.Navigator
           screenOptions={{
             headerStyle: {
-              backgroundColor: '#070F2B',
+              backgroundColor: navBarColor,
             },
             headerTintColor: 'white',
             tabBarStyle: {
-              backgroundColor: '#070F2B',
+              backgroundColor: navBarColor,
               position: 'absolute',
               bottom: 0,
               left: 0,
@@ -50,7 +56,7 @@ const RootApp = () => {
               borderColor: 'black',
               borderRadius: 0
             },
-            tabBarActiveTintColor: '#8000FF',
+            tabBarActiveTintColor: highlightColor,
             tabBarInactiveTintColor: 'white',
           }}
         >
@@ -59,7 +65,7 @@ const RootApp = () => {
             component={TaskTab}
             options={{
               tabBarIcon: () => (
-                <FeatherIcon name="list" color={"#9290C3"} size={20} />
+                <FeatherIcon name="list" color={highlightColor} size={20} />
               ),
             }}
           />
@@ -68,7 +74,7 @@ const RootApp = () => {
             component={ShopTab}
             options={{
               tabBarIcon: () => (
-                <FeatherIcon name="shopping-bag" color={"#9290C3"} size={20} />
+                <FeatherIcon name="shopping-bag" color={highlightColor} size={20} />
               ),
             }}
           />
@@ -77,7 +83,7 @@ const RootApp = () => {
             component={CalendarTab}
             options={{
               tabBarIcon: () => (
-                <FeatherIcon name="calendar" color={"#9290C3"} size={20} />
+                <FeatherIcon name="calendar" color={highlightColor} size={20} />
               ),
             }}
           />
@@ -86,7 +92,7 @@ const RootApp = () => {
             component={SettingsTab}
             options={{
               tabBarIcon: () => (
-                <FeatherIcon name="settings" color={"#9290C3"} size={20} />
+                <FeatherIcon name="settings" color={highlightColor} size={20} />
               ),
             }}
           />
@@ -115,10 +121,6 @@ const styles = StyleSheet.create({
   pointsText: {
     fontSize: 16,
   },
-    textStyle: {
-      fontSize: 20,
-      color: '#8A2BE2',
-    },
   screen: {
     backgroundColor: "black",
   }

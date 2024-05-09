@@ -5,6 +5,7 @@ import {
 import { Button } from '@rneui/themed';
 import { PointsContext } from '../providers/PointsProvider.js';
 import { ShopModalContext } from '../providers/ShopModalProvider.js';
+import { ThemeContext } from '../providers/AppThemeProvider';
 import RewardComponent from '../components/Reward.js';
 
 var rewardCount = 0;
@@ -53,6 +54,9 @@ const removeReward = (reward) => {
 
 const ShopTab = () => {
   const {
+    navBarColor, backgroundColor, highlightColor, containerColor
+  } = useContext(ThemeContext);
+  const {
     modalType, setModalType, rewardModalVisible, setRewardModalVisible, newRewardName, setNewRewardName, newRewardPointValue, setNewRewardPointValue, newRewardColor, changeColor, selectedReward
   } = useContext(ShopModalContext);
   var saveButtonPressed = false;
@@ -79,7 +83,7 @@ const ShopTab = () => {
   };
   saveButtonPressed = true;
   return (
-    <ScrollView style={styles.scrollView}>
+    <ScrollView style={{backgroundColor: containerColor}}>
       <Modal
         animationType="slide"
         transparent={true}
@@ -88,7 +92,7 @@ const ShopTab = () => {
           setRewardModalVisible(false);
       }}>
         <View style={styles.centeredView}>
-          <View style={styles.modalView}>
+          <View style={[styles.modalView, {borderColor: containerColor}]}>
             <View style={styles.topView}>
               <TouchableOpacity style={styles.backButton}
                 onPress={() => setRewardModalVisible(false)}
@@ -97,7 +101,7 @@ const ShopTab = () => {
               <Text style={styles.modalText}>New Reward</Text>
             </View>
             <TextInput
-              style={styles.nameInput}
+              style={[styles.nameInput, {borderColor: highlightColor}]}
               value={newRewardName}
               onChangeText={setNewRewardName}
               placeholder='Reward Name'
@@ -108,7 +112,7 @@ const ShopTab = () => {
             />
             <View style={{ height: 15 }} />
             <TextInput
-              style={styles.pointValueInput}
+              style={[styles.pointValueInput, {borderColor: highlightColor}]}
               value={newRewardPointValue}
               onChangeText={setNewRewardPointValue}
               keyboardType="numeric"
@@ -147,7 +151,7 @@ const ShopTab = () => {
             <View style={{ height: 400 }} />
             }
             <TouchableOpacity
-              style={[styles.saveButton, styles.buttonClose]}
+              style={[styles.saveButton, styles.buttonClose, {backgroundColor: highlightColor}]}
               onPress={() => {saveButtonPress()}}
             >
               <Text style={styles.saveButtonText}>Save Reward</Text>
@@ -156,9 +160,9 @@ const ShopTab = () => {
           </View>
         </View>
       </Modal>
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor: containerColor}]}>
       <TouchableOpacity
-        style={[styles.addButton, styles.addButtonOpen]}
+        style={[styles.addButton, {backgroundColor: highlightColor}]}
         onPress={() => {
           setRewardModalVisible(true);
           setModalType('add');
@@ -182,10 +186,6 @@ const ShopTab = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 12,
-    backgroundColor: '##5C8374',
-  },
-  scrollView: {
-    backgroundColor: '##5C8374',
   },
   centeredView: {
     flex: 1,
@@ -223,7 +223,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 40,
     borderWidth: 4,
-    borderColor: '#A852FF',
     padding: 15,
     alignItems: 'center',
     shadowColor: '#000',
@@ -267,19 +266,12 @@ const styles = StyleSheet.create({
     display: 'flex',
     borderRadius: 15,
   },
-  addButtonOpen: {
-    backgroundColor: '#A852FF',
-  },
   saveButton: {
     padding: 10,
     marginTop: 20,
     width: 300,
     elevation: 2,
     borderRadius: 10,
-    backgroundColor: '#A852FF',
-  },
-  buttonClose: {
-    backgroundColor: '#A852FF',
   },
   addButtonText: {
     color: 'black',
@@ -307,7 +299,6 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 10,
     textAlign: 'center',
-    borderColor: '#A852FF',
     fontSize: 15,
   },
   pointValueInput: {
@@ -318,7 +309,6 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 10,
     textAlign: 'center',
-    borderColor: '#A852FF',
     fontSize: 18,
   },
   reward_name: {
@@ -368,7 +358,6 @@ const styles = StyleSheet.create({
   divider: {
     height: 23,
     width: 5,
-    backgroundColor: '#A852FF',
     borderRadius: 5,
   },
 	reward_name: {
@@ -409,7 +398,6 @@ const styles = StyleSheet.create({
 		width: 375,
 		height: 50,
 		marginTop: 10,
-		borderColor: '#A852F',
 		borderWidth: 1.5,
 		alignItems: 'center',
 		justifyContent: 'left',
@@ -419,7 +407,6 @@ const styles = StyleSheet.create({
 	divider: {
 		height: 23,
 		width: 5,
-		backgroundColor: '#A852F',
 		borderRadius: 5,
 	},
 });

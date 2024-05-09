@@ -3,6 +3,7 @@ import {
   StyleSheet, Pressable, View, Text
 } from 'react-native';
 import { FrequencyContext } from "../providers/FrequencyProvider";
+import { ThemeContext } from '../providers/AppThemeProvider';
 
 const data = [
   { key: 0, name: 'Daily'},
@@ -26,11 +27,14 @@ function range(start, end) {
 }
 
 const WeekdayButton = (props) => {
+  const {
+    navBarColor, backgroundColor, highlightColor, containerColor
+  } = useContext(ThemeContext);
   const { addWeekData, removeWeekData, weekData } = useContext(FrequencyContext);
   const [selected, setSelected] = useState(weekData.includes(props.day));
   return (
     <Pressable
-      style={selected ? styles.weekday.selected.pressable : styles.weekday.unselected.pressable}
+      style={selected ? [styles.weekday.selected.pressable, {backgroundColor: containerColor, borderColor: highlightColor}] : [styles.weekday.unselected.pressable, {borderColor: highlightColor}]}
       onPress={(state) => {
         setSelected(!selected);
         state ? addWeekData([props.day]) : removeWeekData(props.day);
@@ -44,11 +48,14 @@ const WeekdayButton = (props) => {
 }
 
 const MonthButton = (props) => {
+  const {
+    navBarColor, backgroundColor, highlightColor, containerColor
+  } = useContext(ThemeContext);
   const { addMonthData, removeMonthData, monthData } = useContext(FrequencyContext);
   const [selected, setSelected] = useState(monthData.includes(props.day));
   return (
     <Pressable
-      style={selected ? styles.month.selected.pressable : styles.month.unselected.pressable}
+      style={selected ? [styles.month.selected.pressable, {backgroundColor: containerColor, borderColor: highlightColor}] : [styles.month.unselected.pressable, {borderColor: highlightColor}]}
       onPress={(state) => {
         setSelected(!selected);
         state ? addMonthData([props.day]) : removeMonthData(props.day);
@@ -127,6 +134,9 @@ const MonthButtonGroup = () => {
 
 
 const FrequencyButtonGroup = () => {
+  const {
+    navBarColor, backgroundColor, highlightColor, containerColor
+  } = useContext(ThemeContext);
   const { frequencyType, setFrequencyType } = useContext(FrequencyContext);
   return (
     <View style={styles.view}>
@@ -137,8 +147,8 @@ const FrequencyButtonGroup = () => {
           <View key={index}>
             <Pressable
               style={
-                item.name === frequencyType ? styles.period.selected.pressable :
-                styles.period.unselected.pressable
+                item.name === frequencyType ? [styles.period.selected.pressable, {backgroundColor: containerColor, borderColor: highlightColor}] :
+                [styles.period.unselected.pressable, {borderColor: highlightColor}]
               }
               onPress={() => {
                 setFrequencyType(item.name);
@@ -178,12 +188,10 @@ const FrequencyButtonGroup = () => {
 const styles = StyleSheet.create({
   view: {
     margin: 10,
-    // backgroundColor: 'red',
   },
   periodView: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    // backgroundColor: 'red',
   },
   weekdayView: {
     flexDirection: 'row',
@@ -193,7 +201,6 @@ const styles = StyleSheet.create({
   monthView: {
     flexDirection: 'column',
     justifyContent: 'space-around',
-    // backgroundColor: 'red',
   },
   dailySpacer: {
     height: 225,
@@ -229,7 +236,6 @@ const styles = StyleSheet.create({
     unselected: {
       pressable: {
         backgroundColor: 'white',
-        borderColor: '#A852FF',
         borderWidth: 2,
         margin: 10,
         padding: 10,
@@ -242,8 +248,6 @@ const styles = StyleSheet.create({
     },
   selected: {
     pressable: {
-      backgroundColor: '#A852FF',
-      borderColor: '#A852FF',
       borderWidth: 2,
       margin: 10,
       padding: 10,
@@ -259,7 +263,6 @@ const styles = StyleSheet.create({
     unselected: {
       pressable: {
         backgroundColor: 'white',
-        borderColor: '#A852FF',
         borderWidth: 2,
         margin: 5,
         padding: 5,
@@ -272,8 +275,6 @@ const styles = StyleSheet.create({
     },
   selected: {
     pressable: {
-      backgroundColor: '#A852FF',
-      borderColor: '#A852FF',
       borderWidth: 2,
       margin: 5,
       padding: 5,
@@ -288,7 +289,6 @@ const styles = StyleSheet.create({
     unselected: {
       pressable: {
         backgroundColor: 'white',
-        borderColor: '#A852FF',
         borderWidth: 2,
         borderRadius: 10,
         width: 35,
@@ -303,8 +303,6 @@ const styles = StyleSheet.create({
     },
   selected: {
     pressable: {
-      backgroundColor: '#A852FF',
-      borderColor: '#A852FF',
       borderWidth: 2,
       borderRadius: 10,
       width: 35,

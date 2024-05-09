@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import {
   StyleSheet,
   SafeAreaView,
@@ -9,10 +9,14 @@ import {
 } from 'react-native';
 import moment from 'moment';
 import Swiper from 'react-native-swiper';
+import { ThemeContext } from '../providers/AppThemeProvider';
 
 const { width } = Dimensions.get('window');
 
 const CalendarTab = () => {
+  const {
+    navBarColor, backgroundColor, highlightColor, containerColor
+  } = useContext(ThemeContext);
   const swiper = useRef();
   const [value, setValue] = useState(new Date());
   const [week, setWeek] = useState(0);
@@ -34,12 +38,12 @@ const CalendarTab = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor: containerColor}]}>
         <View style={styles.header}>
           <Text style={styles.title}>Your Task Schedule</Text>
         </View>
 
-        {/* The top part of the page will the swiping calander system */}
+        {/* The top part of the page will the swiping calendar system */}
         <View style={styles.picker}>
           <Swiper
             index={1}
@@ -99,15 +103,15 @@ const CalendarTab = () => {
             ))}
           </Swiper>
         </View>
-        
+
         {/* The section created to hold the place where the tasks for that day will be stored */}
         <View style={{ flex: 1, paddingHorizontal: 16, paddingVertical: 24, }}>
           <Text style={styles.subtitle}>{value.toDateString()}</Text>
           <View style={styles.placeholder}>
             {/* <View style={styles.placeholderInset}>
-              
+
             </View> */}
-            <SafeAreaView style={styles.taskContainer}>
+            <SafeAreaView style={[styles.taskContainer, {backgroundColor: highlightColor}]}>
                 {/* Populate the tasks here */}
             </SafeAreaView>
           </View>
@@ -121,7 +125,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingVertical: 24,
-    backgroundColor: "#5C8374", //changes background color of screen
   },
   header: {
     paddingHorizontal: 16,
@@ -202,7 +205,6 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     flexBasis: 0,
     textAlign: "center",
-    backgroundColor: "#9EC8B9"
   },
 });
 

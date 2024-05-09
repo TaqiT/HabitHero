@@ -6,6 +6,7 @@ import TaskComponent from '../components/Task.js';
 import FrequencyButtonGroup from '../components/SelectFrequency.js';
 import { FrequencyContext } from "../providers/FrequencyProvider.js";
 import { TaskModalContext } from '../providers/TaskModalProvider.js';
+import { ThemeContext } from '../providers/AppThemeProvider';
 
 var taskCount = 0;
 
@@ -54,6 +55,9 @@ const removeTask = (task) => {
 
 const TaskTab = () => {
   const {
+    navBarColor, backgroundColor, highlightColor, containerColor
+  } = useContext(ThemeContext);
+  const {
     modalType, setModalType, taskModalVisible, setTaskModalVisible, newTaskName, setNewTaskName, newTaskPointValue, setNewTaskPointValue, newTaskColor, changeColor, selectedTask
   } = useContext(TaskModalContext);
   const {
@@ -89,7 +93,7 @@ const TaskTab = () => {
   };
   saveButtonPressed = true;
   return (
-    <ScrollView style={styles.scrollView}>
+    <ScrollView style={{backgroundColor: backgroundColor}}>
       <Modal
         animationType="slide"
         transparent={true}
@@ -98,7 +102,7 @@ const TaskTab = () => {
           setTaskModalVisible(false);
       }}>
         <View style={styles.centeredView}>
-          <View style={styles.modalView}>
+          <View style={[styles.modalView, {backgroundColor: backgroundColor}]}>
             <View style={styles.topView}>
               <TouchableOpacity style={styles.backButton}
                 onPress={() => setTaskModalVisible(false)}
@@ -107,7 +111,7 @@ const TaskTab = () => {
               <Text style={styles.modalText}>New Task</Text>
             </View>
             <TextInput
-              style={styles.nameInput}
+              style={[styles.nameInput, {borderColor: highlightColor}]}
               value={newTaskName}
               onChangeText={setNewTaskName}
               placeholder='Task Name'
@@ -118,7 +122,7 @@ const TaskTab = () => {
             />
             <View style={{ height: 15 }} />
             <TextInput
-              style={styles.pointValueInput}
+              style={[styles.pointValueInput, {borderColor: highlightColor}]}
               value={newTaskPointValue}
               onChangeText={setNewTaskPointValue}
               keyboardType="numeric"
@@ -158,7 +162,7 @@ const TaskTab = () => {
             <View style={{ height: 70 }} />
             }
             <TouchableOpacity
-              style={[styles.saveButton, styles.buttonClose]}
+              style={[styles.saveButton, {backgroundColor: containerColor}]}
               onPress={() => {saveButtonPress()}}
             >
               <Text style={styles.saveButtonText}>Save Task</Text>
@@ -167,7 +171,7 @@ const TaskTab = () => {
           </View>
         </View>
       </Modal>
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor: backgroundColor}]}>
         {taskList.map((task, index) => (
           <TaskComponent key={index} task={task} />
         ))}
@@ -183,10 +187,6 @@ const TaskTab = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 12,
-    backgroundColor: '#5C8374',
-  },
-  scrollView: {
-    backgroundColor: '#5C8374',
   },
   centeredView: {
     flex: 1,
@@ -224,7 +224,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 40,
     borderWidth: 4,
-    borderColor: '#A852FF',
     padding: 15,
     alignItems: 'center',
     shadowColor: '#000',
@@ -268,19 +267,12 @@ const styles = StyleSheet.create({
     display: 'flex',
     borderRadius: 15,
   },
-  addButtonOpen: {
-    backgroundColor: '#A852FF',
-  },
   saveButton: {
     padding: 10,
     marginTop: 20,
     width: 300,
     elevation: 2,
     borderRadius: 10,
-    backgroundColor: '#2196F3',
-  },
-  buttonClose: {
-    backgroundColor: '#2196F3',
   },
   addButtonText: {
     color: 'black',
@@ -308,7 +300,6 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 10,
     textAlign: 'center',
-    borderColor: '#A852FF',
     fontSize: 15,
   },
   pointValueInput: {
@@ -319,7 +310,6 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 10,
     textAlign: 'center',
-    borderColor: '#A852FF',
     fontSize: 18,
   },
   task_name: {
@@ -365,12 +355,6 @@ const styles = StyleSheet.create({
     justifyContent: 'left',
     display: 'flex',
     borderRadius: 12,
-  },
-  divider: {
-    height: 23,
-    width: 5,
-    backgroundColor: '#A852FF',
-    borderRadius: 5,
   },
 });
 

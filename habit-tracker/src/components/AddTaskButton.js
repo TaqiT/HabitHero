@@ -4,12 +4,16 @@ import {
 } from "react-native";
 import { TaskModalContext } from '../providers/TaskModalProvider';
 import { FrequencyContext } from '../providers/FrequencyProvider';
+import { ThemeContext } from '../providers/AppThemeProvider';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
 
 const AddTaskButton = () => {
   const {
-  setModalType, setTaskModalVisible, setNewTaskName, setNewTaskPointValue, changeColor
+    navBarColor, backgroundColor, highlightColor, containerColor
+  } = useContext(ThemeContext);
+  const {
+    setModalType, setTaskModalVisible, setNewTaskName, setNewTaskPointValue, changeColor
   } = useContext(TaskModalContext);
   const {
     clearWeekData, clearMonthData, setFrequencyType
@@ -28,7 +32,7 @@ const AddTaskButton = () => {
         clearMonthData();
       }}
     >
-      <FeatherIcon name="plus-square" color={"#8000FF"} size={35} />
+      <FeatherIcon name="plus-square" color={highlightColor} size={35} />
     </TouchableOpacity>
   );
 }

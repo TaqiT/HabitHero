@@ -5,10 +5,14 @@ import {
 import { PointsContext } from '../providers/PointsProvider';
 import { TaskModalContext } from '../providers/TaskModalProvider';
 import { FrequencyContext } from '../providers/FrequencyProvider';
+import { ThemeContext } from '../providers/AppThemeProvider';
 import LottieView from 'lottie-react-native';
 import confetti from '../components/confetti.json';
 
 const TaskComponent = ({task}) => {
+  const {
+    navBarColor, backgroundColor, highlightColor, containerColor
+  } = useContext(ThemeContext);
   const lottieRef = useRef(null);
   const [isEnabled, setIsEnabled] = useState(false);
   const { pointTotal, setPointsTotal } = useContext(PointsContext);
@@ -26,7 +30,7 @@ const TaskComponent = ({task}) => {
   }
   return (
     <TouchableOpacity
-      style={[styles.taskTouchable, {borderColor: task.color==='' ? 'black' : task.color}]}
+      style={[styles.taskTouchable, {borderColor: task.color==='' ? 'black' : task.color, backgroundColor: containerColor}]}
       onPress={() => {
         setSelectedTask(task);
         setModalType('edit');
@@ -53,13 +57,12 @@ const TaskComponent = ({task}) => {
         </Text>
       </View>
       <View style={styles.spacer}/>
-      <View style={[styles.divider, {backgroundColor: task.color==='' ? '#A852FF' : task.color}]}/>
+      <View style={[styles.divider, {backgroundColor: task.color==='' ? highlightColor : task.color}]}/>
       <View style={styles.task_points.view}>
         <Text style={styles.task_points.text}>
           {task.point_value}
         </Text>
       </View>
-      {/* <View style={[styles.divider, {backgroundColor: task.color==='' ? '#A852FF' : task.color}]}/> */}
       <View style={styles.spacer}/>
       <View>
         <Switch
@@ -121,16 +124,11 @@ const styles = StyleSheet.create({
     display: 'flex',
     borderRadius: 12,
   },
-
-  
   divider: {
     height: 5,
     width: 45,
-    backgroundColor: '#A852FF',
     borderRadius: 5,
-  
   },
-  
 });
 
 export default TaskComponent;

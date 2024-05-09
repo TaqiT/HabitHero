@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   StyleSheet,
   SafeAreaView,
@@ -10,6 +10,7 @@ import {
   Image,
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import { ThemeContext } from '../providers/AppThemeProvider';
 
 const tabs = [
   { name: 'Preferences', icon: 'settings' },
@@ -18,6 +19,9 @@ const tabs = [
 ];
 
 export default function Example() {
+  const {
+    navBarColor, backgroundColor, highlightColor, containerColor
+  } = useContext(ThemeContext);
   const [value, setValue] = React.useState(0);
   const [form, setForm] = useState({
     emailNotifications: true,
@@ -26,9 +30,9 @@ export default function Example() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#f8f8f8' }}>
-      <View style={styles.container}>
-        <View style={styles.profile}>
-          <View style={styles.profileHeader}>
+      <View style={[styles.container, {backgroundColor: backgroundColor}]}>
+        <View style={[styles.profile, {backgroundColor: backgroundColor}]}>
+          <View style={[styles.profileHeader, {backgroundColor: backgroundColor}]}>
             <Image
               alt=""
               source={{
@@ -47,7 +51,7 @@ export default function Example() {
             onPress={() => {
               // handle onPress
             }}>
-            <View style={styles.profileAction}>
+            <View style={[styles.profileAction, {backgroundColor: containerColor}]}>
               <Text style={styles.profileActionText}>Edit Profile</Text>
 
               <FeatherIcon color="#fff" name="edit-3" size={16} />
@@ -64,22 +68,22 @@ export default function Example() {
                 key={name}
                 style={[
                   styles.tabWrapper,
-                  isActive && { borderBottomColor: '#6366f1' },
+                  isActive && { borderBottomColor: highlightColor },
                 ]}>
                 <TouchableOpacity
                   onPress={() => {
                     setValue(index);
                   }}>
-                  <View style={styles.tab}>
+                  <View style={[styles.tab, {backgroundColor: containerColor}]}>
                     <FeatherIcon
-                      color={isActive ? '#6366f1' : '#6b7280'}
+                      color={isActive ? highlightColor : '#6b7280'}
                       name={icon}
                       size={16} />
 
                     <Text
                       style={[
                         styles.tabText,
-                        isActive && { color: '#6366f1' },
+                        isActive && { color: highlightColor },
                       ]}>
                       {name}
                     </Text>
@@ -172,7 +176,7 @@ export default function Example() {
         )}
         {value === 1 && (
         <View style={styles.section}>
-          <View style={styles.sectionBody}>
+          <View style={[styles.sectionBody, {backgroundColor: highlightColor}]}>
             <View style={[styles.rowWrapper, styles.rowFirst]}>
               <TouchableOpacity
                 onPress={() => {
@@ -255,7 +259,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
     flexBasis: 0,
-    backgroundColor: '#5C8374'
   },
   header: {
     paddingLeft: 24,
@@ -287,13 +290,11 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderColor: '#e3e3e3',
-    backgroundColor: '#5C8374',
   },
   profileHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    backgroundColor: '#5C8374',
   },
   profileAvatar: {
     width: 60,
@@ -320,7 +321,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#007bff',
     borderRadius: 12,
   },
   profileActionText: {
@@ -338,7 +338,6 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     position: 'relative',
     overflow: 'hidden',
-    backgroundColor: '#5C8374',
     marginTop: -20
   },
   tabWrapper: {
@@ -357,15 +356,12 @@ const styles = StyleSheet.create({
   /** Section */
   section: {
     marginTop: 12,
-    
   },
   sectionBody: {
-    backgroundColor: '#fff',
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderColor: '#e3e3e3',
     paddingLeft: 24,
-    backgroundColor: '#9EC8B9'
   },
   sectionTitle: {
     marginTop: 0,
