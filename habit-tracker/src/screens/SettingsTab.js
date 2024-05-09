@@ -36,14 +36,13 @@ export default function Example() {
             <Image
               alt=""
               source={{
-                uri: 'https://lh3.googleusercontent.com/pw/AP1GczOOdQtnh-Hfp5sLzpyQ45hcHBXZVhZ_TUU0StlTCsyxAwtWXgq9_Yg63WFR---w7oRjNVkfEM38OGRYdZSfm1T2Mo8XxA0HeS23zLjfPdyVEl_5lTKMAPaax8w5xDpX57ft6SVnT_0O9zOiwGufIkiW_iNggvgmRpS5bBcIagh5gifo0CAg7esCJ6DCX-txxzWN3e_hBtu_LFOPqrdJ_P9UTMHD-T7k00b3p6gYyOUzQbRfcIvwqHU9MUMjKi8XLzy3T000vtxBbZkMdwOlTgpDZXypyf8SRqTFNuX7otQPWiIvc-tbTB1n5HZx5gqjXuwW6WOVPm8Niiu62sObS3GYMEzxVLX_gNm_gaz9_LjzG_7C0weX8arN9JTOCQB4dQRnBs3L0VFMUDEeHRmO7sBSfxqgIIxSZFv3U9b9BJJA5nXeIvHynIlbllwgtVVEj0QA8WfhKv3H-8qSAfXWIL6xiVpJeoDp8WWdQHMT7vV9rXfAdLEnnfJKGxvEzWT9Ww2xgrR8oGIohqMPk2MP43A2sQa1rOlaS13hbirweFjyGJCrQIMyArf9Th-mubiAHTdDsCkVc4zfSb8WTaizwn_54x98hjyzPjAlCbwECcT8JE1XItRfaTcK88UXD_fA5i2wA39X62OluOuhiJildKPnn6OuDx3SNLnoSnfe7BoFHlc5DQgJQ2Ne09v-NXyCPd_kZzzhTb2AnfbWgEuKn7PRLksab5UF-8KYDSYPZ443iR_ylqrsLhCkgrM4x1KLSp-2GbVHsNEtODo0wHsOglw30SsTtQxQyg3557PXLgQggwHTZpTM_kPGnIZUTHPITycHlALRcEnyCk-LZd0F--MbIOSP_6N6bSCKZDHD-66Tm7r7WHbiKYIQ_3RE4Hqo9coZfJfpwz9yDUhkZx--nGg6xQ=w521-h928-s-no-gm?authuser=0',
-              }}
+                uri: 'https://images.saymedia-content.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:eco%2Cw_1200/MTk2NzY3MjA5ODc0MjY5ODI2/top-10-cutest-cat-photos-of-all-time.jpg',}}
               style={styles.profileAvatar} />
 
             <View>
-              <Text style={styles.profileName}>John Doe</Text>
+              <Text style={styles.profileName}>Taqi Thomas</Text>
 
-              <Text style={styles.profileHandle}>@john.doe</Text>
+              <Text style={styles.profileHandle}>@Taqi.Thomas</Text>
             </View>
           </View>
 
@@ -76,7 +75,7 @@ export default function Example() {
                   }}>
                   <View style={[styles.tab, {backgroundColor: containerColor}]}>
                     <FeatherIcon
-                      color={isActive ? highlightColor : '#6b7280'}
+                      color={isActive ? highlightColor : 'black'}
                       name={icon}
                       size={16} />
 
@@ -127,7 +126,7 @@ export default function Example() {
 
                     <View style={styles.rowSpacer} />
 
-                    <Text style={styles.rowValue}>Los Angeles, CA</Text>
+                    <Text style={styles.rowValue}>Philadelphia, PA</Text>
 
                     <FeatherIcon
                       color="#C6C6C6"
@@ -350,7 +349,7 @@ const styles = StyleSheet.create({
   tabText: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#6b7280',
+    color: 'black',
     marginLeft: 5,
   },
   /** Section */

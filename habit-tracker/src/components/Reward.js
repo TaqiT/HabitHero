@@ -115,19 +115,19 @@ const styles = StyleSheet.create({
   },
   button: {
     view: {
-      flex: 7,
-      height: 30,
+      flex: 7.5,
+      height: 27,
       right: -3,
-      borderRadius: 6,
+      borderRadius: 16,
     },
     buttonStyle: {
-      height: 30,
-      width: 66,
+      height: 31,
+      width: 60,
       top:-4,
     },
     textStyle: {
-      color: 'white',
-      fontSize: 12,
+      color: 'black',
+      fontSize: 12.7,
       justifyContent: 'center',
       alignItems: 'center',
       flex: 1

@@ -92,7 +92,7 @@ const ShopTab = () => {
           setRewardModalVisible(false);
       }}>
         <View style={styles.centeredView}>
-          <View style={[styles.modalView, {borderColor: containerColor}]}>
+          <View style={[styles.modalView, {borderColor: 'black', backgroundColor: containerColor}]}>
             <View style={styles.topView}>
               <TouchableOpacity style={styles.backButton}
                 onPress={() => setRewardModalVisible(false)}
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 0,
-    backgroundColor: 'white',
+    backgroundColor: '#0F4B2B',
     borderRadius: 40,
     borderWidth: 4,
     padding: 15,
