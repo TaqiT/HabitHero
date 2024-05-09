@@ -183,10 +183,10 @@ const TaskTab = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 12,
-    backgroundColor: 'white',
+    backgroundColor: '#5C8374',
   },
   scrollView: {
-    backgroundColor: 'white',
+    backgroundColor: '#5C8374',
   },
   centeredView: {
     flex: 1,

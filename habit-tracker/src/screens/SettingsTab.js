@@ -255,6 +255,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
     flexBasis: 0,
+    backgroundColor: '#5C8374'
   },
   header: {
     paddingLeft: 24,
@@ -286,11 +287,13 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderColor: '#e3e3e3',
+    backgroundColor: '#5C8374',
   },
   profileHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    backgroundColor: '#5C8374',
   },
   profileAvatar: {
     width: 60,
@@ -303,12 +306,12 @@ const styles = StyleSheet.create({
   profileName: {
     fontSize: 17,
     fontWeight: '600',
-    color: '#3d3d3d',
+    color: 'white',
   },
   profileHandle: {
     marginTop: 4,
     fontSize: 15,
-    color: '#989898',
+    color: 'white',
   },
   profileAction: {
     marginTop: 16,
@@ -335,6 +338,8 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     position: 'relative',
     overflow: 'hidden',
+    backgroundColor: '#5C8374',
+    marginTop: -20
   },
   tabWrapper: {
     flexGrow: 1,
@@ -352,6 +357,7 @@ const styles = StyleSheet.create({
   /** Section */
   section: {
     marginTop: 12,
+    
   },
   sectionBody: {
     backgroundColor: '#fff',
@@ -359,6 +365,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: '#e3e3e3',
     paddingLeft: 24,
+    backgroundColor: '#9EC8B9'
   },
   sectionTitle: {
     marginTop: 0,
@@ -388,7 +395,7 @@ const styles = StyleSheet.create({
   rowLabel: {
     fontSize: 17,
     fontWeight: '500',
-    color: '#2c2c2c',
+    color: 'white',
   },
   rowSpacer: {
     flexGrow: 1,
@@ -398,7 +405,7 @@ const styles = StyleSheet.create({
   rowValue: {
     fontSize: 17,
     fontWeight: '500',
-    color: '#7f7f7f',
+    color: 'white',
     marginRight: 4,
   },
 });

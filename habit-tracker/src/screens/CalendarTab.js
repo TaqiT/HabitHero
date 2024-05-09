@@ -101,12 +101,15 @@ const CalendarTab = () => {
         </View>
         
         {/* The section created to hold the place where the tasks for that day will be stored */}
-        <View style={{ flex: 1, paddingHorizontal: 16, paddingVertical: 24 }}>
+        <View style={{ flex: 1, paddingHorizontal: 16, paddingVertical: 24, }}>
           <Text style={styles.subtitle}>{value.toDateString()}</Text>
           <View style={styles.placeholder}>
-            <View style={styles.placeholderInset}>
-              {/* Replace with content for tasks */}
-            </View>
+            {/* <View style={styles.placeholderInset}>
+              
+            </View> */}
+            <SafeAreaView style={styles.taskContainer}>
+                {/* Populate the tasks here */}
+            </SafeAreaView>
           </View>
         </View>
       </View>
@@ -118,6 +121,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingVertical: 24,
+    backgroundColor: "#5C8374", //changes background color of screen
   },
   header: {
     paddingHorizontal: 16,
@@ -125,7 +129,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: '700',
-    color: '#1d1d1d',
+    color: 'white',
     marginBottom: 12,
   },
   picker: {
@@ -138,8 +142,9 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 17,
     fontWeight: '600',
-    color: '#999999',
+    color: 'white',
     marginBottom: 12,
+    marginTop: -15,
   },
   footer: {
     marginTop: 'auto',
@@ -170,11 +175,13 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#737373',
     marginBottom: 4,
+    color: 'white',
   },
   itemDate: {
     fontSize: 15,
     fontWeight: '600',
     color: '#111',
+    color: 'white',
   },
   /** Placeholder */
   placeholder: {
@@ -186,7 +193,7 @@ const styles = StyleSheet.create({
     padding: 0,
     backgroundColor: 'transparent',
   },
-  placeholderInset: {
+  taskContainer: {
     borderWidth: 4,
     borderColor: '#e5e7eb',
     borderStyle: 'solid',
@@ -194,6 +201,8 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
     flexBasis: 0,
+    textAlign: "center",
+    backgroundColor: "#9EC8B9"
   },
 });
 
