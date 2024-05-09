@@ -36,7 +36,7 @@ const CalendarTab = () => {
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.title}>Your Schedule</Text>
+          <Text style={styles.title}>Your Task Schedule</Text>
         </View>
 
         {/* The top part of the page will the swiping calander system */}

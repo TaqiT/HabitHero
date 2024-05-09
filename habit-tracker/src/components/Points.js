@@ -20,13 +20,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 45,
     left: 25,
-    backgroundColor: '#A852FF',
+    backgroundColor: '#8000FF',
     padding: 10,
     borderRadius: 5,
     elevation: 5,
   },
   pointsText: {
     fontSize: 16,
+    color: '#fff',
   },
 });
 

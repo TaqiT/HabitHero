@@ -36,7 +36,7 @@ const RewardComponent = ({ reward }) => {
           {reward.point_value}
         </Text>
       </View>
-      <View style={styles.divider}></View>
+      {/* <View style={styles.divider}></View> */}
       <View style={styles.button.view}>
         <Button
           titleStyle={styles.button.textStyle}
@@ -111,12 +111,15 @@ const styles = StyleSheet.create({
 		display: 'flex',
 		borderRadius: 12,
 	},
+  
 	divider: {
-		height: 23,
-		width: 5,
+		height: 5,
+		width: 45,
 		backgroundColor: '#A852FF',
 		borderRadius: 5,
+    justifyContent: 'center'
 	},
+
   button: {
     view: {
       flex: 7,
@@ -135,7 +138,10 @@ const styles = StyleSheet.create({
     },
     textStyle: {
       color: 'white',
-      fontSize: 15,
+      fontSize: 12,
+      justifyContent: 'center', 
+      alignItems: 'center', 
+      flex: 1
     }
   },
   lottie: {
