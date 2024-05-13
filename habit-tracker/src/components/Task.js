@@ -70,8 +70,9 @@ const TaskComponent = ({task}) => {
         <Switch
           value={isEnabled}
           onValueChange={(state) => {
-            {state ? setPointsTotal(pointTotal + Number(task.point_value))
-            : setPointsTotal(pointTotal - Number(task.point_value))}
+            const newPointTotal = state
+              ? pointTotal + Number(task.point_value)
+              : pointTotal - Number(task.point_value);
             toggleSwitch();
             Alert.alert('Are you sure you have completed this task?', '🤔', [
               {
@@ -80,7 +81,11 @@ const TaskComponent = ({task}) => {
                 style: 'No',
               },
               {text: 'Yes',
-              onPress: () => triggerConfetti(),
+              onPress: () => {
+                setPointsTotal(newPointTotal);
+                triggerConfetti();
+                Alert.alert('Congratulations on completing your task! \n 🎉');
+              }
             }
             ]);
           }}
