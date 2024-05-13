@@ -1,6 +1,6 @@
 import React, { useContext, useState, useRef } from 'react'
 import {
-  StyleSheet, TouchableOpacity, Text, View, Switch
+  StyleSheet, TouchableOpacity, Text, View, Switch, Alert
 } from 'react-native';
 import { PointsContext } from '../providers/PointsProvider';
 import { TaskModalContext } from '../providers/TaskModalProvider';
@@ -23,11 +23,13 @@ const TaskComponent = ({task}) => {
     setFrequencyType, addWeekData, addMonthData
   } = useContext(FrequencyContext);
   const toggleSwitch = () => { setIsEnabled(previousState => !previousState) }
-  function triggerConfetti() {
+  
+  const triggerConfetti = () => {
     if (lottieRef.current) {
       lottieRef.current.play();
     }
-  }
+  };
+
   return (
     <TouchableOpacity
       style={[styles.taskTouchable, {borderColor: task.color==='' ? 'black' : task.color, backgroundColor: containerColor}]}
@@ -45,9 +47,9 @@ const TaskComponent = ({task}) => {
       <LottieView
         ref={lottieRef}
         source={confetti}
-        loop={false}
-        style={{pointerEvents: 'none'}}
+        style={styles.lottie}
         resizeMode='cover'
+        animationDuration={30000}
       />
       <View style={styles.spacer}/>
       <View style={styles.spacer}/>
@@ -71,7 +73,16 @@ const TaskComponent = ({task}) => {
             {state ? setPointsTotal(pointTotal + Number(task.point_value))
             : setPointsTotal(pointTotal - Number(task.point_value))}
             toggleSwitch();
-            {state ? triggerConfetti() : null }
+            Alert.alert('Are you sure you have completed this task?', '🤔', [
+              {
+                text: 'No',
+                onPress: () => toggleSwitch(),
+                style: 'No',
+              },
+              {text: 'Yes',
+              onPress: () => triggerConfetti(),
+            }
+            ]);
           }}
         />
       </View>
@@ -128,6 +139,15 @@ const styles = StyleSheet.create({
     height: 5,
     width: 45,
     borderRadius: 5,
+  },
+  lottie: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    zIndex: 1000,
+    pointerEvents: 'none',
   },
 });
 
