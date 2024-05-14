@@ -22,14 +22,22 @@ const TaskComponent = ({task}) => {
   const {
     setFrequencyType, addWeekData, addMonthData
   } = useContext(FrequencyContext);
-  const toggleSwitch = () => { setIsEnabled(previousState => !previousState) }
-  
+  var newPointTotal = Number(task.point_value);
+  const toggleSwitch = (state) => {
+    newPointTotal = state
+      ? pointTotal + Number(task.point_value)
+      : pointTotal - Number(task.point_value);
+    setPointsTotal(newPointTotal);
+    if (state) {
+      triggerConfetti();
+      Alert.alert('Congratulations on completing your task! \n 🎉');
+    }
+  }
   const triggerConfetti = () => {
     if (lottieRef.current) {
       lottieRef.current.play();
     }
   };
-
   return (
     <TouchableOpacity
       style={[styles.taskTouchable, {borderColor: task.color==='' ? 'black' : task.color, backgroundColor: containerColor}]}
@@ -70,24 +78,24 @@ const TaskComponent = ({task}) => {
         <Switch
           value={isEnabled}
           onValueChange={(state) => {
-            const newPointTotal = state
-              ? pointTotal + Number(task.point_value)
-              : pointTotal - Number(task.point_value);
-            toggleSwitch();
-            Alert.alert('Are you sure you have completed this task?', '🤔', [
-              {
-                text: 'No',
-                onPress: () => toggleSwitch(),
-                style: 'No',
-              },
-              {text: 'Yes',
-              onPress: () => {
-                setPointsTotal(newPointTotal);
-                triggerConfetti();
-                Alert.alert('Congratulations on completing your task! \n 🎉');
-              }
+            setIsEnabled(previousState => !previousState)
+            {state ?
+                Alert.alert(
+                  'Are you sure you have completed this task?', '🤔', [
+                    {
+                      text: 'No',
+                      style: 'No',
+                      onPress: () =>
+                        setIsEnabled(previousState => !previousState)
+                    },
+                {text: 'Yes',
+                  onPress: () => {
+                    toggleSwitch(state);
+                  }
+                }
+              ])
+              : toggleSwitch(state)
             }
-            ]);
           }}
         />
       </View>
