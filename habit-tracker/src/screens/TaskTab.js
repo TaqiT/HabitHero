@@ -7,6 +7,7 @@ import FrequencyButtonGroup from '../components/SelectFrequency.js';
 import { FrequencyContext } from "../providers/FrequencyProvider.js";
 import { TaskModalContext } from '../providers/TaskModalProvider.js';
 import { ThemeContext } from '../providers/AppThemeProvider';
+import { TaskListContext } from '../providers/TaskListProvider.js';
 
 var taskCount = 0;
 
@@ -38,7 +39,7 @@ class Task {
   }
 }
 
-var taskList = [
+var sampleTasks = [
   new Task('Take out the trash', 9999),
   new Task('Clean the bathroom', 10),
   new Task('Do the laundry', 10),
@@ -49,11 +50,8 @@ var taskList = [
   new Task('Clean the bedroom', 10),
 ];
 
-const removeTask = (task) => {
-  taskList = taskList.filter((t) => t.id !== task.id);
-};
-
 const TaskTab = () => {
+  const { taskList, addTask, removeTask } = useContext(TaskListContext);
   const {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
@@ -63,6 +61,9 @@ const TaskTab = () => {
   const {
     weekData, clearWeekData, monthData, clearMonthData, frequencyType, setFrequencyType
   } = React.useContext(FrequencyContext);
+  // for (let i = 0; i < sampleTasks.length; i++) {
+  //   addTask(sampleTasks[i]);
+  // }
   var saveButtonPressed = false;
   const saveButtonPress = () => {
     if (newTaskName.length > 0 && newTaskPointValue.length > 0 && ( (frequencyType === 'Weekly' && weekData.length != 0) || (frequencyType === 'Monthly' && monthData.length != 0) || frequencyType === 'Daily') && !isNaN(Number(newTaskPointValue))
@@ -74,7 +75,7 @@ const TaskTab = () => {
         );
         ((frequencyType === 'Weekly') ? newTask.frequency_data = weekData : newTask.frequency_data = monthData);
         newTask.color = newTaskColor;
-        taskList.push(newTask);
+        addTask(newTask);
       }
       else{
         selectedTask.name = newTaskName;

@@ -9,16 +9,18 @@ import CalendarTab from './src/screens/CalendarTab';
 import { PointsProvider } from './src/providers/PointsProvider';
 import { FrequencyProvider } from './src/providers/FrequencyProvider';
 import { TaskModalProvider } from './src/providers/TaskModalProvider';
+import { ShopModalProvider } from './src/providers/ShopModalProvider';
 import { ThemeProvider, ThemeContext } from './src/providers/AppThemeProvider';
+import { TaskListProvider } from './src/providers/TaskListProvider';
 import { View, StyleSheet } from 'react-native';
 import ShopTab from './src/screens/ShopTab';
-import { ShopModalProvider } from './src/providers/ShopModalProvider';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
 const Tab = createBottomTabNavigator();
 
 const App = () => {
   return (
+    <TaskListProvider>
     <ThemeProvider>
     <ShopModalProvider>
     <TaskModalProvider>
@@ -30,6 +32,7 @@ const App = () => {
     </TaskModalProvider>
     </ShopModalProvider>
     </ThemeProvider>
+    </TaskListProvider>
   );
 };
 
