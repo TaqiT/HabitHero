@@ -42,10 +42,8 @@ var reward_list = [
   new Reward('Get your nails done', 250),
   new Reward('Skip a chore', 60),
   new Reward('Night out', 120),
-  new Reward('DIY beauty night', 140),
   new Reward('Indulge in junk food', 240),
   new Reward('Shopping spree', 400),
-
 ];
 
 const removeReward = (reward) => {
@@ -57,17 +55,16 @@ const ShopTab = () => {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
   const {
-    modalType, setModalType, rewardModalVisible, setRewardModalVisible, newRewardName, setNewRewardName, newRewardPointValue, setNewRewardPointValue, newRewardColor, changeColor, selectedReward
+    shopModalType, setShopModalType, shopModalVisible, setShopModalVisible, newRewardName, setNewRewardName, newRewardPointValue, setNewRewardPointValue, newRewardColor, changeRewardColor, selectedReward
   } = useContext(ShopModalContext);
   var saveButtonPressed = false;
   const saveButtonPress = () => {
     if (newRewardName.length > 0 && newRewardPointValue.length > 0){
-      setRewardModalVisible(false);
-      if (modalType === 'add') {
+      setShopModalVisible(false);
+      if (shopModalType === 'add') {
         newReward = new Reward(
           newRewardName, newRewardPointValue
         );
-
         newReward.color = newRewardColor;
         reward_list.push(newReward);
       }
@@ -87,15 +84,15 @@ const ShopTab = () => {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={rewardModalVisible}
+        visible={shopModalVisible}
         onRequestClose={() => {
-          setRewardModalVisible(false);
+          setShopModalVisible(false);
       }}>
         <View style={styles.centeredView}>
           <View style={[styles.modalView, {borderColor: 'black', backgroundColor: containerColor}]}>
             <View style={styles.topView}>
               <TouchableOpacity style={styles.backButton}
-                onPress={() => setRewardModalVisible(false)}
+                onPress={() => setShopModalVisible(false)}
               />
               <View style={styles.topViewDivider} />
               <Text style={styles.modalText}>New Reward</Text>
@@ -132,22 +129,23 @@ const ShopTab = () => {
                       borderColor: (color === 'black') ? 'grey' : 'black',
                       borderWidth: (newRewardColor === color) ? 3 : 0
                     }}
-                    onPress={() => {changeColor(color)}}
+                    onPress={() => {changeRewardColor(color)}}
                   />
                 );
               })}
             </View>
-            {modalType == 'edit' ? // If the modal is in edit mode, show delete button, else show spacer view
+            {shopModalType == 'edit' ? // If the modal is in edit mode, show delete button, else show spacer view
             <View style={styles.deleteButton.view}>
               <TouchableOpacity
                 style={styles.deleteButton.touchable}
                 onPress = {() => {
-                  setRewardModalVisible(false); removeReward(selectedReward);
+                  setShopModalVisible(false); removeReward(selectedReward);
                 }}
               >
                 <Text style={styles.deleteButton.text}> Delete </Text>
               </TouchableOpacity>
-            </View> :
+            </View>
+            :
             <View style={{ height: 400 }} />
             }
             <TouchableOpacity
@@ -161,17 +159,6 @@ const ShopTab = () => {
         </View>
       </Modal>
       <View style={[styles.container, {backgroundColor: containerColor}]}>
-      <TouchableOpacity
-        style={[styles.addButton, {backgroundColor: highlightColor}]}
-        onPress={() => {
-          setRewardModalVisible(true);
-          setModalType('add');
-          setNewRewardName('');
-          setNewRewardPointValue('');
-          changeColor('');
-          }}>
-        <Text style={styles.addButtonText}>Create New Reward!</Text>
-      </TouchableOpacity>
         {reward_list.map((reward, index) => (
           <RewardComponent key={index} reward={reward} />
         ))}
@@ -195,7 +182,7 @@ const styles = StyleSheet.create({
   },
   deleteButton: {
     view: {
-      marginTop: 20,
+      marginTop: 340,
       width: 300,
       height: 50,
       backgroundColor: 'red',
@@ -219,11 +206,9 @@ const styles = StyleSheet.create({
     alignItems: 'left',
   },
   modalView: {
-    margin: 0,
-    backgroundColor: '#0F4B2B',
     borderRadius: 40,
     borderWidth: 4,
-    padding: 15,
+    padding: 18,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -247,6 +232,7 @@ const styles = StyleSheet.create({
   colorsView: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    marginTop: 30,
     height: 120,
     width: 300,
     flexWrap: 'wrap',
