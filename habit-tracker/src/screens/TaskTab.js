@@ -9,7 +9,6 @@ import { TaskModalContext } from '../providers/TaskModalProvider.js';
 import { ThemeContext } from '../providers/AppThemeProvider';
 import { TaskListContext } from '../providers/TaskListProvider.js';
 
-var taskCount = 0;
 
 const colors = [
   'black',

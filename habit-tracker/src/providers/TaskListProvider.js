@@ -1,5 +1,7 @@
 import React, { createContext, useState } from 'react';
 
+var taskCount = 0;
+
 class Task {
   constructor(name, point_value, frequency='Daily', frequency_data=[], color='') {
     this.id = taskCount++;
