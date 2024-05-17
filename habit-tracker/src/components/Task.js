@@ -9,6 +9,11 @@ import { ThemeContext } from '../providers/AppThemeProvider';
 import LottieView from 'lottie-react-native';
 import confetti from '../components/confetti.json';
 
+
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
 const TaskComponent = ({task}) => {
   const {
     navBarColor, backgroundColor, highlightColor, containerColor
@@ -30,12 +35,14 @@ const TaskComponent = ({task}) => {
     setPointsTotal(newPointTotal);
     if (state) {
       triggerConfetti();
-      Alert.alert('Congratulations on completing your task! \n 🎉');
     }
   }
   const triggerConfetti = () => {
     if (lottieRef.current) {
       lottieRef.current.play();
+      sleep(4010).then(() => {
+        lottieRef.current.pause();
+      });
     }
   };
   return (
@@ -57,7 +64,6 @@ const TaskComponent = ({task}) => {
         source={confetti}
         style={styles.lottie}
         resizeMode='cover'
-        animationDuration={30000}
       />
       <View style={styles.spacer}/>
       <View style={styles.spacer}/>
