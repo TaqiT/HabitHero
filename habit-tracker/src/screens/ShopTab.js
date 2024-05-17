@@ -55,11 +55,11 @@ const ShopTab = () => {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
   const {
-    shopModalType, setShopModalType, shopModalVisible, setShopModalVisible, newRewardName, setNewRewardName, newRewardPointValue, setNewRewardPointValue, newRewardColor, changeRewardColor, selectedReward
+    shopModalType, shopModalVisible, setShopModalVisible, newRewardName, setNewRewardName, newRewardPointValue, setNewRewardPointValue, newRewardColor, changeRewardColor, selectedReward
   } = useContext(ShopModalContext);
   var saveButtonPressed = false;
   const saveButtonPress = () => {
-    if (newRewardName.length > 0 && newRewardPointValue.length > 0){
+    if (newRewardName.length > 0 && newRewardPointValue.length > 0 && Number(newRewardPointValue) > 0){
       setShopModalVisible(false);
       if (shopModalType === 'add') {
         newReward = new Reward(
@@ -245,33 +245,12 @@ const styles = StyleSheet.create({
     width: 300,
     flexWrap: 'wrap',
   },
-  addButton: {
-    padding: 10,
-    elevation: 2,
-    flexDirection: 'row',
-    alignSelf: 'center',
-    padding: 5,
-    width: 375,
-    height: 50,
-    marginTop: 10,
-    borderColor: '#000',
-    alignItems: 'center',
-    justifyContent: 'center',
-    display: 'flex',
-    borderRadius: 15,
-  },
   saveButton: {
     padding: 10,
     marginTop: 20,
     width: 300,
     elevation: 2,
     borderRadius: 10,
-  },
-  addButtonText: {
-    color: 'black',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    fontSize: 20,
   },
   saveButtonText: {
     color: 'white',
@@ -305,104 +284,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
   },
-  reward_name: {
-    view: {
-      flex: 10,
-      justifyContent: 'center',
-    },
-    text: {
-      color: '#000',
-      fontSize: 15,
-    },
-  },
-  reward_points: {
-    view: {
-      flex: 5.5,
-      alignItems: 'center',
-    },
-    text: {
-      color: '#000',
-      fontSize: 18,
-      justifyContent: 'center',
-    },
-  },
-  spacer: {
-    flex: 1,
-    height: 10,
-  },
-  check_box: {
-    flex: 4,
-    height: 20,
-    borderWidth: 1,
-  },
-  rewardTouchable: {
-    flexDirection: 'row',
-    alignSelf: 'center',
-    padding: 5,
-    width: 375,
-    height: 50,
-    marginTop: 10,
-    borderColor: '#000',
-    borderWidth: 1.5,
-    alignItems: 'center',
-    justifyContent: 'left',
-    display: 'flex',
-    borderRadius: 12,
-  },
-  divider: {
-    height: 23,
-    width: 5,
-    borderRadius: 5,
-  },
-	reward_name: {
-		view: {
-			flex: 20,
-			justifyContent: 'center',
-		},
-		text: {
-			color: '#000',
-			fontSize: 15,
-		},
-	},
-	reward_points: {
-		view: {
-			flex: 5.5,
-
-			alignItems: 'center',
-		},
-		text: {
-			color: '#000',
-			fontSize: 18,
-			justifyContent: 'center',
-		},
-	},
-	spacer: {
-		flex: 1,
-		height: 10,
-	},
-	check_box: {
-		flex: 4,
-		height: 20,
-		borderWidth: 1,
-	},
-	rewardTouchable: {
-		flexDirection: 'row',
-		alignSelf: 'center',
-		padding: 5,
-		width: 375,
-		height: 50,
-		marginTop: 10,
-		borderWidth: 1.5,
-		alignItems: 'center',
-		justifyContent: 'left',
-		display: 'flex',
-		borderRadius: 12,
-	},
-	divider: {
-		height: 23,
-		width: 5,
-		borderRadius: 5,
-	},
 });
 
 

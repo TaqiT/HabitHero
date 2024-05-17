@@ -129,11 +129,6 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 10,
   },
-  check_box: {
-    flex: 4,
-    height: 20,
-    borderWidth: 1,
-  },
   taskTouchable: {
     flexDirection: 'row',
     alignSelf: 'center',

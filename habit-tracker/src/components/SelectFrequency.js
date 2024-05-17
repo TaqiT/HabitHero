@@ -227,11 +227,6 @@ const styles = StyleSheet.create({
   monthLastRowThirdDivider: {
     width: 9.5,
   },
-  option: {
-    fontSize: 20,
-    color: 'white',
-    textAlign: 'center',
-  },
   period: {
     unselected: {
       pressable: {
@@ -246,18 +241,18 @@ const styles = StyleSheet.create({
         fontSize: 23,
       },
     },
-  selected: {
-    pressable: {
-      borderWidth: 2,
-      margin: 10,
-      padding: 10,
-      borderRadius: 10,
-    },
-    text: {
-      color: 'white',
-      fontSize: 23,
-    },
-  }
+    selected: {
+      pressable: {
+        borderWidth: 2,
+        margin: 10,
+        padding: 10,
+        borderRadius: 10,
+      },
+      text: {
+        color: 'white',
+        fontSize: 23,
+      },
+    }
   },
   weekday: {
     unselected: {
@@ -273,18 +268,19 @@ const styles = StyleSheet.create({
         fontSize: 15,
       },
     },
-  selected: {
-    pressable: {
-      borderWidth: 2,
-      margin: 5,
-      padding: 5,
-      borderRadius: 10,
-    },
-    text: {
-      color: 'white',
-      fontSize: 15,
-    },
-  }},
+    selected: {
+      pressable: {
+        borderWidth: 2,
+        margin: 5,
+        padding: 5,
+        borderRadius: 10,
+      },
+      text: {
+        color: 'white',
+        fontSize: 15,
+      },
+    }
+  },
   month: {
     unselected: {
       pressable: {
@@ -301,20 +297,21 @@ const styles = StyleSheet.create({
         textAlign: 'center',
       },
     },
-  selected: {
-    pressable: {
-      borderWidth: 2,
-      borderRadius: 10,
-      width: 35,
-      height: 35,
-      justifyContent: 'center',
-    },
-    text: {
-      color: 'white',
-      fontSize: 15,
-      textAlign: 'center',
-    },
-  }}
+    selected: {
+      pressable: {
+        borderWidth: 2,
+        borderRadius: 10,
+        width: 35,
+        height: 35,
+        justifyContent: 'center',
+      },
+      text: {
+        color: 'white',
+        fontSize: 15,
+        textAlign: 'center',
+      },
+    }
+  }
 });
 
 export default FrequencyButtonGroup;

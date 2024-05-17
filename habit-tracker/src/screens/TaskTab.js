@@ -58,10 +58,10 @@ const TaskTab = () => {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
   const {
-    taskModalType, setTaskModalType, taskModalVisible, setTaskModalVisible, newTaskName, setNewTaskName, newTaskPointValue, setNewTaskPointValue, newTaskColor, changeTaskColor, selectedTask
+    taskModalType, taskModalVisible, setTaskModalVisible, newTaskName, setNewTaskName, newTaskPointValue, setNewTaskPointValue, newTaskColor, changeTaskColor, selectedTask
   } = useContext(TaskModalContext);
   const {
-    weekData, clearWeekData, monthData, clearMonthData, frequencyType, setFrequencyType
+    weekData, monthData, frequencyType
   } = React.useContext(FrequencyContext);
   const saveButtonPress = () => {
     if (newTaskName.length > 0 && ((frequencyType === 'Weekly' && weekData.length != 0) || (frequencyType === 'Monthly' && monthData.length != 0) || frequencyType === 'Daily') && Number(newTaskPointValue) > 0
@@ -99,7 +99,6 @@ const TaskTab = () => {
       alert('Please fill out all fields');
     }
   };
-  saveButtonPressed = true;
   return (
     <ScrollView style={{backgroundColor: backgroundColor}}>
       <Modal
@@ -260,33 +259,12 @@ const styles = StyleSheet.create({
     width: 300,
     flexWrap: 'wrap',
   },
-  addButton: {
-    padding: 10,
-    elevation: 2,
-    flexDirection: 'row',
-    alignSelf: 'center',
-    padding: 5,
-    width: 375,
-    height: 50,
-    marginTop: 10,
-    borderColor: '',
-    alignItems: 'center',
-    justifyContent: 'center',
-    display: 'flex',
-    borderRadius: 15,
-  },
   saveButton: {
     padding: 10,
     marginTop: 20,
     width: 300,
     elevation: 2,
     borderRadius: 10,
-  },
-  addButtonText: {
-    color: 'black',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    fontSize: 20,
   },
   saveButtonText: {
     color: 'white',
@@ -320,49 +298,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
   },
-  task_name: {
-    view: {
-      flex: 20,
-      justifyContent: 'center',
-    },
-    text: {
-      color: '#000',
-      fontSize: 15,
-    },
-  },
-  task_points: {
-    view: {
-      flex: 5.5,
-      alignItems: 'center',
-    },
-    text: {
-      color: '#000',
-      fontSize: 18,
-      justifyContent: 'center',
-    },
-  },
   spacer: {
     flex: 1,
     height: 10,
-  },
-  check_box: {
-    flex: 4,
-    height: 20,
-    borderWidth: 1,
-  },
-  taskTouchable: {
-    flexDirection: 'row',
-    alignSelf: 'center',
-    padding: 5,
-    width: 375,
-    height: 50,
-    marginTop: 10,
-    borderColor: '#000',
-    borderWidth: 1.5,
-    alignItems: 'center',
-    justifyContent: 'left',
-    display: 'flex',
-    borderRadius: 12,
   },
 });
 

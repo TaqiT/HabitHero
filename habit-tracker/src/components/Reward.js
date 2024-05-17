@@ -152,7 +152,6 @@ const styles = StyleSheet.create({
     zIndex: 1000,
     pointerEvents: 'none',
   }
-
 });
 
 export default RewardComponent;
