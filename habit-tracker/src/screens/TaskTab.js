@@ -83,10 +83,19 @@ const TaskTab = () => {
         selectedTask.color = newTaskColor;
       }
     }
-    else if (saveButtonPressed && isNaN(Number(newTaskPointValue))){
+    else if (isNaN(Number(newTaskPointValue)) || newTaskPointValue.length == 0){
       alert('Please enter a valid point value');
     }
-    else if(saveButtonPressed) {
+    else if (Number(newTaskPointValue) <= 0){
+      alert('Please enter a point value greater than 0');
+    }
+    else if (frequencyType === 'Weekly' && weekData.length === 0){
+      alert('Please select at least one day of the week');
+    }
+    else if (frequencyType === 'Monthly' && monthData.length === 0){
+      alert('Please select at least one day of the month');
+    }
+    else {
       alert('Please fill out all fields');
     }
   };

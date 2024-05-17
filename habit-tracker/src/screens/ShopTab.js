@@ -74,6 +74,14 @@ const ShopTab = () => {
         selectedReward.color = newRewardColor;
       }
     }
+    else if (
+      isNaN(Number(newRewardPointValue)) || newRewardPointValue.length == 0
+    ){
+      alert('Please enter a valid point value');
+    }
+    else if (Number(newRewardPointValue) <= 0){
+      alert('Please enter a point value greater than 0');
+    }
     else if(saveButtonPressed) {
       alert('Please fill out all fields');
     }
