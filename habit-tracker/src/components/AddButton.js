@@ -3,18 +3,27 @@ import {
   StyleSheet, TouchableOpacity
 } from "react-native";
 import { TaskModalContext } from '../providers/TaskModalProvider';
+import { ShopModalContext } from '../providers/ShopModalProvider';
 import { FrequencyContext } from '../providers/FrequencyProvider';
 import { ThemeContext } from '../providers/AppThemeProvider';
+import { CurrentTabContext } from '../providers/CurrentTabProvider';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
 
-const AddTaskButton = () => {
+const AddButton = () => {
   const {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
+  const { currentTab } = useContext(CurrentTabContext);
   const {
-    setModalType, setTaskModalVisible, setNewTaskName, setNewTaskPointValue, changeColor
+    setTaskModalType, setTaskModalVisible, setNewTaskName, setNewTaskPointValue, changeTaskColor
   } = useContext(TaskModalContext);
+  const {
+    setShopModalType, setShopModalVisible, setNewRewardName, setNewRewardPointValue, changeRewardColor
+  } = useContext(ShopModalContext);
+  if (currentTab != 'Tasks' && currentTab != 'Shop') {
+    return null;
+  }
   const {
     clearWeekData, clearMonthData, setFrequencyType
   } = React.useContext(FrequencyContext);
@@ -22,14 +31,23 @@ const AddTaskButton = () => {
     <TouchableOpacity
       style={styles.addButton}
       onPress={() => {
-        setTaskModalVisible(true);
-        setModalType('add');
-        setNewTaskName('');
-        setNewTaskPointValue('');
-        changeColor('');
-        setFrequencyType('Daily');
-        clearWeekData();
-        clearMonthData();
+        if (currentTab === 'Shop') {
+          setShopModalVisible(true);
+          setShopModalType('add');
+          setNewRewardName('');
+          setNewRewardPointValue('');
+          changeRewardColor('');
+        }
+        else if (currentTab === 'Tasks') {
+          setTaskModalVisible(true);
+          setTaskModalType('add');
+          setNewTaskName('');
+          setNewTaskPointValue('');
+          changeTaskColor('');
+          setFrequencyType('Daily');
+          clearWeekData();
+          clearMonthData();
+        }
       }}
     >
       <FeatherIcon name="plus-square" color={highlightColor} size={35} />
@@ -56,4 +74,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddTaskButton;
+export default AddButton;

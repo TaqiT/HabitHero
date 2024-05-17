@@ -14,7 +14,7 @@ const RewardComponent = ({ reward }) => {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
   const { setPointsTotal, pointTotal } = useContext(PointsContext);
-  const { setModalType, setRewardModalVisible, setNewRewardName, setNewRewardPointValue, setNewRewardColor, setSelectedReward } = useContext(ShopModalContext);
+  const { setShopModalType, setShopModalVisible, setNewRewardName, setNewRewardPointValue, setNewRewardColor, setSelectedReward } = useContext(ShopModalContext);
   const lottieRef = useRef(null);
 
   const triggerConfetti = () => {
@@ -25,7 +25,17 @@ const RewardComponent = ({ reward }) => {
 
   return (
     <TouchableOpacity
-      style={styles.rewardTouchable}>
+      style={[
+        styles.rewardTouchable,{borderColor: reward.color==='' ? 'black' : reward.color, backgroundColor: containerColor}]}
+      onPress={() => {
+        setSelectedReward(reward);
+        setShopModalType('edit');
+        setShopModalVisible(true);
+        setNewRewardName(reward.name);
+        setNewRewardPointValue(String(reward.point_value));
+        setNewRewardColor(reward.color);
+      }}
+      >
       <View style={styles.spacer}></View>
       <View style={styles.spacer}></View>
       <View style={styles.reward_name.view}>

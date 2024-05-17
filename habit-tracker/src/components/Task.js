@@ -17,7 +17,7 @@ const TaskComponent = ({task}) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const { pointTotal, setPointsTotal } = useContext(PointsContext);
   const {
-    setModalType, setTaskModalVisible, setNewTaskName, setNewTaskPointValue, setNewTaskColor, setSelectedTask
+    setTaskModalType, setTaskModalVisible, setNewTaskName, setNewTaskPointValue, setNewTaskColor, setSelectedTask
   } = useContext(TaskModalContext);
   const {
     setFrequencyType, addWeekData, addMonthData
@@ -43,7 +43,7 @@ const TaskComponent = ({task}) => {
       style={[styles.taskTouchable, {borderColor: task.color==='' ? 'black' : task.color, backgroundColor: containerColor}]}
       onPress={() => {
         setSelectedTask(task);
-        setModalType('edit');
+        setTaskModalType('edit');
         setTaskModalVisible(true);
         setNewTaskName(task.name);
         setNewTaskPointValue(String(task.point_value));

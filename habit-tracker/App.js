@@ -1,24 +1,28 @@
 import React, { useContext } from 'react'
+import { View, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TaskTab from './src/screens/TaskTab';
+import ShopTab from './src/screens/ShopTab';
 import SettingsTab from './src/screens/SettingsTab';
 import Points from './src/components/Points';
-import AddTaskButton from './src/components/AddTaskButton';
+import AddTaskButton from './src/components/AddButton';
 import CalendarTab from './src/screens/CalendarTab';
 import { PointsProvider } from './src/providers/PointsProvider';
 import { FrequencyProvider } from './src/providers/FrequencyProvider';
 import { TaskModalProvider } from './src/providers/TaskModalProvider';
-import { ThemeProvider, ThemeContext } from './src/providers/AppThemeProvider';
-import { View, StyleSheet } from 'react-native';
-import ShopTab from './src/screens/ShopTab';
 import { ShopModalProvider } from './src/providers/ShopModalProvider';
+import { ThemeProvider, ThemeContext } from './src/providers/AppThemeProvider';
+import {
+  CurrentTabProvider, CurrentTabContext
+} from './src/providers/CurrentTabProvider';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
 const Tab = createBottomTabNavigator();
 
 const App = () => {
   return (
+    <CurrentTabProvider>
     <ThemeProvider>
     <ShopModalProvider>
     <TaskModalProvider>
@@ -30,6 +34,7 @@ const App = () => {
     </TaskModalProvider>
     </ShopModalProvider>
     </ThemeProvider>
+    </CurrentTabProvider>
   );
 };
 
@@ -37,6 +42,7 @@ const RootApp = () => {
   const {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
+  const { setCurrentTab } = useContext(CurrentTabContext);
   return (
       <View style={styles.container}>
         <NavigationContainer>
@@ -68,6 +74,10 @@ const RootApp = () => {
                 <FeatherIcon name="list" color={highlightColor} size={20} />
               ),
             }}
+            listeners={({ navigation }) => ({
+              tabPress: e =>
+                setCurrentTab('Tasks')
+            })}
           />
           <Tab.Screen
             name="Shop"
@@ -77,6 +87,10 @@ const RootApp = () => {
                 <FeatherIcon name="shopping-bag" color={highlightColor} size={20} />
               ),
             }}
+            listeners={({ navigation }) => ({
+              tabPress: e =>
+                setCurrentTab('Shop')
+            })}
           />
           <Tab.Screen
             name="Calendar"
@@ -86,6 +100,10 @@ const RootApp = () => {
                 <FeatherIcon name="calendar" color={highlightColor} size={20} />
               ),
             }}
+            listeners={({ navigation }) => ({
+              tabPress: e =>
+                setCurrentTab('Calendar')
+            })}
           />
           <Tab.Screen
             name="Settings"
@@ -95,6 +113,10 @@ const RootApp = () => {
                 <FeatherIcon name="settings" color={highlightColor} size={20} />
               ),
             }}
+            listeners={({ navigation }) => ({
+              tabPress: e =>
+                setCurrentTab('Settings')
+            })}
           />
         </Tab.Navigator>
         </NavigationContainer>

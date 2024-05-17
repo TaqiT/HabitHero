@@ -58,17 +58,16 @@ const TaskTab = () => {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
   const {
-    modalType, setModalType, taskModalVisible, setTaskModalVisible, newTaskName, setNewTaskName, newTaskPointValue, setNewTaskPointValue, newTaskColor, changeColor, selectedTask
+    taskModalType, setTaskModalType, taskModalVisible, setTaskModalVisible, newTaskName, setNewTaskName, newTaskPointValue, setNewTaskPointValue, newTaskColor, changeTaskColor, selectedTask
   } = useContext(TaskModalContext);
   const {
     weekData, clearWeekData, monthData, clearMonthData, frequencyType, setFrequencyType
   } = React.useContext(FrequencyContext);
-  var saveButtonPressed = false;
   const saveButtonPress = () => {
-    if (newTaskName.length > 0 && newTaskPointValue.length > 0 && ( (frequencyType === 'Weekly' && weekData.length != 0) || (frequencyType === 'Monthly' && monthData.length != 0) || frequencyType === 'Daily') && !isNaN(Number(newTaskPointValue))
+    if (newTaskName.length > 0 && ((frequencyType === 'Weekly' && weekData.length != 0) || (frequencyType === 'Monthly' && monthData.length != 0) || frequencyType === 'Daily') && Number(newTaskPointValue) > 0
     ){
       setTaskModalVisible(false);
-      if (modalType === 'add') {
+      if (taskModalType === 'add') {
         newTask = new Task(
           newTaskName, newTaskPointValue, frequencyType
         );
@@ -143,12 +142,12 @@ const TaskTab = () => {
                       borderColor: (color === 'black') ? 'grey' : 'black',
                       borderWidth: (newTaskColor === color) ? 3 : 0
                     }}
-                    onPress={() => {changeColor(color)}}
+                    onPress={() => {changeTaskColor(color)}}
                   />
                 );
               })}
             </View>
-            {modalType == 'edit' ? // If the modal is in edit mode, show delete button, else show spacer view
+            {taskModalType == 'edit' ? // If the modal is in edit mode, show delete button, else show spacer view
             <View style={styles.deleteButton.view}>
               <TouchableOpacity
                 style={styles.deleteButton.touchable}
