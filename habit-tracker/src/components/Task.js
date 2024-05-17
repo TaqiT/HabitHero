@@ -6,10 +6,12 @@ import { PointsContext } from '../providers/PointsProvider';
 import { TaskModalContext } from '../providers/TaskModalProvider';
 import { FrequencyContext } from '../providers/FrequencyProvider';
 import { ThemeContext } from '../providers/AppThemeProvider';
+import { TaskListContext } from '../providers/TaskListProvider';
 import LottieView from 'lottie-react-native';
 import confetti from '../components/confetti.json';
 
 const TaskComponent = ({task}) => {
+  const {taskList, addTask, editTask, removeTask} = useContext(TaskListContext);
   const {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
@@ -30,7 +32,6 @@ const TaskComponent = ({task}) => {
     setPointsTotal(newPointTotal);
     if (state) {
       triggerConfetti();
-      Alert.alert('Congratulations on completing your task! \n 🎉');
     }
   }
   const triggerConfetti = () => {
@@ -57,7 +58,6 @@ const TaskComponent = ({task}) => {
         source={confetti}
         style={styles.lottie}
         resizeMode='cover'
-        animationDuration={30000}
       />
       <View style={styles.spacer}/>
       <View style={styles.spacer}/>
