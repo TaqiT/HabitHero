@@ -26,6 +26,11 @@ export default function Example() {
   const [form, setForm] = useState({
     emailNotifications: true,
     pushNotifications: false,
+    darkMode: false,
+    pinkMode: false,
+    normalMode: true,
+    blueMode: false,
+    lightMode: false,
   });
 
   return (
@@ -245,6 +250,115 @@ export default function Example() {
             </View>
           </View>
         </View>
+        )}
+        {value === 2 && (
+          <ScrollView>
+            <View style={styles.section}>
+              <View style={styles.sectionBody}>
+
+                <View style={styles.rowWrapper}>
+                  <View style={styles.row}>
+                    <Text style={styles.rowLabel}>Normal mode</Text>
+                    <View style={styles.rowSpacer} />
+                    <Switch
+                      onValueChange={normalMode =>
+                        setForm({ ...form, normalMode })
+                      }
+                      style={{
+                        transform: [{ scaleX: 0.95 }, { scaleY: 0.95 }],
+                      }}
+                      value={form.normalMode} />
+                  </View>
+                </View>
+
+                <View style={styles.rowWrapper}>
+                  <View style={styles.row}>
+                    <Text style={styles.rowLabel}>Dark Mode</Text>
+                    {/* #161A30
+                    #31304D
+                    #B6BBC4
+                    #F0ECE5 */}
+
+                    <View style={styles.rowSpacer} />
+
+                    <Switch
+                      onValueChange={darkMode =>
+                        setForm({ ...form, darkMode })
+                      }
+                      style={{
+                        transform: [{ scaleX: 0.95 }, { scaleY: 0.95 }],
+                      }}
+                      value={form.darkMode} />
+                  </View>
+                </View>
+
+                <View style={styles.rowWrapper}>
+                  <View style={styles.row}>
+                    <Text style={styles.rowLabel}>Pink Mode</Text>
+                    {/* #86469C
+                      #BC7FCD
+                      #FB9AD1
+                      #FFCDEA */}
+
+                    <View style={styles.rowSpacer} />
+
+                    <Switch
+                      onValueChange={pinkMode =>
+                        setForm({ ...form, pinkMode })
+                      }
+                      style={{
+                        transform: [{ scaleX: 0.95 }, { scaleY: 0.95 }],
+                      }}
+                      value={form.pinkMode} />
+                  </View>
+                </View>
+
+                <View style={styles.rowWrapper}>
+                  <View style={styles.row}>
+                    <Text style={styles.rowLabel}>Blue Mode</Text>
+                    {/* #F8F6E3
+                    #97E7E1
+                    #6AD4DD
+                    #7AA2E3 */}
+
+                    <View style={styles.rowSpacer} />
+
+                    <Switch
+                      onValueChange={blueMode =>
+                        setForm({ ...form, blueMode })
+                      }
+                      style={{
+                        transform: [{ scaleX: 0.95 }, { scaleY: 0.95 }],
+                      }}
+                      value={form.blueMode} />
+                  </View>
+                </View>
+
+                <View style={styles.rowWrapper}>
+                  <View style={styles.row}>
+                    <Text style={styles.rowLabel}>Light Mode</Text>
+                    {/* #F6F5F2
+                    #F0EBE3
+                    #F3D0D7
+                    #FFEFEF */}
+
+                    <View style={styles.rowSpacer} />
+
+                    <Switch
+                      onValueChange={lightMode =>
+                        setForm({ ...form, lightMode })
+                      }
+                      style={{
+                        transform: [{ scaleX: 0.95 }, { scaleY: 0.95 }],
+                      }}
+                      value={form.lightMode} />
+                  </View>
+                </View>
+
+              </View>
+            </View>
+
+          </ScrollView>
         )}
       </View>
     </SafeAreaView>
