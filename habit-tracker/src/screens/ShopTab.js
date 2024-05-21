@@ -162,7 +162,7 @@ const ShopTab = () => {
             >
               <Text style={styles.saveButtonText}>Save Reward</Text>
             </TouchableOpacity>
-            <View style={{ height: 10, width: 340 }} />
+            <View style={{ height: 0, width: 340 }} />
           </View>
         </View>
       </Modal>
