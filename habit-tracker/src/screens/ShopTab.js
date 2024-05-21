@@ -88,7 +88,7 @@ const ShopTab = () => {
   };
   saveButtonPressed = true;
   return (
-    <ScrollView style={{backgroundColor: containerColor}}>
+    <ScrollView style={{backgroundColor: backgroundColor}}>
       <Modal
         animationType="slide"
         transparent={true}
@@ -97,7 +97,7 @@ const ShopTab = () => {
           setShopModalVisible(false);
       }}>
         <View style={styles.centeredView}>
-          <View style={[styles.modalView, {borderColor: 'black', backgroundColor: containerColor}]}>
+          <View style={[styles.modalView, {borderColor: 'black', backgroundColor: backgroundColor}]}>
             <View style={styles.topView}>
               <TouchableOpacity style={styles.backButton}
                 onPress={() => setShopModalVisible(false)}
@@ -157,16 +157,16 @@ const ShopTab = () => {
             <View style={{ height: 400 }} />
             }
             <TouchableOpacity
-              style={[styles.saveButton, styles.buttonClose, {backgroundColor: highlightColor}]}
+              style={[styles.saveButton, styles.buttonClose, {backgroundColor: containerColor}]}
               onPress={() => {saveButtonPress()}}
             >
               <Text style={styles.saveButtonText}>Save Reward</Text>
             </TouchableOpacity>
-            <View style={{ height: 30, width: 350 }} />
+            <View style={{ height: 10, width: 340 }} />
           </View>
         </View>
       </Modal>
-      <View style={[styles.container, {backgroundColor: containerColor}]}>
+      <View style={[styles.container, {backgroundColor: backgroundColor}]}>
         {reward_list.map((reward, index) => (
           <RewardComponent key={index} reward={reward} />
         ))}
