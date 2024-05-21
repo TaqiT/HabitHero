@@ -14,6 +14,15 @@ function sleep (time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
 
+const toggleSwtich = (state) => {
+  setIsEnabled(state);
+  if (state) {
+    setTimeout(() => {
+      setIsEnabled(false);
+    }, 12 * 60 * 60 * 1000);
+  }
+};
+
 const TaskComponent = ({task}) => {
   const {
     navBarColor, backgroundColor, highlightColor, containerColor
@@ -40,9 +49,6 @@ const TaskComponent = ({task}) => {
   const triggerConfetti = () => {
     if (lottieRef.current) {
       lottieRef.current.play();
-      sleep(4010).then(() => {
-        lottieRef.current.pause();
-      });
     }
   };
   return (
@@ -64,6 +70,7 @@ const TaskComponent = ({task}) => {
         source={confetti}
         style={styles.lottie}
         resizeMode='cover'
+        loop={false}
       />
       <View style={styles.spacer}/>
       <View style={styles.spacer}/>
@@ -81,33 +88,36 @@ const TaskComponent = ({task}) => {
       </View>
       <View style={styles.spacer}/>
       <View>
-        <Switch
+      <Switch
           value={isEnabled}
           onValueChange={(state) => {
-            setIsEnabled(previousState => !previousState)
-            {state ?
-                Alert.alert(
-                  'Are you sure you have completed this task?', '🤔', [
-                    {
-                      text: 'No',
-                      style: 'No',
-                      onPress: () =>
-                        setIsEnabled(previousState => !previousState)
-                    },
-                {text: 'Yes',
-                  onPress: () => {
-                    toggleSwitch(state);
+            setIsEnabled(previousState => !previousState);
+            if (state) {
+              Alert.alert(
+                'Are you sure you have completed this task?', '🤔', [
+                  {
+                    text: 'No',
+                    style: 'cancel',
+                    onPress: () => setIsEnabled(previousState => !previousState)
+                  },
+                  {
+                    text: 'Yes',
+                    onPress: () => {
+                      toggleSwitch(state);
+                    }
                   }
-                }
-              ])
-              : toggleSwitch(state)
+                ]
+              );
+            } else {
+              toggleSwitch(state);
             }
           }}
         />
       </View>
     </TouchableOpacity>
   );
-}
+};
+
 
 const styles = StyleSheet.create({
   task_name: {
