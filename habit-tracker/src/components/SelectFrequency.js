@@ -30,7 +30,9 @@ const WeekdayButton = (props) => {
   const {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
-  const { addWeekData, removeWeekData, weekData } = useContext(FrequencyContext);
+  const {
+    addWeekData, removeWeekData, weekData
+  } = useContext(FrequencyContext);
   const [selected, setSelected] = useState(weekData.includes(props.day));
   return (
     <Pressable

@@ -34,7 +34,7 @@ const TaskTab = () => {
     modalType, setModalType, taskModalVisible, setTaskModalVisible, newTaskName, setNewTaskName, newTaskPointValue, setNewTaskPointValue, newTaskColor, changeColor, selectedTask
   } = useContext(TaskModalContext);
   const {
-    weekData, clearWeekData, monthData, clearMonthData, frequencyType, setFrequencyType
+    weekData, monthData, frequencyType
   } = React.useContext(FrequencyContext);
   var frequency_data;
   var color = '';
@@ -121,7 +121,8 @@ const TaskTab = () => {
               <TouchableOpacity
                 style={styles.deleteButton.touchable}
                 onPress = {() => {
-                  setTaskModalVisible(false); removeTask(selectedTask);
+                  setTaskModalVisible(false);
+                  removeTask(selectedTask.id);
                 }}
               >
                 <Text style={styles.deleteButton.text}> Delete </Text>

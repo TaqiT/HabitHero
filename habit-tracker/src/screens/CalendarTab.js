@@ -6,14 +6,19 @@ import {
   TouchableWithoutFeedback,
   Text,
   Dimensions,
+  TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import moment from 'moment';
 import Swiper from 'react-native-swiper';
 import { ThemeContext } from '../providers/AppThemeProvider';
+import { TaskListContext } from '../providers/TaskListProvider';
+// import { ScrollView } from 'react-native-gesture-handler';
+// import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const { width } = Dimensions.get('window');
 
-const CalendarTab = () => {
+const CalendarTab = ( props ) => {
   const {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
@@ -111,9 +116,15 @@ const CalendarTab = () => {
             {/* <View style={styles.placeholderInset}>
 
             </View> */}
-            <SafeAreaView style={[styles.taskContainer, {backgroundColor: highlightColor}]}>
-                {/* Populate the tasks here */}
-            </SafeAreaView>
+            <ScrollView style={[styles.taskContainer, {backgroundColor: highlightColor}]} key={refreshKey}>
+                {props.taskList.map((task, index) => {
+                  return (
+                    <TouchableOpacity key={index}>
+                      <Text>{task.name}</Text>
+                    </TouchableOpacity>
+                  );
+                })}
+            </ScrollView>
           </View>
         </View>
       </View>

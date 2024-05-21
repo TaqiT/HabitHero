@@ -11,7 +11,9 @@ import { FrequencyProvider } from './src/providers/FrequencyProvider';
 import { TaskModalProvider } from './src/providers/TaskModalProvider';
 import { ShopModalProvider } from './src/providers/ShopModalProvider';
 import { ThemeProvider, ThemeContext } from './src/providers/AppThemeProvider';
-import { TaskListProvider } from './src/providers/TaskListProvider';
+import {
+  TaskListProvider, TaskListContext
+} from './src/providers/TaskListProvider';
 import { View, StyleSheet } from 'react-native';
 import ShopTab from './src/screens/ShopTab';
 import FeatherIcon from 'react-native-vector-icons/Feather';
@@ -40,6 +42,7 @@ const RootApp = () => {
   const {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
+  const { taskList } = useContext(TaskListContext);
   return (
       <View style={styles.container}>
         <NavigationContainer>
@@ -84,6 +87,7 @@ const RootApp = () => {
           <Tab.Screen
             name="Calendar"
             component={CalendarTab}
+            taskList={taskList}
             options={{
               tabBarIcon: () => (
                 <FeatherIcon name="calendar" color={highlightColor} size={20} />

@@ -19,7 +19,7 @@ const TaskComponent = ({task}) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const { pointTotal, setPointsTotal } = useContext(PointsContext);
   const {
-    setModalType, setTaskModalVisible, setNewTaskName, setNewTaskPointValue, setNewTaskColor, setSelectedTask
+    setModalType, setTaskModalVisible, setNewTaskName, setNewTaskPointValue, setNewTaskColor, setSelectedTask, taskModalVisible
   } = useContext(TaskModalContext);
   const {
     setFrequencyType, addWeekData, addMonthData

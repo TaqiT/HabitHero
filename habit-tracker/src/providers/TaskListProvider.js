@@ -17,7 +17,6 @@ class Task {
   }
 }
 
-
 const TaskListContext = createContext();
 
 const TaskListProvider = ({ children }) => {
@@ -45,10 +44,13 @@ const TaskListProvider = ({ children }) => {
     frequency_data=(frequency_data.length===0)?taskList[taskIndex].frequency_data:frequency_data;
     color=(color==='') ? taskList[taskIndex].color : color;
     taskList[taskIndex] = new Task(name, point_value, frequency, frequency_data, color);
-    return true;
   };
   const removeTask = (taskID) => {
-    const taskIndex = taskList.findIndex(task => task.id === taskID);
+    const taskIndex = taskList.findIndex(task => Number(task.id) === Number(taskID));
+    if (taskIndex === -1) {
+      console.log("Error: Task not found.");
+      return;
+    }
     taskList.splice(taskIndex, 1);
   }
   return (
