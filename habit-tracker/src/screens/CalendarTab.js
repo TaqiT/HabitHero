@@ -6,20 +6,37 @@ import {
   TouchableWithoutFeedback,
   Text,
   Dimensions,
+  TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import moment from 'moment';
 import Swiper from 'react-native-swiper';
 import { ThemeContext } from '../providers/AppThemeProvider';
+import { TaskListContext } from '../providers/TaskListProvider';
 
 const { width } = Dimensions.get('window');
+
+var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 const CalendarTab = () => {
   const {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
+  const { taskList } = useContext(TaskListContext);
   const swiper = useRef();
   const [value, setValue] = useState(new Date());
   const [week, setWeek] = useState(0);
+  const showTask = (task, date) => {
+    if (task.frequency === 'Daily') {
+      return true;
+    }
+    if (task.frequency === 'Weekly') {
+      return task.frequency_data.includes(days[date.getDay()]);
+    }
+    if (task.frequency === 'Monthly') {
+      return task.frequency_data.includes(String(date.getDate()));
+    }
+  };
   const weeks = React.useMemo(() => {
     const start = moment().add(week, 'weeks').startOf('week');
 
@@ -111,9 +128,32 @@ const CalendarTab = () => {
             {/* <View style={styles.placeholderInset}>
 
             </View> */}
-            <SafeAreaView style={[styles.taskContainer, {backgroundColor: highlightColor}]}>
-                {/* Populate the tasks here */}
-            </SafeAreaView>
+            <ScrollView style={[styles.taskContainer, {backgroundColor: highlightColor}]}>
+                {taskList.map((task, index) => {
+                  if (!showTask(task, value)){
+                    return null;
+                  }
+                  return (
+                    <TouchableOpacity
+                      key={index}
+                      style={{
+                        alignItems: 'center',
+                        margin: 8,
+                        backgroundColor: 'white',
+                        borderRadius: 10,
+                      }}
+                    >
+                      <Text
+                        style={{
+                          fontSize: 20,
+                          color: 'black',
+                          padding: 10,
+                        }}
+                      >{task.name}</Text>
+                    </TouchableOpacity>
+                  );
+                })}
+            </ScrollView>
           </View>
         </View>
       </View>

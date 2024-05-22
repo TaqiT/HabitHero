@@ -14,8 +14,12 @@ import { TaskModalProvider } from './src/providers/TaskModalProvider';
 import { ShopModalProvider } from './src/providers/ShopModalProvider';
 import { ThemeProvider, ThemeContext } from './src/providers/AppThemeProvider';
 import {
+  TaskListProvider, TaskListContext
+} from './src/providers/TaskListProvider';
+import {
   CurrentTabProvider, CurrentTabContext
 } from './src/providers/CurrentTabProvider';
+
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
 const Tab = createBottomTabNavigator();
@@ -23,6 +27,7 @@ const Tab = createBottomTabNavigator();
 const App = () => {
   return (
     <CurrentTabProvider>
+    <TaskListProvider>
     <ThemeProvider>
     <ShopModalProvider>
     <TaskModalProvider>
@@ -34,6 +39,7 @@ const App = () => {
     </TaskModalProvider>
     </ShopModalProvider>
     </ThemeProvider>
+    </TaskListProvider>
     </CurrentTabProvider>
   );
 };
@@ -43,11 +49,13 @@ const RootApp = () => {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
   const { setCurrentTab } = useContext(CurrentTabContext);
+  const { taskList } = useContext(TaskListContext);
   return (
       <View style={styles.container}>
         <NavigationContainer>
         <Tab.Navigator
           screenOptions={{
+            unmountOnBlur: true,
             headerStyle: {
               backgroundColor: navBarColor,
             },
@@ -95,6 +103,7 @@ const RootApp = () => {
           <Tab.Screen
             name="Calendar"
             component={CalendarTab}
+            initialParams={{taskList: taskList}}
             options={{
               tabBarIcon: () => (
                 <FeatherIcon name="calendar" color={highlightColor} size={20} />

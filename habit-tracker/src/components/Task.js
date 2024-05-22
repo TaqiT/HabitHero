@@ -6,6 +6,7 @@ import { PointsContext } from '../providers/PointsProvider';
 import { TaskModalContext } from '../providers/TaskModalProvider';
 import { FrequencyContext } from '../providers/FrequencyProvider';
 import { ThemeContext } from '../providers/AppThemeProvider';
+import { TaskListContext } from '../providers/TaskListProvider';
 import LottieView from 'lottie-react-native';
 import confetti from '../components/confetti.json';
 
@@ -14,16 +15,9 @@ function sleep (time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
 
-const toggleSwtich = (state) => {
-  setIsEnabled(state);
-  if (state) {
-    setTimeout(() => {
-      setIsEnabled(false);
-    }, 12 * 60 * 60 * 1000);
-  }
-};
 
 const TaskComponent = ({task}) => {
+  const {taskList, addTask, editTask, removeTask} = useContext(TaskListContext);
   const {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
@@ -34,7 +28,7 @@ const TaskComponent = ({task}) => {
     setTaskModalType, setTaskModalVisible, setNewTaskName, setNewTaskPointValue, setNewTaskColor, setSelectedTask
   } = useContext(TaskModalContext);
   const {
-    setFrequencyType, addWeekData, addMonthData
+    setFrequencyType, setWeekData, setMonthData, clearMonthData, clearWeekData
   } = useContext(FrequencyContext);
   var newPointTotal = Number(task.point_value);
   const toggleSwitch = (state) => {
@@ -45,24 +39,43 @@ const TaskComponent = ({task}) => {
     if (state) {
       triggerConfetti();
     }
-  }
+    if (state) {
+      setTimeout(() => {
+        setIsEnabled(false);
+      }, 12 * 60 * 60 * 1000);
+    }
+    }
   const triggerConfetti = () => {
     if (lottieRef.current) {
       lottieRef.current.play();
+    }
+  };
+  const openModal = () => {
+    setSelectedTask(task);
+    setTaskModalType('edit');
+    setTaskModalVisible(true);
+    setNewTaskName(task.name);
+    setNewTaskPointValue(String(task.point_value));
+    setNewTaskColor(task.color);
+    setFrequencyType(task.frequency);
+    if (task.frequency === 'Daily') {
+      clearWeekData();
+      clearMonthData();
+    }
+    if (task.frequency === 'Weekly') {
+      clearMonthData();
+      setWeekData(task.frequency_data)
+    }
+    if (task.frequency === 'Monthly') {
+      clearWeekData();
+      setMonthData(task.frequency_data);
     }
   };
   return (
     <TouchableOpacity
       style={[styles.taskTouchable, {borderColor: task.color==='' ? 'black' : task.color, backgroundColor: containerColor}]}
       onPress={() => {
-        setSelectedTask(task);
-        setTaskModalType('edit');
-        setTaskModalVisible(true);
-        setNewTaskName(task.name);
-        setNewTaskPointValue(String(task.point_value));
-        setNewTaskColor(task.color);
-        setFrequencyType(task.frequency);
-        (task.frequency === 'Weekly') ? addWeekData(task.frequency_data) : addMonthData(task.frequency_data);
+        openModal();
       }}
     >
       <LottieView

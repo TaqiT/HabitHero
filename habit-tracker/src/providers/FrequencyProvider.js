@@ -5,6 +5,7 @@ const FrequencyContext = createContext();
 const FrequencyProvider = ({ children }) => {
   const [frequencyType, setFrequencyType] = useState('Daily');
   const [weekData, setWeekData] = useState([]);
+  const [monthData, setMonthData] = useState([]);
   const addWeekData = (data) => {
     setWeekData([...weekData, ...data]);
   };
@@ -14,7 +15,6 @@ const FrequencyProvider = ({ children }) => {
   const clearWeekData = () => {
     setWeekData([]);
   };
-  const [monthData, setMonthData] = useState([]);
   const addMonthData = (data) => {
     setMonthData([...monthData, ...data]);
   };
@@ -23,10 +23,10 @@ const FrequencyProvider = ({ children }) => {
   };
   const clearMonthData = () => {
     setMonthData([]);
-  }
+  };
   return (
     <FrequencyContext.Provider value={{
-      weekData, addWeekData, removeWeekData, clearWeekData, monthData, addMonthData, removeMonthData, clearMonthData, frequencyType, setFrequencyType
+      weekData, setWeekData, addWeekData, removeWeekData, clearWeekData, monthData, setMonthData, addMonthData, removeMonthData, clearMonthData, frequencyType, setFrequencyType
       }}>
       {children}
     </FrequencyContext.Provider>

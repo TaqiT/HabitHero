@@ -7,8 +7,8 @@ import FrequencyButtonGroup from '../components/SelectFrequency.js';
 import { FrequencyContext } from "../providers/FrequencyProvider.js";
 import { TaskModalContext } from '../providers/TaskModalProvider.js';
 import { ThemeContext } from '../providers/AppThemeProvider';
+import { TaskListContext } from '../providers/TaskListProvider.js';
 
-var taskCount = 0;
 
 const colors = [
   'black',
@@ -23,37 +23,10 @@ const colors = [
   'brown',
 ];
 
-class Task {
-  constructor(name, point_value, frequency='Daily', frequency_data=[], color='') {
-    this.id = taskCount++;
-    this.name = name;
-    this.point_value = point_value;
-    this.frequency = frequency;
-    this.frequency_data = frequency_data;
-    this.color = color
-  }
-  toString() {
-    return this.name + ' - ' + this.point_value + ' points' + ' - ' +
-    this.frequency + ' - ' + this.color;
-  }
-}
 
-var taskList = [
-  new Task('Take out the trash', 9999),
-  new Task('Clean the bathroom', 10),
-  new Task('Do the laundry', 10),
-  new Task('Sweep the floors', 10),
-  new Task('Mop the floors', 10),
-  new Task('Clean the kitchen', 10),
-  new Task('Clean the living room', 10),
-  new Task('Clean the bedroom', 10),
-];
-
-const removeTask = (task) => {
-  taskList = taskList.filter((t) => t.id !== task.id);
-};
 
 const TaskTab = () => {
+  const {taskList, addTask, editTask, removeTask} = useContext(TaskListContext);
   const {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
@@ -63,24 +36,26 @@ const TaskTab = () => {
   const {
     weekData, monthData, frequencyType
   } = React.useContext(FrequencyContext);
+  var frequency_data;
+  var color = '';
   const saveButtonPress = () => {
     if (newTaskName.length > 0 && ((frequencyType === 'Weekly' && weekData.length != 0) || (frequencyType === 'Monthly' && monthData.length != 0) || frequencyType === 'Daily') && Number(newTaskPointValue) > 0
     ){
       setTaskModalVisible(false);
       if (taskModalType === 'add') {
-        newTask = new Task(
-          newTaskName, newTaskPointValue, frequencyType
-        );
-        ((frequencyType === 'Weekly') ? newTask.frequency_data = weekData : newTask.frequency_data = monthData);
-        newTask.color = newTaskColor;
-        taskList.push(newTask);
+        ((frequencyType === 'Weekly') ? frequency_data = weekData : frequency_data = monthData);
+        color = newTaskColor;
+        addTask(newTaskName, newTaskPointValue, frequencyType, frequency_data, color);
       }
       else{
-        selectedTask.name = newTaskName;
-        selectedTask.point_value = newTaskPointValue;
-        selectedTask.frequency = frequencyType;
-        ((frequencyType === 'Weekly') ? selectedTask.frequency_data = weekData : selectedTask.frequency_data = monthData);
-        selectedTask.color = newTaskColor;
+        if (frequencyType === 'Weekly'){
+          frequency_data = weekData
+        }
+        else if (frequencyType === 'Monthly'){
+          frequency_data = monthData;
+        }
+        color = newTaskColor;
+        editTask(selectedTask.id, newTaskName, newTaskPointValue, frequencyType, frequency_data, color);
       }
     }
     else if (isNaN(Number(newTaskPointValue)) || newTaskPointValue.length == 0){
@@ -160,7 +135,8 @@ const TaskTab = () => {
               <TouchableOpacity
                 style={styles.deleteButton.touchable}
                 onPress = {() => {
-                  setTaskModalVisible(false); removeTask(selectedTask);
+                  setTaskModalVisible(false);
+                  removeTask(selectedTask.id);
                 }}
               >
                 <Text style={styles.deleteButton.text}> Delete </Text>
