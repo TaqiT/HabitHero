@@ -48,8 +48,9 @@ const RootApp = () => {
   const {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
-  const { setCurrentTab } = useContext(CurrentTabContext);
+  const { currentTab, setCurrentTab } = useContext(CurrentTabContext);
   const { taskList } = useContext(TaskListContext);
+  const iconSize = 25;
   return (
       <View style={styles.container}>
         <NavigationContainer>
@@ -60,6 +61,7 @@ const RootApp = () => {
               backgroundColor: navBarColor,
             },
             headerTintColor: 'white',
+            // tabBarShowLabel: false,
             tabBarStyle: {
               backgroundColor: navBarColor,
               position: 'absolute',
@@ -70,8 +72,8 @@ const RootApp = () => {
               borderColor: 'black',
               borderRadius: 0
             },
-            tabBarActiveTintColor: highlightColor,
-            tabBarInactiveTintColor: 'white',
+            tabBarActiveTintColor: 'white',
+            tabBarInactiveTintColor: containerColor,
           }}
         >
           <Tab.Screen
@@ -79,10 +81,14 @@ const RootApp = () => {
             component={TaskTab}
             options={{
               tabBarIcon: () => (
-                <FeatherIcon name="list" color={highlightColor} size={20} />
+                <FeatherIcon
+                  name="list"
+                  color={currentTab == "Tasks" ? "white" :highlightColor}
+                  size={iconSize}
+                />
               ),
             }}
-            listeners={({ navigation }) => ({
+            listeners={() => ({
               tabPress: e =>
                 setCurrentTab('Tasks')
             })}
@@ -92,10 +98,14 @@ const RootApp = () => {
             component={ShopTab}
             options={{
               tabBarIcon: () => (
-                <FeatherIcon name="shopping-bag" color={highlightColor} size={20} />
+                <FeatherIcon
+                  name="shopping-cart"
+                  color={currentTab == "Shop" ? "white" :highlightColor}
+                  size={iconSize}
+                />
               ),
             }}
-            listeners={({ navigation }) => ({
+            listeners={() => ({
               tabPress: e =>
                 setCurrentTab('Shop')
             })}
@@ -106,23 +116,31 @@ const RootApp = () => {
             initialParams={{taskList: taskList}}
             options={{
               tabBarIcon: () => (
-                <FeatherIcon name="calendar" color={highlightColor} size={20} />
+                <FeatherIcon
+                  name="calendar"
+                  color={currentTab == "Calendar" ? "white" :highlightColor}
+                  size={iconSize}
+                />
               ),
             }}
-            listeners={({ navigation }) => ({
+            listeners={() => ({
               tabPress: e =>
                 setCurrentTab('Calendar')
             })}
           />
           <Tab.Screen
-            name="Settings"
+            name="Account"
             component={SettingsTab}
             options={{
               tabBarIcon: () => (
-                <FeatherIcon name="settings" color={highlightColor} size={20} />
+                <FeatherIcon
+                  name="user"
+                  color={currentTab == "Settings" ? "white" :highlightColor}
+                  size={iconSize}
+                />
               ),
             }}
-            listeners={({ navigation }) => ({
+            listeners={() => ({
               tabPress: e =>
                 setCurrentTab('Settings')
             })}

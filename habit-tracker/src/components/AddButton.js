@@ -14,13 +14,13 @@ const AddButton = () => {
   const {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
-  const { currentTab } = useContext(CurrentTabContext);
   const {
     setTaskModalType, setTaskModalVisible, setNewTaskName, setNewTaskPointValue, changeTaskColor
   } = useContext(TaskModalContext);
   const {
     setShopModalType, setShopModalVisible, setNewRewardName, setNewRewardPointValue, changeRewardColor
   } = useContext(ShopModalContext);
+  const { currentTab } = useContext(CurrentTabContext);
   if (currentTab != 'Tasks' && currentTab != 'Shop') {
     return null;
   }

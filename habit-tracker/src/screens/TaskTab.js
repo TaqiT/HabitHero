@@ -8,7 +8,7 @@ import { FrequencyContext } from "../providers/FrequencyProvider.js";
 import { TaskModalContext } from '../providers/TaskModalProvider.js';
 import { ThemeContext } from '../providers/AppThemeProvider';
 import { TaskListContext } from '../providers/TaskListProvider.js';
-
+import FeatherIcon from 'react-native-vector-icons/Feather';
 
 const colors = [
   'black',
@@ -86,10 +86,13 @@ const TaskTab = () => {
         <View style={styles.centeredView}>
           <View style={[styles.modalView, {backgroundColor: backgroundColor}]}>
             <View style={styles.topView}>
-              <TouchableOpacity style={styles.backButton}
+              <TouchableOpacity
+                style={styles.backButton.touchable}
                 onPress={() => setTaskModalVisible(false)}
-              />
-              <View style={styles.topViewDivider} />
+              >
+                <FeatherIcon name={"arrow-left"} size={30}/>
+              </TouchableOpacity>
+              <View style={styles.topViewDivider}/>
               <Text style={styles.modalText}>New Task</Text>
             </View>
             <TextInput
@@ -218,15 +221,25 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  backButton: {
-    position: 'absolute',
-    borderBottomWidth: 4,
-    borderLeftWidth: 4,
-    top: 7,
-    left: -100,
-    height: 17,
-    width: 17,
-    transform: [{ rotate: '45deg' }],
+  backButton:{
+    touchable: {
+      position: 'absolute',
+      left: -115,
+      height: 40,
+      width: 40,
+      borderRadius: 50,
+      // backgroundColor: 'red',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    view:{
+      left: 2,
+      borderBottomWidth: 4,
+      borderLeftWidth: 4,
+      height: 17,
+      width: 17,
+      transform: [{ rotate: '45deg' }],
+    },
   },
   colorsView: {
     flexDirection: 'row',

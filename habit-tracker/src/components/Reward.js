@@ -54,7 +54,7 @@ const RewardComponent = ({ reward }) => {
         <Button
           titleStyle={styles.button.textStyle}
           buttonStyle={[styles.button.buttonStyle, {backgroundColor: highlightColor}]}
-          title='Redeem'
+          title='Claim'
           onPress={() => {
             if (pointTotal >= reward.point_value) {
               setPointsTotal(pointTotal - reward.point_value);
@@ -128,9 +128,12 @@ const styles = StyleSheet.create({
       flex: 7.5,
       height: 27,
       right: -3,
-      borderRadius: 16,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     buttonStyle: {
+      marginTop: 6,
+      borderRadius: 12,
       height: 31,
       width: 60,
       top:-4,

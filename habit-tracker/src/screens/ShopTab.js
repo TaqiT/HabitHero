@@ -2,11 +2,10 @@ import React, { useContext } from 'react'
 import {
   StyleSheet, ScrollView, View, StatusBar, Modal, Text, TouchableOpacity, TextInput
 } from 'react-native';
-import { Button } from '@rneui/themed';
-import { PointsContext } from '../providers/PointsProvider.js';
 import { ShopModalContext } from '../providers/ShopModalProvider.js';
 import { ThemeContext } from '../providers/AppThemeProvider';
 import RewardComponent from '../components/Reward.js';
+import FeatherIcon from 'react-native-vector-icons/Feather';
 
 var rewardCount = 0;
 
@@ -99,9 +98,12 @@ const ShopTab = () => {
         <View style={styles.centeredView}>
           <View style={[styles.modalView, {borderColor: 'black', backgroundColor: backgroundColor}]}>
             <View style={styles.topView}>
-              <TouchableOpacity style={styles.backButton}
+              <TouchableOpacity
+                style={styles.backButton.touchable}
                 onPress={() => setShopModalVisible(false)}
-              />
+              >
+                <FeatherIcon name={"arrow-left"} size={30}/>
+              </TouchableOpacity>
               <View style={styles.topViewDivider} />
               <Text style={styles.modalText}>New Reward</Text>
             </View>
@@ -228,15 +230,24 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  backButton: {
-    position: 'absolute',
-    borderBottomWidth: 4,
-    borderLeftWidth: 4,
-    top: 7,
-    left: -90,
-    height: 17,
-    width: 17,
-    transform: [{ rotate: '45deg' }],
+  backButton:{
+    touchable: {
+      position: 'absolute',
+      left: -95,
+      height: 40,
+      width: 40,
+      borderRadius: 50,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    view:{
+      left: 2,
+      borderBottomWidth: 4,
+      borderLeftWidth: 4,
+      height: 17,
+      width: 17,
+      transform: [{ rotate: '45deg' }],
+    },
   },
   colorsView: {
     flexDirection: 'row',

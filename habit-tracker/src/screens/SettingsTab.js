@@ -18,6 +18,14 @@ const tabs = [
   { name: 'Themes', icon: 'pen-tool'},
 ];
 
+const themeTypes = [
+  "Normal",
+  "Dark",
+  "Pink",
+  "Blue",
+  "Light"
+]
+
 export default function Example() {
   const {
     navBarColor, backgroundColor, highlightColor, containerColor
@@ -27,10 +35,6 @@ export default function Example() {
     emailNotifications: true,
     pushNotifications: false,
     mode: "normal",
-    // pinkMode: false,
-    // normalMode: true,
-    // blueMode: false,
-    // lightMode: false,
   });
 
   return (
@@ -147,6 +151,7 @@ export default function Example() {
                     <View style={styles.rowSpacer} />
 
                     <Switch
+                      ios_backgroundColor={"lightgrey"}
                       onValueChange={emailNotifications =>
                         setForm({ ...form, emailNotifications })
                       }
@@ -164,6 +169,7 @@ export default function Example() {
                     <View style={styles.rowSpacer} />
 
                     <Switch
+                      ios_backgroundColor={"lightgrey"}
                       onValueChange={pushNotifications =>
                         setForm({ ...form, pushNotifications })
                       }
@@ -255,109 +261,28 @@ export default function Example() {
           <ScrollView>
             <View style={styles.section}>
               <View style={styles.sectionBody}>
-
-                <View style={styles.rowWrapper}>
-                  <View style={styles.row}>
-                    <Text style={styles.rowLabel}>Normal mode</Text>
-                    <View style={styles.rowSpacer} />
-                    <Switch
-                      onValueChange={() =>
-                        setForm({ ...form, mode: "normal" })
-                      }
-                      style={{
-                        transform: [{ scaleX: 0.95 }, { scaleY: 0.95 }],
-                      }}
-                      value={form.mode == "normal"} />
+                {themeTypes.map((theme, index) => {
+                  key = index
+                  return(
+                  <View style={styles.rowWrapper}>
+                    <View style={styles.row}>
+                      <Text style={styles.rowLabel}>{theme} Mode</Text>
+                      <View style={styles.rowSpacer} />
+                      <Switch
+                        ios_backgroundColor={"lightgrey"}
+                        onValueChange={() =>
+                          setForm({ ...form, mode: theme })
+                        }
+                        style={{
+                          transform: [{ scaleX: 0.95 }, { scaleY: 0.95 }],
+                        }}
+                        value={form.mode == theme} />
+                    </View>
                   </View>
-                </View>
-
-                <View style={styles.rowWrapper}>
-                  <View style={styles.row}>
-                    <Text style={styles.rowLabel}>Dark Mode</Text>
-                    {/* #161A30
-                    #31304D
-                    #B6BBC4
-                    #F0ECE5 */}
-
-                    <View style={styles.rowSpacer} />
-
-                    <Switch
-                      onValueChange={() =>
-                        setForm({ ...form, mode: "dark" })
-                      }
-                      style={{
-                        transform: [{ scaleX: 0.95 }, { scaleY: 0.95 }],
-                      }}
-                      value={form.mode == "dark"} />
-                  </View>
-                </View>
-
-                <View style={styles.rowWrapper}>
-                  <View style={styles.row}>
-                    <Text style={styles.rowLabel}>Pink Mode</Text>
-                    {/* #86469C
-                      #BC7FCD
-                      #FB9AD1
-                      #FFCDEA */}
-
-                    <View style={styles.rowSpacer} />
-
-                    <Switch
-                      onValueChange={() =>
-                        setForm({ ...form, mode: "pink" })
-                      }
-                      style={{
-                        transform: [{ scaleX: 0.95 }, { scaleY: 0.95 }],
-                      }}
-                      value={form.mode == "pink"} />
-                  </View>
-                </View>
-
-                <View style={styles.rowWrapper}>
-                  <View style={styles.row}>
-                    <Text style={styles.rowLabel}>Blue Mode</Text>
-                    {/* #F8F6E3
-                    #97E7E1
-                    #6AD4DD
-                    #7AA2E3 */}
-
-                    <View style={styles.rowSpacer} />
-
-                    <Switch
-                      onValueChange={() =>
-                        setForm({ ...form, mode: "blue" })
-                      }
-                      style={{
-                        transform: [{ scaleX: 0.95 }, { scaleY: 0.95 }],
-                      }}
-                      value={form.mode == "blue"} />
-                  </View>
-                </View>
-
-                <View style={styles.rowWrapper}>
-                  <View style={styles.row}>
-                    <Text style={styles.rowLabel}>Light Mode</Text>
-                    {/* #F6F5F2
-                    #F0EBE3
-                    #F3D0D7
-                    #FFEFEF */}
-
-                    <View style={styles.rowSpacer} />
-
-                    <Switch
-                      onValueChange={() =>
-                        setForm({ ...form, mode: "light" })
-                      }
-                      style={{
-                        transform: [{ scaleX: 0.95 }, { scaleY: 0.95 }],
-                      }}
-                      value={form.mode == "light"} />
-                  </View>
-                </View>
-
+                  );
+                })}
               </View>
             </View>
-
           </ScrollView>
         )}
       </View>

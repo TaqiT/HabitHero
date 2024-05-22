@@ -101,8 +101,9 @@ const TaskComponent = ({task}) => {
       </View>
       <View style={styles.spacer}/>
       <View>
-      <Switch
+        <Switch
           value={isEnabled}
+          ios_backgroundColor={"lightgrey"}
           onValueChange={(state) => {
             setIsEnabled(previousState => !previousState);
             if (state) {
@@ -185,6 +186,13 @@ const styles = StyleSheet.create({
     right: 0,
     zIndex: 1000,
     pointerEvents: 'none',
+  },
+  switch: {
+    backgroundColor: '#000',
+    trackColor: {
+      false: '#f00',
+      true: "#f0"
+    },
   },
 });
 

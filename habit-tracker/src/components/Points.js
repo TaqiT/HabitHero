@@ -2,11 +2,16 @@ import React, { useContext } from 'react';
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
 import { PointsContext } from "../providers/PointsProvider";
 import { ThemeContext } from '../providers/AppThemeProvider';
+import { CurrentTabContext } from '../providers/CurrentTabProvider';
 
 const Points = () => {
   const {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
+  const { currentTab } = useContext(CurrentTabContext);
+  if (currentTab == 'Settings') {
+    return null;
+  }
   const { pointTotal } = useContext(PointsContext);
   return (
       <TouchableOpacity
