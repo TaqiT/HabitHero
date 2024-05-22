@@ -22,7 +22,7 @@ const TaskComponent = ({task}) => {
     setModalType, setTaskModalVisible, setNewTaskName, setNewTaskPointValue, setNewTaskColor, setSelectedTask, taskModalVisible
   } = useContext(TaskModalContext);
   const {
-    setFrequencyType, addWeekData, addMonthData
+    setFrequencyType, setWeekData, setMonthData, clearMonthData, clearWeekData
   } = useContext(FrequencyContext);
   var newPointTotal = Number(task.point_value);
   const toggleSwitch = (state) => {
@@ -39,18 +39,32 @@ const TaskComponent = ({task}) => {
       lottieRef.current.play();
     }
   };
+  const openModal = () => {
+    setSelectedTask(task);
+    setModalType('edit');
+    setTaskModalVisible(true);
+    setNewTaskName(task.name);
+    setNewTaskPointValue(String(task.point_value));
+    setNewTaskColor(task.color);
+    setFrequencyType(task.frequency);
+    if (task.frequency === 'Daily') {
+      clearWeekData();
+      clearMonthData();
+    }
+    if (task.frequency === 'Weekly') {
+      clearMonthData();
+      setWeekData(task.frequency_data)
+    }
+    if (task.frequency === 'Monthly') {
+      clearWeekData();
+      setMonthData(task.frequency_data);
+    }
+  };
   return (
     <TouchableOpacity
       style={[styles.taskTouchable, {borderColor: task.color==='' ? 'black' : task.color, backgroundColor: containerColor}]}
       onPress={() => {
-        setSelectedTask(task);
-        setModalType('edit');
-        setTaskModalVisible(true);
-        setNewTaskName(task.name);
-        setNewTaskPointValue(String(task.point_value));
-        setNewTaskColor(task.color);
-        setFrequencyType(task.frequency);
-        (task.frequency === 'Weekly') ? addWeekData(task.frequency_data) : addMonthData(task.frequency_data);
+        openModal();
       }}
     >
       <LottieView

@@ -33,14 +33,14 @@ const TaskListProvider = ({ children }) => {
   const addTask = (name, point_value, frequency, frequency_data, color) => {
     taskList.push(new Task(name, point_value, frequency, frequency_data, color));
   }
-  const editTask = (taskID, name='', point_value=0, frequency='Daily', frequency_data=[], color='') => {
+  const editTask = (taskID, name='', point_value=0, frequency='', frequency_data=[], color='') => {
     const taskIndex = taskList.findIndex(task => task.id === taskID);
     if (taskIndex === -1) {
       return false;
     }
     name= (name==='')? taskList[taskIndex].name:name;
     point_value= (point_value===0)? taskList[taskIndex].point_value:point_value;
-    frequency= (frequency==='Daily')? taskList[taskIndex].frequency:frequency;
+    frequency= (frequency==='')? taskList[taskIndex].frequency:frequency;
     frequency_data=(frequency_data.length===0)?taskList[taskIndex].frequency_data:frequency_data;
     color=(color==='') ? taskList[taskIndex].color : color;
     taskList[taskIndex] = new Task(name, point_value, frequency, frequency_data, color);

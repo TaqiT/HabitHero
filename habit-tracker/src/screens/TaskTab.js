@@ -48,7 +48,12 @@ const TaskTab = () => {
         addTask(newTaskName, newTaskPointValue, frequencyType, frequency_data, color);
       }
       else{
-        ((frequencyType === 'Weekly') ? frequency_data = weekData : frequency_data = monthData);
+        if (frequencyType === 'Weekly'){
+          frequency_data = weekData
+        }
+        else if (frequencyType === 'Monthly'){
+          frequency_data = monthData;
+        }
         color = newTaskColor;
         editTask(selectedTask.id, newTaskName, newTaskPointValue, frequencyType, frequency_data, color);
       }

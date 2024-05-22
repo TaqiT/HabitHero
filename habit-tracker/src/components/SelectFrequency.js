@@ -37,9 +37,9 @@ const WeekdayButton = (props) => {
   return (
     <Pressable
       style={selected ? [styles.weekday.selected.pressable, {backgroundColor: containerColor, borderColor: highlightColor}] : [styles.weekday.unselected.pressable, {borderColor: highlightColor}]}
-      onPress={(state) => {
+      onPress={() => {
+        !selected ? addWeekData([props.day]) : removeWeekData(props.day);
         setSelected(!selected);
-        state ? addWeekData([props.day]) : removeWeekData(props.day);
       }}
     >
       <Text style={selected ? styles.weekday.selected.text : styles.weekday.unselected.text}>
@@ -53,14 +53,16 @@ const MonthButton = (props) => {
   const {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
-  const { addMonthData, removeMonthData, monthData } = useContext(FrequencyContext);
+  const {
+    addMonthData, removeMonthData, monthData
+  } = useContext(FrequencyContext);
   const [selected, setSelected] = useState(monthData.includes(props.day));
   return (
     <Pressable
       style={selected ? [styles.month.selected.pressable, {backgroundColor: containerColor, borderColor: highlightColor}] : [styles.month.unselected.pressable, {borderColor: highlightColor}]}
-      onPress={(state) => {
+      onPress={() => {
+        !selected ? addMonthData([props.day]) : removeMonthData(props.day);
         setSelected(!selected);
-        state ? addMonthData([props.day]) : removeMonthData(props.day);
       }}
     >
       <Text style={selected ? styles.month.selected.text : styles.month.unselected.text}>
@@ -140,27 +142,31 @@ const FrequencyButtonGroup = () => {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
   const { frequencyType, setFrequencyType } = useContext(FrequencyContext);
+  const updateFrequencyType = (name) => {
+    // idk why this but this is the only way to set the frequencyType
+    setFrequencyType(name);
+  };
   return (
     <View style={styles.view}>
     <View style={styles.periodView}>
-      {data.map((item, index) => {
-        key = index;
+      {data.map((item) => {
+        var name = item.name;
         return (
-          <View key={index}>
+          <View key={item.key}>
             <Pressable
               style={
-                item.name === frequencyType ? [styles.period.selected.pressable, {backgroundColor: containerColor, borderColor: highlightColor}] :
+                name === frequencyType ? [styles.period.selected.pressable, {backgroundColor: containerColor, borderColor: highlightColor}] :
                 [styles.period.unselected.pressable, {borderColor: highlightColor}]
               }
               onPress={() => {
-                setFrequencyType(item.name);
+                updateFrequencyType(name);
               }}
             >
               <Text style={
-                  item.name === frequencyType ? styles.period.selected.text :
+                  name === frequencyType ? styles.period.selected.text :
                   styles.period.unselected.text
               }>
-                {item.name}
+                {name}
               </Text>
             </Pressable>
           </View>

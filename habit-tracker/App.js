@@ -48,6 +48,7 @@ const RootApp = () => {
         <NavigationContainer>
         <Tab.Navigator
           screenOptions={{
+            unmountOnBlur: true,
             headerStyle: {
               backgroundColor: navBarColor,
             },
@@ -87,7 +88,7 @@ const RootApp = () => {
           <Tab.Screen
             name="Calendar"
             component={CalendarTab}
-            taskList={taskList}
+            initialParams={{taskList: taskList}}
             options={{
               tabBarIcon: () => (
                 <FeatherIcon name="calendar" color={highlightColor} size={20} />
