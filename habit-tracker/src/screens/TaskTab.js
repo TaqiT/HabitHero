@@ -263,6 +263,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     textAlign: 'center',
     fontSize: 15,
+    backgroundColor: 'white',
   },
   pointValueInput: {
     height: 50,
@@ -273,6 +274,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     textAlign: 'center',
     fontSize: 18,
+    backgroundColor: 'white',
   },
   spacer: {
     flex: 1,

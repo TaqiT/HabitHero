@@ -190,7 +190,8 @@ const styles = StyleSheet.create({
   },
   deleteButton: {
     view: {
-      marginTop: 340,
+      marginTop: 275,
+      marginBottom: 10,
       width: 300,
       height: 50,
       backgroundColor: 'red',
@@ -216,7 +217,7 @@ const styles = StyleSheet.create({
   modalView: {
     borderRadius: 40,
     borderWidth: 4,
-    padding: 18,
+    padding: 25,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -248,6 +249,7 @@ const styles = StyleSheet.create({
   saveButton: {
     padding: 10,
     marginTop: 20,
+    marginBottom:30,
     width: 300,
     elevation: 2,
     borderRadius: 10,
@@ -273,6 +275,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     textAlign: 'center',
     fontSize: 15,
+    backgroundColor: 'white',
   },
   pointValueInput: {
     height: 50,
@@ -283,6 +286,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     textAlign: 'center',
     fontSize: 18,
+    backgroundColor: 'white',
   },
 });
 

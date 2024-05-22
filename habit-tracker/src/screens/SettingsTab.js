@@ -26,11 +26,11 @@ export default function Example() {
   const [form, setForm] = useState({
     emailNotifications: true,
     pushNotifications: false,
-    darkMode: false,
-    pinkMode: false,
-    normalMode: true,
-    blueMode: false,
-    lightMode: false,
+    mode: "normal",
+    // pinkMode: false,
+    // normalMode: true,
+    // blueMode: false,
+    // lightMode: false,
   });
 
   return (
@@ -261,13 +261,13 @@ export default function Example() {
                     <Text style={styles.rowLabel}>Normal mode</Text>
                     <View style={styles.rowSpacer} />
                     <Switch
-                      onValueChange={normalMode =>
-                        setForm({ ...form, normalMode })
+                      onValueChange={() =>
+                        setForm({ ...form, mode: "normal" })
                       }
                       style={{
                         transform: [{ scaleX: 0.95 }, { scaleY: 0.95 }],
                       }}
-                      value={form.normalMode} />
+                      value={form.mode == "normal"} />
                   </View>
                 </View>
 
@@ -282,13 +282,13 @@ export default function Example() {
                     <View style={styles.rowSpacer} />
 
                     <Switch
-                      onValueChange={darkMode =>
-                        setForm({ ...form, darkMode })
+                      onValueChange={() =>
+                        setForm({ ...form, mode: "dark" })
                       }
                       style={{
                         transform: [{ scaleX: 0.95 }, { scaleY: 0.95 }],
                       }}
-                      value={form.darkMode} />
+                      value={form.mode == "dark"} />
                   </View>
                 </View>
 
@@ -303,13 +303,13 @@ export default function Example() {
                     <View style={styles.rowSpacer} />
 
                     <Switch
-                      onValueChange={pinkMode =>
-                        setForm({ ...form, pinkMode })
+                      onValueChange={() =>
+                        setForm({ ...form, mode: "pink" })
                       }
                       style={{
                         transform: [{ scaleX: 0.95 }, { scaleY: 0.95 }],
                       }}
-                      value={form.pinkMode} />
+                      value={form.mode == "pink"} />
                   </View>
                 </View>
 
@@ -324,13 +324,13 @@ export default function Example() {
                     <View style={styles.rowSpacer} />
 
                     <Switch
-                      onValueChange={blueMode =>
-                        setForm({ ...form, blueMode })
+                      onValueChange={() =>
+                        setForm({ ...form, mode: "blue" })
                       }
                       style={{
                         transform: [{ scaleX: 0.95 }, { scaleY: 0.95 }],
                       }}
-                      value={form.blueMode} />
+                      value={form.mode == "blue"} />
                   </View>
                 </View>
 
@@ -345,13 +345,13 @@ export default function Example() {
                     <View style={styles.rowSpacer} />
 
                     <Switch
-                      onValueChange={lightMode =>
-                        setForm({ ...form, lightMode })
+                      onValueChange={() =>
+                        setForm({ ...form, mode: "light" })
                       }
                       style={{
                         transform: [{ scaleX: 0.95 }, { scaleY: 0.95 }],
                       }}
-                      value={form.lightMode} />
+                      value={form.mode == "light"} />
                   </View>
                 </View>
 
