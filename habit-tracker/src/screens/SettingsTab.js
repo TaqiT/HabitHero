@@ -262,9 +262,8 @@ export default function Example() {
             <View style={styles.section}>
               <View style={styles.sectionBody}>
                 {themeTypes.map((theme, index) => {
-                  key = index
                   return(
-                  <View style={styles.rowWrapper}>
+                  <View style={styles.rowWrapper} key={index}>
                     <View style={styles.row}>
                       <Text style={styles.rowLabel}>{theme} Mode</Text>
                       <View style={styles.rowSpacer} />

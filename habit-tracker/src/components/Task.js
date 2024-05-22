@@ -105,14 +105,14 @@ const TaskComponent = ({task}) => {
           value={isEnabled}
           ios_backgroundColor={"lightgrey"}
           onValueChange={(state) => {
-            setIsEnabled(previousState => !previousState);
+            setIsEnabled(state);
             if (state) {
               Alert.alert(
                 'Are you sure you have completed this task?', '🤔', [
                   {
                     text: 'No',
                     style: 'cancel',
-                    onPress: () => setIsEnabled(previousState => !previousState)
+                    onPress: () => setIsEnabled(!state)
                   },
                   {
                     text: 'Yes',

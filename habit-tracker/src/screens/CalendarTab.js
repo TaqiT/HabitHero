@@ -52,10 +52,12 @@ const CalendarTab = () => {
     });
   }, [week]);
 
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={[styles.container, {backgroundColor: containerColor}]}>
+      <Text style={styles.subtitle}>
+        {moment(value).format("YYYY-MM-DD") === moment().format("YYYY-MM-DD") ? 'Today' : moment(value).format("MMM D")}
+      </Text>
 
         {/* The top part of the page will the swiping calendar system */}
         <View style={styles.picker}>
@@ -90,22 +92,25 @@ const CalendarTab = () => {
                       <View
                         style={[
                           styles.item,
-                          isActive && {
+                          isActive ? {
                             backgroundColor: '#111',
                             borderColor: '#111',
+                          } : {
+                            backgroundColor: '#fff',
                           },
+
                         ]}>
                         <Text
                           style={[
                             styles.itemWeekday,
-                            isActive && { color: '#fff' },
+                            isActive ? { color: '#fff' }: { color: '#000' },
                           ]}>
                           {item.weekday}
                         </Text>
                         <Text
                           style={[
                             styles.itemDate,
-                            isActive && { color: '#fff' },
+                            isActive ? { color: '#fff' } : { color: '#000' },
                           ]}>
                           {item.date.getDate()}
                         </Text>
@@ -120,7 +125,6 @@ const CalendarTab = () => {
 
         {/* The section created to hold the place where the tasks for that day will be stored */}
         <View style={{ flex: 1, paddingHorizontal: 16, paddingVertical: 24, }}>
-          <Text style={styles.subtitle}>{value.toDateString()}</Text>
           <View style={styles.placeholder}>
             {/* <View style={styles.placeholderInset}>
 
@@ -180,11 +184,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   subtitle: {
-    fontSize: 17,
+    alignSelf: 'center',
+    fontSize: 20,
     fontWeight: '600',
     color: 'white',
-    marginBottom: 12,
-    marginTop: -15,
+    marginBottom: 5,
+    marginTop: -5,
   },
   footer: {
     marginTop: 'auto',
