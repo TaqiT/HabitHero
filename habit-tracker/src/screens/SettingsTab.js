@@ -19,24 +19,23 @@ const tabs = [
 ];
 
 const themeTypes = [
-  "Normal",
-  "Dark",
-  "Pink",
-  "Blue",
-  "Light"
+  "normal",
+  "dark",
+  "pink",
+  "blue",
+  "light"
 ]
 
 export default function Example() {
   const {
-    navBarColor, backgroundColor, highlightColor, containerColor
+    navBarColor, backgroundColor, highlightColor, containerColor, changeTheme, appTheme
   } = useContext(ThemeContext);
   const [value, setValue] = React.useState(0);
   const [form, setForm] = useState({
     emailNotifications: true,
     pushNotifications: false,
-    mode: "normal",
+    mode: appTheme,
   });
-
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#f8f8f8' }}>
       <View style={[styles.container, {backgroundColor: backgroundColor}]}>
@@ -92,7 +91,7 @@ export default function Example() {
                       style={[
                         styles.tabText,
                         isActive && { color: highlightColor },
-                      ]}>
+                    ]}>
                       {name}
                     </Text>
                   </View>
@@ -265,13 +264,14 @@ export default function Example() {
                   return(
                   <View style={styles.rowWrapper} key={index}>
                     <View style={styles.row}>
-                      <Text style={styles.rowLabel}>{theme} Mode</Text>
+                      <Text style={styles.rowLabel}>{theme[0].toUpperCase() + theme.slice(1)} Mode</Text>
                       <View style={styles.rowSpacer} />
                       <Switch
                         ios_backgroundColor={"lightgrey"}
-                        onValueChange={() =>
-                          setForm({ ...form, mode: theme })
-                        }
+                        onValueChange={() =>{
+                          setForm({ ...form, mode: theme });
+                          changeTheme(theme)
+                        }}
                         style={{
                           transform: [{ scaleX: 0.95 }, { scaleY: 0.95 }],
                         }}
