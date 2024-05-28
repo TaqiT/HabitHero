@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from 'react'
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import {
   StyleSheet, TouchableOpacity, Text, View, Switch, Alert
 } from 'react-native';
@@ -9,20 +9,22 @@ import { ThemeContext } from '../providers/AppThemeProvider';
 import { TaskListContext } from '../providers/TaskListProvider';
 import LottieView from 'lottie-react-native';
 import confetti from '../components/confetti.json';
+import fire from '../components/fire.json';
 
-
-function sleep (time) {
+function sleep(time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
 
-
-const TaskComponent = ({task}) => {
-  const {taskList, addTask, editTask, removeTask} = useContext(TaskListContext);
+const TaskComponent = ({ task }) => {
+  const { taskList, addTask, editTask, removeTask } = useContext(TaskListContext);
   const {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
-  const lottieRef = useRef(null);
+  const confettiRef = useRef(null);
+  const fireRef = useRef(null);
   const [isEnabled, setIsEnabled] = useState(false);
+  const [isFireVisible, setIsFireVisible] = useState(false);
+  const [streakCount, setStreakCount] = useState(0);
   const { pointTotal, setPointsTotal } = useContext(PointsContext);
   const {
     setTaskModalType, setTaskModalVisible, setNewTaskName, setNewTaskPointValue, setNewTaskColor, setSelectedTask
@@ -31,6 +33,7 @@ const TaskComponent = ({task}) => {
     setFrequencyType, setWeekData, setMonthData, clearMonthData, clearWeekData
   } = useContext(FrequencyContext);
   var newPointTotal = Number(task.point_value);
+
   const toggleSwitch = (state) => {
     newPointTotal = state
       ? pointTotal + Number(task.point_value)
@@ -38,18 +41,38 @@ const TaskComponent = ({task}) => {
     setPointsTotal(newPointTotal);
     if (state) {
       triggerConfetti();
+      incrementStreak();
     }
     if (state) {
       setTimeout(() => {
         setIsEnabled(false);
       }, 12 * 60 * 60 * 1000);
     }
-    }
+  };
+
   const triggerConfetti = () => {
-    if (lottieRef.current) {
-      lottieRef.current.play();
+    if (confettiRef.current) {
+      confettiRef.current.play();
     }
   };
+
+  const triggerFire = () => {
+    setIsFireVisible(true);
+    if (fireRef.current) {
+      fireRef.current.play();
+    }
+  };
+
+  const incrementStreak = () => {
+    setStreakCount(prevCount => {
+      const newCount = prevCount + 1;
+      if (newCount >= 3) {
+        triggerFire();
+      }
+      return newCount;
+    });
+  };
+
   const openModal = () => {
     setSelectedTask(task);
     setTaskModalType('edit');
@@ -64,42 +87,49 @@ const TaskComponent = ({task}) => {
     }
     if (task.frequency === 'Weekly') {
       clearMonthData();
-      setWeekData(task.frequency_data)
+      setWeekData(task.frequency_data);
     }
     if (task.frequency === 'Monthly') {
       clearWeekData();
       setMonthData(task.frequency_data);
     }
   };
+
   return (
     <TouchableOpacity
-      style={[styles.taskTouchable, {borderColor: task.color==='' ? 'black' : task.color, backgroundColor: containerColor}]}
-      onPress={() => {
-        openModal();
-      }}
+      style={[styles.taskTouchable, { borderColor: task.color === '' ? 'black' : task.color, backgroundColor: containerColor }]}
+      onPress={openModal}
     >
       <LottieView
-        ref={lottieRef}
+        ref={confettiRef}
         source={confetti}
-        style={styles.lottie}
+        style={styles.confetti}
         resizeMode='cover'
         loop={false}
       />
-      <View style={styles.spacer}/>
-      <View style={styles.spacer}/>
+      {isFireVisible && (
+        <LottieView
+          ref={fireRef}
+          source={fire}
+          style={styles.lottie}
+        />
+      )}
+      <Text style={styles.streakCount}>{streakCount}</Text>
+      <View style={styles.spacer} />
+      <View style={styles.spacer} />
       <View style={styles.task_name.view}>
         <Text style={styles.task_name.text}>
           {task.name}
         </Text>
       </View>
-      <View style={styles.spacer}/>
-      <View style={[styles.divider, {backgroundColor: task.color==='' ? highlightColor : task.color}]}/>
+      <View style={styles.spacer} />
+      <View style={[styles.divider, { backgroundColor: task.color === '' ? highlightColor : task.color }]} />
       <View style={styles.task_points.view}>
         <Text style={styles.task_points.text}>
           {task.point_value}
         </Text>
       </View>
-      <View style={styles.spacer}/>
+      <View style={styles.spacer} />
       <View>
         <Switch
           value={isEnabled}
@@ -118,6 +148,7 @@ const TaskComponent = ({task}) => {
                     text: 'Yes',
                     onPress: () => {
                       toggleSwitch(state);
+                      setIsEnabled(!state);
                     }
                   }
                 ]
@@ -131,7 +162,6 @@ const TaskComponent = ({task}) => {
     </TouchableOpacity>
   );
 };
-
 
 const styles = StyleSheet.create({
   task_name: {
@@ -174,18 +204,19 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   divider: {
-    height: 5,
-    width: 45,
+    height: 25,
+    width: 5,
     borderRadius: 5,
   },
   lottie: {
     position: 'absolute',
     top: 0,
-    bottom: 0,
-    left: 0,
+    bottom: 10,
+    left: 200,
     right: 0,
     zIndex: 1000,
     pointerEvents: 'none',
+    width: 30,
   },
   switch: {
     backgroundColor: '#000',
@@ -193,6 +224,23 @@ const styles = StyleSheet.create({
       false: '#f00',
       true: "#f0"
     },
+  },
+  streakCount: {
+    position: 'absolute',
+    top: 14,
+    left: 210,
+    fontSize: 18,
+    color: '#000',
+    zIndex: 1000,
+  },
+  confetti: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    zIndex: 1000,
+    pointerEvents: 'none',
   },
 });
 
