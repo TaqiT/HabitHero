@@ -52,8 +52,8 @@ const RootApp = () => {
   const { taskList } = useContext(TaskListContext);
   const iconSize = showNavLabels ? 25 : 32;
   return (
+      <NavigationContainer>
       <View style={styles.container}>
-        <NavigationContainer>
         <Tab.Navigator
           screenOptions={{
             headerStyle: {
@@ -82,7 +82,7 @@ const RootApp = () => {
               tabBarIcon: () => (
                 <FeatherIcon
                   name="list"
-                  color={currentTab == "Tasks" ? "white" :highlightColor}
+                  color={currentTab == "Tasks" ? "white" : highlightColor}
                   size={iconSize}
                 />
               ),
@@ -145,10 +145,10 @@ const RootApp = () => {
             })}
           />
         </Tab.Navigator>
-        </NavigationContainer>
         <Points/>
         <AddTaskButton/>
       </View>
+      </NavigationContainer>
   );
 };
 

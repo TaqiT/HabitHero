@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import {
-  StyleSheet, ScrollView, View, StatusBar, Modal, Text, TouchableOpacity, TextInput
+  StyleSheet, ScrollView, View, StatusBar, Modal, Text, TouchableOpacity, TextInput, Keyboard
 } from 'react-native';
 import TaskComponent from '../components/Task.js';
 import FrequencyButtonGroup from '../components/SelectFrequency.js';
@@ -58,8 +58,11 @@ const TaskTab = () => {
         editTask(selectedTask.id, newTaskName, newTaskPointValue, frequencyType, frequency_data, color);
       }
     }
-    else if (isNaN(Number(newTaskPointValue)) || newTaskPointValue.length == 0){
+    else if (newTaskPointValue.length == 0){
       alert('Please enter a valid point value');
+    }
+    else if(isNaN(Number(newTaskPointValue))){
+      alert('Nice Try. Enter a valid point value.');
     }
     else if (Number(newTaskPointValue) <= 0){
       alert('Please enter a point value greater than 0');
@@ -98,12 +101,14 @@ const TaskTab = () => {
             <TextInput
               style={[styles.nameInput, {borderColor: highlightColor}]}
               value={newTaskName}
+              multiline={true}
               onChangeText={setNewTaskName}
               placeholder='Task Name'
               enablesReturnKeyAutomatically={true}
-              maxLength={26}
+              maxLength={100}
               placeholderTextColor='black'
               returnKeyType={'done'}
+              onSubmitEditing={Keyboard.dismiss}
             />
             <View style={{ height: 15 }} />
             <TextInput
@@ -268,11 +273,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   nameInput: {
-    height: 50,
     width: 300,
     margin: 0,
     borderWidth: 2,
-    padding: 5,
+    padding: 7,
     borderRadius: 10,
     textAlign: 'center',
     fontSize: 15,

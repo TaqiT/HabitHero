@@ -29,6 +29,7 @@ const TaskListProvider = ({ children }) => {
     new Task('Clean the kitchen', 10),
     new Task('Clean the living room', 10),
     new Task('Clean the bedroom', 10),
+    new Task('theres bugs under your skin. take your skin off. get the bugs before they get you.', 10),
   ];
   const addTask = (name, point_value, frequency, frequency_data, color) => {
     taskList.push(new Task(name, point_value, frequency, frequency_data, color));

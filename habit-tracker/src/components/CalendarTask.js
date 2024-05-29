@@ -2,6 +2,7 @@ import React, { useContext, useState, useRef, useEffect } from 'react';
 import {
   StyleSheet, TouchableOpacity, Text, View, Switch, Alert
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { PointsContext } from '../providers/PointsProvider';
 import { TaskModalContext } from '../providers/TaskModalProvider';
 import { FrequencyContext } from '../providers/FrequencyProvider';
@@ -15,7 +16,8 @@ function sleep(time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
 
-const TaskComponent = ({ task }) => {
+const CalendarTaskComponent = ({ task }) => {
+  const navigation = useNavigation();
   const {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
@@ -83,6 +85,7 @@ const TaskComponent = ({ task }) => {
   };
 
   const openModal = () => {
+    navigation.navigate("Tasks");
     setSelectedTask(task);
     setTaskModalType('edit');
     setTaskModalVisible(true);
@@ -125,6 +128,8 @@ const TaskComponent = ({ task }) => {
         />
       )}
       {isFireVisible && (<Text style={styles.streakCount}>{streakCount}</Text>)}
+      <View style={styles.spacer} />
+      <View style={styles.spacer} />
       <View style={styles.task_name.view}>
         <Text style={styles.task_name.text}>
           {task.name}
@@ -174,9 +179,9 @@ const TaskComponent = ({ task }) => {
 const styles = StyleSheet.create({
   task_name: {
     view: {
-      marginLeft: 10,
-      marginTop: 14,
-      marginBottom: 14,
+      marginLeft: -10,
+      marginTop: 10,
+      marginBottom: 10,
       flex: 20,
       justifyContent: 'left',
     },
@@ -204,14 +209,14 @@ const styles = StyleSheet.create({
   taskTouchable: {
     flexDirection: 'row',
     alignSelf: 'center',
-    width: 375,
+    width: 340,
     marginTop: 10,
     borderColor: '#000',
     borderWidth: 1.5,
     alignItems: 'center',
     justifyContent: 'left',
     display: 'flex',
-    borderRadius: 12,
+    borderRadius: 8,
   },
   divider: {
     height: 25,
@@ -220,23 +225,23 @@ const styles = StyleSheet.create({
   },
   fire: {
     position: 'absolute',
-    top: -18,
-    right: -15,
+    top: -16,
+    right: -12,
     zIndex: 1000,
     pointerEvents: 'none',
-    width: 35,
-    height: 35,
+    width: 28,
+    height: 28,
   },
   streakCount: {
     position: 'absolute',
-    top: -6,
-    right: -2.5,
-    fontSize: 18,
+    top: -7,
+    right: -2,
+    fontSize: 15,
     color: '#000',
     zIndex: 1000,
   },
   switch: {
-    marginRight: 10,
+    marginRight: 7,
   },
   confetti: {
     position: 'absolute',
@@ -249,4 +254,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TaskComponent;
+export default CalendarTaskComponent;

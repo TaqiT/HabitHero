@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import moment from 'moment';
 import Swiper from 'react-native-swiper';
+import TaskComponent from '../components/CalendarTask';
 import { ThemeContext } from '../providers/AppStyleProvider';
 import { TaskListContext } from '../providers/TaskListProvider';
 
@@ -124,38 +125,20 @@ const CalendarTab = () => {
         </View>
 
         {/* The section created to hold the place where the tasks for that day will be stored */}
-        <View style={{ flex: 1, paddingHorizontal: 16, paddingVertical: 24, }}>
-          <View style={styles.placeholder}>
-            {/* <View style={styles.placeholderInset}>
-
-            </View> */}
-            <ScrollView style={[styles.taskContainer, {backgroundColor: highlightColor}]}>
-                {taskList.map((task, index) => {
-                  if (!showTask(task, value)){
-                    return null;
-                  }
-                  return (
-                    <TouchableOpacity
-                      key={index}
-                      style={{
-                        alignItems: 'center',
-                        margin: 8,
-                        backgroundColor: 'white',
-                        borderRadius: 10,
-                      }}
-                    >
-                      <Text
-                        style={{
-                          fontSize: 20,
-                          color: 'black',
-                          padding: 10,
-                        }}
-                      >{task.name}</Text>
-                    </TouchableOpacity>
-                  );
-                })}
-            </ScrollView>
-          </View>
+        <View
+          style={{
+            paddingHorizontal: 16, paddingVertical: 24, paddingTop: 5
+          }}
+        >
+          <ScrollView style={[styles.taskContainer, {backgroundColor: highlightColor}]}>
+            {taskList.map((task, index) => {
+              if (!showTask(task, value)){
+                return null;
+              }
+              return(
+                <TaskComponent key={index} task={task} />);
+            })}
+          </ScrollView>
         </View>
       </View>
     </SafeAreaView>
@@ -228,24 +211,13 @@ const styles = StyleSheet.create({
     color: '#111',
     color: 'white',
   },
-  /** Placeholder */
-  placeholder: {
-    flexGrow: 1,
-    flexShrink: 1,
-    flexBasis: 0,
-    height: 400,
-    marginTop: 0,
-    padding: 0,
-    backgroundColor: 'transparent',
-  },
   taskContainer: {
+    paddingBottom: 10,
+    paddingTop: 2,
     borderWidth: 4,
     borderColor: '#e5e7eb',
     borderStyle: 'solid',
     borderRadius: 9,
-    flexGrow: 1,
-    flexShrink: 1,
-    flexBasis: 0,
     textAlign: "center",
   },
 });
