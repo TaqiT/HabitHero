@@ -60,7 +60,6 @@ const TaskComponent = ({ task }) => {
   };
 
   const triggerFire = () => {
-    setIsFireVisible(true);
     setTimeout(() => {
       if (fireRef.current){
         fireRef.current.play();
@@ -68,11 +67,14 @@ const TaskComponent = ({ task }) => {
     }, 5);
   };
 
-  const changeStreak = ( change ) => {
+  const changeStreak = ( state ) => {
     setStreakCount(prevCount => {
-      const newCount = prevCount + change;
+      const newCount = prevCount + state;
       if (newCount > 0) {
-        triggerFire();
+        setIsFireVisible(true);
+        if (state > 0){
+          triggerFire();
+        }
       }
       else {
         setIsFireVisible(false);
@@ -138,9 +140,9 @@ const TaskComponent = ({ task }) => {
           {task.point_value}
         </Text>
       </View>
-      <View style={styles.spacer} />
       <View>
         <Switch
+          style={styles.switch}
           value={isEnabled}
           ios_backgroundColor={"lightgrey"}
           onValueChange={(state) => {
@@ -157,6 +159,7 @@ const TaskComponent = ({ task }) => {
                     text: 'Yes',
                     onPress: () => {
                       toggleSwitch(state);
+                      // setIsEnabled(!state);
                     }
                   }
                 ]
@@ -218,29 +221,23 @@ const styles = StyleSheet.create({
   },
   fire: {
     position: 'absolute',
-    top: 0,
-    bottom: 27,
-    left: 0,
-    right: 0,
+    top: -18,
+    right: -15,
     zIndex: 1000,
     pointerEvents: 'none',
-    width: 21,
-    height: 22,
-  },
-  switch: {
-    backgroundColor: '#000',
-    trackColor: {
-      false: '#f00',
-      true: "#f0"
-    },
+    width: 35,
+    height: 35,
   },
   streakCount: {
     position: 'absolute',
-    top: 3,
-    left: 6,
+    top: -6,
+    right: -2.5,
     fontSize: 18,
     color: '#000',
     zIndex: 1000,
+  },
+  switch: {
+    marginRight: 7,
   },
   confetti: {
     position: 'absolute',
