@@ -211,12 +211,12 @@ const styles = StyleSheet.create({
   lottie: {
     position: 'absolute',
     top: 0,
-    bottom: 10,
-    left: 200,
+    bottom: 27,
+    left: 0,
     right: 0,
     zIndex: 1000,
     pointerEvents: 'none',
-    width: 30,
+    width: 21,
   },
   switch: {
     backgroundColor: '#000',
@@ -227,8 +227,8 @@ const styles = StyleSheet.create({
   },
   streakCount: {
     position: 'absolute',
-    top: 14,
-    left: 210,
+    top: 3,
+    left: 6,
     fontSize: 18,
     color: '#000',
     zIndex: 1000,
