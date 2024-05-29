@@ -3,7 +3,7 @@ import {
   StyleSheet, ScrollView, View, StatusBar, Modal, Text, TouchableOpacity, TextInput
 } from 'react-native';
 import { ShopModalContext } from '../providers/ShopModalProvider.js';
-import { ThemeContext } from '../providers/AppThemeProvider';
+import { ThemeContext } from '../providers/AppStyleProvider';
 import RewardComponent from '../components/Reward.js';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 

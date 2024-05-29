@@ -37,6 +37,7 @@ const themes = {
 };
 
 const ThemeProvider = ({ children }) => {
+  const [showNavLabels, setShowNavLabels] = useState(true);
   const [appTheme, setAppTheme] = useState("normal")
   const [navBarColor, setNavBarColor] = useState(themes["normal"].navBarColor);
   const [backgroundColor, setBackgroundColor] = useState(themes["normal"].backgroundColor);
@@ -55,7 +56,7 @@ const ThemeProvider = ({ children }) => {
   }
   return (
     <ThemeContext.Provider value={{
-      navBarColor, backgroundColor, highlightColor, containerColor, appTheme, changeTheme
+      showNavLabels, setShowNavLabels, navBarColor, backgroundColor, highlightColor, containerColor, appTheme, changeTheme
     }}>
       {children}
     </ThemeContext.Provider>

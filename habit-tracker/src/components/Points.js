@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
 import { PointsContext } from "../providers/PointsProvider";
-import { ThemeContext } from '../providers/AppThemeProvider';
+import { ThemeContext } from '../providers/AppStyleProvider';
 import { CurrentTabContext } from '../providers/CurrentTabProvider';
 
 const Points = () => {

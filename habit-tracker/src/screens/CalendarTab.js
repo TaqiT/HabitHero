@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import moment from 'moment';
 import Swiper from 'react-native-swiper';
-import { ThemeContext } from '../providers/AppThemeProvider';
+import { ThemeContext } from '../providers/AppStyleProvider';
 import { TaskListContext } from '../providers/TaskListProvider';
 
 const { width } = Dimensions.get('window');

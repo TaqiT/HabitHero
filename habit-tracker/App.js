@@ -12,7 +12,7 @@ import { PointsProvider } from './src/providers/PointsProvider';
 import { FrequencyProvider } from './src/providers/FrequencyProvider';
 import { TaskModalProvider } from './src/providers/TaskModalProvider';
 import { ShopModalProvider } from './src/providers/ShopModalProvider';
-import { ThemeProvider, ThemeContext } from './src/providers/AppThemeProvider';
+import { ThemeProvider, ThemeContext } from './src/providers/AppStyleProvider';
 import {
   TaskListProvider, TaskListContext
 } from './src/providers/TaskListProvider';
@@ -46,22 +46,21 @@ const App = () => {
 
 const RootApp = () => {
   const {
-    navBarColor, backgroundColor, highlightColor, containerColor
+    showNavLabels, navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
   const { currentTab, setCurrentTab } = useContext(CurrentTabContext);
   const { taskList } = useContext(TaskListContext);
-  const iconSize = 25;
+  const iconSize = showNavLabels ? 25 : 32;
   return (
       <View style={styles.container}>
         <NavigationContainer>
         <Tab.Navigator
           screenOptions={{
-            unmountOnBlur: true,
             headerStyle: {
               backgroundColor: navBarColor,
             },
             headerTintColor: 'white',
-            // tabBarShowLabel: false,
+            tabBarShowLabel: showNavLabels,
             tabBarStyle: {
               backgroundColor: navBarColor,
               position: 'absolute',

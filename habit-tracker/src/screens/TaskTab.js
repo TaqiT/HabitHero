@@ -6,7 +6,7 @@ import TaskComponent from '../components/Task.js';
 import FrequencyButtonGroup from '../components/SelectFrequency.js';
 import { FrequencyContext } from "../providers/FrequencyProvider.js";
 import { TaskModalContext } from '../providers/TaskModalProvider.js';
-import { ThemeContext } from '../providers/AppThemeProvider';
+import { ThemeContext } from '../providers/AppStyleProvider';
 import { TaskListContext } from '../providers/TaskListProvider.js';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 

@@ -3,7 +3,7 @@ import {
   StyleSheet, Pressable, View, Text
 } from 'react-native';
 import { FrequencyContext } from "../providers/FrequencyProvider";
-import { ThemeContext } from '../providers/AppThemeProvider';
+import { ThemeContext } from '../providers/AppStyleProvider';
 
 const data = [
   { key: 0, name: 'Daily'},

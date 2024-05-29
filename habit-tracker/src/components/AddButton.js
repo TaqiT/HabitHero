@@ -5,7 +5,7 @@ import {
 import { TaskModalContext } from '../providers/TaskModalProvider';
 import { ShopModalContext } from '../providers/ShopModalProvider';
 import { FrequencyContext } from '../providers/FrequencyProvider';
-import { ThemeContext } from '../providers/AppThemeProvider';
+import { ThemeContext } from '../providers/AppStyleProvider';
 import { CurrentTabContext } from '../providers/CurrentTabProvider';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 

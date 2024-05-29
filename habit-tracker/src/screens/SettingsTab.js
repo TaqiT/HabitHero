@@ -10,7 +10,7 @@ import {
   Image,
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import { ThemeContext } from '../providers/AppThemeProvider';
+import { ThemeContext } from '../providers/AppStyleProvider';
 
 const tabs = [
   { name: 'Preferences', icon: 'settings' },
@@ -28,7 +28,7 @@ const themeTypes = [
 
 export default function Example() {
   const {
-    navBarColor, backgroundColor, highlightColor, containerColor, changeTheme, appTheme
+    showNavLabels, setShowNavLabels, navBarColor, backgroundColor, highlightColor, containerColor, changeTheme, appTheme
   } = useContext(ThemeContext);
   const [value, setValue] = React.useState(0);
   const [form, setForm] = useState({
@@ -178,6 +178,22 @@ export default function Example() {
                       value={form.pushNotifications} />
                   </View>
                 </View>
+                <View style={styles.rowWrapper}>
+                  <View style={styles.row}>
+                    <Text style={styles.rowLabel}>Show Navigation Labels</Text>
+                    <View style={styles.rowSpacer} />
+                    <Switch
+                      ios_backgroundColor={"lightgrey"}
+                      onChange={() =>
+                        setShowNavLabels(!showNavLabels)
+                      }
+                      style={{
+                        transform: [{ scaleX: 0.95 }, { scaleY: 0.95 }],
+                      }}
+                      value={showNavLabels} />
+                  </View>
+                </View>
+
               </View>
             </View>
 

@@ -5,7 +5,7 @@ import {
 import { Button } from '@rneui/themed';
 import { PointsContext } from '../providers/PointsProvider.js';
 import { ShopModalContext } from '../providers/ShopModalProvider.js';
-import { ThemeContext } from '../providers/AppThemeProvider';
+import { ThemeContext } from '../providers/AppStyleProvider';
 import LottieView from 'lottie-react-native';
 import confetti from '../components/confetti.json';
 

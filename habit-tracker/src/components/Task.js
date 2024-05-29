@@ -5,7 +5,7 @@ import {
 import { PointsContext } from '../providers/PointsProvider';
 import { TaskModalContext } from '../providers/TaskModalProvider';
 import { FrequencyContext } from '../providers/FrequencyProvider';
-import { ThemeContext } from '../providers/AppThemeProvider';
+import { ThemeContext } from '../providers/AppStyleProvider';
 import { TaskListContext } from '../providers/TaskListProvider';
 import LottieView from 'lottie-react-native';
 import confetti from '../components/confetti.json';
@@ -41,7 +41,10 @@ const TaskComponent = ({ task }) => {
     setPointsTotal(newPointTotal);
     if (state) {
       triggerConfetti();
-      incrementStreak();
+      changeStreak(1);
+    }
+    else {
+      changeStreak(-1);
     }
     if (state) {
       setTimeout(() => {
@@ -58,16 +61,21 @@ const TaskComponent = ({ task }) => {
 
   const triggerFire = () => {
     setIsFireVisible(true);
-    if (fireRef.current) {
-      fireRef.current.play();
-    }
+    setTimeout(() => {
+      if (fireRef.current){
+        fireRef.current.play();
+      }
+    }, 5);
   };
 
-  const incrementStreak = () => {
+  const changeStreak = ( change ) => {
     setStreakCount(prevCount => {
-      const newCount = prevCount + 1;
-      if (newCount >= 3) {
+      const newCount = prevCount + change;
+      if (newCount > 0) {
         triggerFire();
+      }
+      else {
+        setIsFireVisible(false);
       }
       return newCount;
     });
@@ -111,10 +119,11 @@ const TaskComponent = ({ task }) => {
         <LottieView
           ref={fireRef}
           source={fire}
-          style={styles.lottie}
+          style={styles.fire}
+          loop={false}
         />
       )}
-      <Text style={styles.streakCount}>{streakCount}</Text>
+      {isFireVisible && (<Text style={styles.streakCount}>{streakCount}</Text>)}
       <View style={styles.spacer} />
       <View style={styles.spacer} />
       <View style={styles.task_name.view}>
@@ -148,7 +157,6 @@ const TaskComponent = ({ task }) => {
                     text: 'Yes',
                     onPress: () => {
                       toggleSwitch(state);
-                      setIsEnabled(!state);
                     }
                   }
                 ]
@@ -208,7 +216,7 @@ const styles = StyleSheet.create({
     width: 5,
     borderRadius: 5,
   },
-  lottie: {
+  fire: {
     position: 'absolute',
     top: 0,
     bottom: 27,
@@ -217,6 +225,7 @@ const styles = StyleSheet.create({
     zIndex: 1000,
     pointerEvents: 'none',
     width: 21,
+    height: 22,
   },
   switch: {
     backgroundColor: '#000',
