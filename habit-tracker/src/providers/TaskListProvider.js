@@ -3,7 +3,7 @@ import React, { createContext, useState } from 'react';
 var taskCount = 0;
 
 class Task {
-  constructor(name, point_value, frequency='Daily', frequency_data=[], color='') {
+  constructor(name, point_value, frequency='Daily', frequency_data=[], color='', isOn=false) {
     this.id = taskCount++;
     this.name = name;
     this.point_value = point_value;
@@ -31,10 +31,10 @@ const TaskListProvider = ({ children }) => {
     new Task('Clean the bedroom', 10),
     new Task('theres bugs under your skin. take your skin off. get the bugs before they get you.', 10),
   ];
-  const addTask = (name, point_value, frequency, frequency_data, color) => {
-    taskList.push(new Task(name, point_value, frequency, frequency_data, color));
+  const addTask = (name, point_value, frequency, frequency_data, color, isOn) => {
+    taskList.push(new Task(name, point_value, frequency, frequency_data, color, isOn));
   }
-  const editTask = (taskID, name='', point_value=0, frequency='', frequency_data=[], color='') => {
+  const editTask = (taskID, name='', point_value=0, frequency='', frequency_data=[], color='', isOn=false) => {
     const taskIndex = taskList.findIndex(task => task.id === taskID);
     if (taskIndex === -1) {
       return false;
@@ -44,7 +44,7 @@ const TaskListProvider = ({ children }) => {
     frequency= (frequency==='')? taskList[taskIndex].frequency:frequency;
     frequency_data=(frequency_data.length===0)?taskList[taskIndex].frequency_data:frequency_data;
     color=(color==='') ? taskList[taskIndex].color : color;
-    taskList[taskIndex] = new Task(name, point_value, frequency, frequency_data, color);
+    taskList[taskIndex] = new Task(name, point_value, frequency, frequency_data, color, isOn);
   };
   const removeTask = (taskID) => {
     const taskIndex = taskList.findIndex(task => Number(task.id) === Number(taskID));
@@ -54,9 +54,17 @@ const TaskListProvider = ({ children }) => {
     }
     taskList.splice(taskIndex, 1);
   }
+  const toggle = (taskID) => {
+    const taskIndex = taskList.findIndex(task => task.id === taskID);
+    if (taskIndex === -1) {
+      return false;
+    }
+    taskList[taskIndex].isOn = !taskList[taskIndex].isOn;
+    return true;
+  }
   return (
     <TaskListContext.Provider value={{
-      taskList, addTask, editTask, removeTask
+      taskList, addTask, editTask, removeTask, toggle
     }}>
       {children}
     </TaskListContext.Provider>

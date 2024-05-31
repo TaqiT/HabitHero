@@ -11,28 +11,26 @@ import LottieView from 'lottie-react-native';
 import confetti from '../components/confetti.json';
 import fire from '../components/fire.json';
 
-function sleep(time) {
-  return new Promise((resolve) => setTimeout(resolve, time));
-}
+
 
 const TaskComponent = ({ task }) => {
   const {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
-  const confettiRef = useRef(null);
-  const fireRef = useRef(null);
-  const [isEnabled, setIsEnabled] = useState(false);
-  const [isFireVisible, setIsFireVisible] = useState(false);
-  const [streakCount, setStreakCount] = useState(0);
-  const { pointTotal, setPointsTotal } = useContext(PointsContext);
+  const { toggle } = useContext(TaskListContext);
   const {
     setTaskModalType, setTaskModalVisible, setNewTaskName, setNewTaskPointValue, setNewTaskColor, setSelectedTask
   } = useContext(TaskModalContext);
   const {
     setFrequencyType, setWeekData, setMonthData, clearMonthData, clearWeekData
   } = useContext(FrequencyContext);
+  const confettiRef = useRef(null);
+  const fireRef = useRef(null);
+  const [isEnabled, setIsEnabled] = useState(task.isOn);
+  const [isFireVisible, setIsFireVisible] = useState(false);
+  const [streakCount, setStreakCount] = useState(0);
+  const { pointTotal, setPointsTotal } = useContext(PointsContext);
   var newPointTotal = Number(task.point_value);
-
   const toggleSwitch = (state) => {
     newPointTotal = state
       ? pointTotal + Number(task.point_value)
@@ -48,6 +46,7 @@ const TaskComponent = ({ task }) => {
     if (state) {
       setTimeout(() => {
         setIsEnabled(false);
+        toggle(task.id);
       }, 12 * 60 * 60 * 1000);
     }
   };
@@ -144,13 +143,17 @@ const TaskComponent = ({ task }) => {
           ios_backgroundColor={"lightgrey"}
           onValueChange={(state) => {
             setIsEnabled(state);
+            toggle(task.id);
             if (state) {
               Alert.alert(
                 'Are you sure you have completed this task?', '🤔', [
                   {
                     text: 'No',
                     style: 'cancel',
-                    onPress: () => setIsEnabled(!state)
+                    onPress: () => {
+                      setIsEnabled(!state);
+                      toggle(task.id);
+                    }
                   },
                   {
                     text: 'Yes',

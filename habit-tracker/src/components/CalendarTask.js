@@ -1,40 +1,36 @@
-import React, { useContext, useState, useRef, useEffect } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import {
   StyleSheet, TouchableOpacity, Text, View, Switch, Alert
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { PointsContext } from '../providers/PointsProvider';
 import { TaskModalContext } from '../providers/TaskModalProvider';
 import { FrequencyContext } from '../providers/FrequencyProvider';
 import { ThemeContext } from '../providers/AppStyleProvider';
 import { TaskListContext } from '../providers/TaskListProvider';
+import { CurrentTabContext } from '../providers/CurrentTabProvider';
 import LottieView from 'lottie-react-native';
 import confetti from '../components/confetti.json';
 import fire from '../components/fire.json';
 
-function sleep(time) {
-  return new Promise((resolve) => setTimeout(resolve, time));
-}
 
 const CalendarTaskComponent = ({ task }) => {
-  const navigation = useNavigation();
   const {
     navBarColor, backgroundColor, highlightColor, containerColor
   } = useContext(ThemeContext);
-  const confettiRef = useRef(null);
-  const fireRef = useRef(null);
-  const [isEnabled, setIsEnabled] = useState(false);
-  const [isFireVisible, setIsFireVisible] = useState(false);
-  const [streakCount, setStreakCount] = useState(0);
-  const { pointTotal, setPointsTotal } = useContext(PointsContext);
+  const { toggle } = useContext(TaskListContext);
   const {
     setTaskModalType, setTaskModalVisible, setNewTaskName, setNewTaskPointValue, setNewTaskColor, setSelectedTask
   } = useContext(TaskModalContext);
   const {
     setFrequencyType, setWeekData, setMonthData, clearMonthData, clearWeekData
   } = useContext(FrequencyContext);
+  const { setCurrentTab } = useContext(CurrentTabContext);
+  const confettiRef = useRef(null);
+  const fireRef = useRef(null);
+  const [isFireVisible, setIsFireVisible] = useState(false);
+  const [streakCount, setStreakCount] = useState(0);
+  const { pointTotal, setPointsTotal } = useContext(PointsContext);
   var newPointTotal = Number(task.point_value);
-
   const toggleSwitch = (state) => {
     newPointTotal = state
       ? pointTotal + Number(task.point_value)
@@ -49,7 +45,7 @@ const CalendarTaskComponent = ({ task }) => {
     }
     if (state) {
       setTimeout(() => {
-        setIsEnabled(false);
+        toggle(task.id);
       }, 12 * 60 * 60 * 1000);
     }
   };
@@ -85,7 +81,7 @@ const CalendarTaskComponent = ({ task }) => {
   };
 
   const openModal = () => {
-    navigation.navigate("Tasks");
+    setCurrentTab('Tasks');
     setSelectedTask(task);
     setTaskModalType('edit');
     setTaskModalVisible(true);
@@ -145,17 +141,19 @@ const CalendarTaskComponent = ({ task }) => {
       <View>
         <Switch
           style={styles.switch}
-          value={isEnabled}
+          value={task.isOn}
           ios_backgroundColor={"lightgrey"}
           onValueChange={(state) => {
-            setIsEnabled(state);
+            toggle(task.id);
             if (state) {
               Alert.alert(
                 'Are you sure you have completed this task?', '🤔', [
                   {
                     text: 'No',
                     style: 'cancel',
-                    onPress: () => setIsEnabled(!state)
+                    onPress: () => {
+                      toggle(task.id);
+                    }
                   },
                   {
                     text: 'Yes',
